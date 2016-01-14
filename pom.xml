@@ -3,12 +3,12 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.kekshaus</groupId>
-  <artifactId>Cubit</artifactId>
+  <artifactId>Cubit-Official</artifactId>
   <version>0.5.0</version>
   <packaging>jar</packaging>
 
-  <name>Cubit</name>
-  <url>http://www.minegaming.de</url>
+  <name>Cubit-Official</name>
+  <url>http://www.hyve-software.com</url>
 
   <dependencies>
     <dependency>
