@@ -1,0 +1,194 @@
+name: Cubit
+version: 0.5.0
+description: Cubit Regionmanager
+author: Kekshaus
+main: de.keks.cubit.CubitPlugin
+depend: [WorldEdit, WorldGuard, Vault]
+commands:
+   land:
+      description: Alle Land-Befehle
+      usage: /<command>
+   ladmin:
+      description: Alle Land-Admin-Befehle
+      usage: /<command>
+   lstore:
+      description: Alle Land-Store-Befehle
+      usage: /<command>
+permissions:
+    cubit.admin:
+        description: Alle Permissions
+        children:
+            cubit.land: true
+            cubit.flags: true
+            cubit.chunk: true
+            cubit.biome: true
+            cubit.land.kickbypass: true
+            cubit.admin.take: true
+            cubit.admin.delete: true
+            cubit.admin.help: true
+            cubit.admin.reload: true
+            cubit.admin.list: true
+            cubit.admin.tp: true
+            cubit.admin.unsetserverregion: true
+            cubit.admin.setserverregion: true
+            cubit.lstore: true
+            cubit.lstore.regen: true
+            cubit.lstore.delete: true
+    cubit.land:
+        description: Alle Land Befehle
+        children:
+            cubit.land.help: true
+            cubit.land.addmember: true
+            cubit.land.removemember: true
+            cubit.land.buy: true
+            cubit.land.sell: true
+            cubit.land.buyup: true
+            cubit.land.info: true
+            cubit.land.list: true
+            cubit.land.offer: true
+            cubit.land.give: true
+            cubit.land.takeoffer: true
+            cubit.land.kick: true
+            cubit.land.version: true
+            cubit.land.addallmember: true
+            cubit.land.cleanmember: true
+            cubit.land.removeallmember: true
+    cubit.lstore:
+        description: Alle lStore Commands
+        children:
+            cubit.lstore.list: true
+            cubit.lstore.paste: true
+            cubit.lstore.save: true
+            cubit.lstore.help: true
+    cubit.flags:
+        description: Gibt alle Flags frei
+        children:
+            cubit.flag.help: true
+            cubit.flag.lock: true
+            cubit.flag.mobs: true
+            cubit.flag.potion: true
+            cubit.flag.pvp: true
+            cubit.flag.tnt: true
+            cubit.flag.fire: true
+    cubit.biome:
+        description: Alle Biome Befehle
+        children:
+            cubit.biome.help: true
+            cubit.biome.setbiome: true
+    cubit.land.help:
+        description: Haupt-Hilfeseite
+        default: op
+    cubit.land.addmember:
+        description: Spieler hinzufügen
+        default: op
+    cubit.land.kick:
+        description: Spieler verweisen
+        default: op
+    cubit.land.kickbypass:
+        description: Landkick bypass
+        default: op   
+    cubit.land.removemember:
+        description: Spieler entfernen
+        default: op
+    cubit.land.buy:
+        description: Land kaufen
+        default: op
+    cubit.land.sell:
+        description: Land verkaufen
+        default: op
+    cubit.land.buyup:
+        description: Land aufkaufen
+        default: op
+    cubit.land.info:
+        description: Land Informationen anzeigen
+        default: op
+    cubit.land.list:
+        description: Laender auflisten
+        default: op
+    cubit.land.give:
+        description: Land verschenken
+        default: op
+    cubit.land.offer:
+        description: Land anbieten
+        default: op
+    cubit.land.takeoffer:
+        description: Land abkaufen
+        default: op
+    cubit.land.version:
+        description: Cubit Version
+        default: op
+    cubit.land.addallmember:
+        description: Land-Einstellungen zurücksetzen
+        default: op
+    cubit.land.cleanmember:
+        description: Land-Einstellungen zurücksetzen
+        default: op
+    cubit.land.removeallmember:
+        description: Land-Einstellungen zurücksetzen
+        default: op     
+    cubit.flag.help:
+        description: Flags-Hilfeseite
+        default: op
+    cubit.flag.lock:
+        description: Flag abschliesen
+        default: op
+    cubit.flag.mobs:
+        description: Flag Monster
+        default: op
+    cubit.flag.potion:
+        description: Flag Wurftraenke
+        default: op
+    cubit.flag.pvp:
+        description: Flag PvP
+        default: op
+    cubit.flag.tnt:
+        description: Flag Explosionen
+        default: op
+    cubit.flag.fire:
+        description: Flag Fire
+        default: op
+    cubit.biome.help:
+        description: Biome-Hilfeseite
+        default: op
+    cubit.biome.setbiome:
+        description: Biome veraendern
+        default: op
+    cubit.admin.take:
+        description: Admin Land uebername
+        default: op
+    cubit.admin.delete:
+        description: Admin Land loeschen
+        default: op
+    cubit.admin.help:
+        description: Ladmin Seite
+        default: op
+    cubit.admin.reload:
+        description: Neuladen der Cubit-Config
+        default: op
+    cubit.admin.setserverregion:
+        description: Set a serverregion
+        default: op
+    cubit.admin.unsetserverregion:
+        description: Unset a serverregion
+        default: op
+    cubit.admin.list:
+        description: Auflisten von Regionen eines Spielers
+        default: op
+    cubit.admin.tp:
+        description: Teleportierten zu einer Region
+        default: op
+    cubit.lstore.delete:
+        description: Delete a file
+        default: op
+    cubit.lstore.list:
+        description: List all your files
+        default: op
+    cubit.lstore.paste:
+        description: Paste a file
+        default: op
+    cubit.lstore.save:
+        description: Save a file
+        default: op
+    cubit.lstore.regen:
+        description: Regenerate a chunk
+        default: op
