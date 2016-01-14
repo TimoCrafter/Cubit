@@ -15,26 +15,26 @@ import de.keks.internal.register.CommandSetupStore;
 
 public class SetupStoreCommandsTask implements Runnable {
 
-    private CubitPlugin cubit;
+	private CubitPlugin cubit;
 
-    private CommandSetupStore handler;
+	private CommandSetupStore handler;
 
-    public SetupStoreCommandsTask(CubitPlugin cubit, CommandSetupStore handler) {
-        this.cubit = cubit;
+	public SetupStoreCommandsTask(CubitPlugin cubit, CommandSetupStore handler) {
+		this.cubit = cubit;
 
-        this.handler = handler;
-    }
+		this.handler = handler;
+	}
 
-    @Override
-    public void run() {
-        cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
-            @Override
-            public void run() {
-                if (!handler.isInitialized()) {
-                    handler.initialize();
-                }
-            }
-        });
+	@Override
+	public void run() {
+		cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
+			@Override
+			public void run() {
+				if (!handler.isInitialized()) {
+					handler.initialize();
+				}
+			}
+		});
 
-    }
+	}
 }

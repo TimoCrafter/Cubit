@@ -17,23 +17,23 @@ import de.keks.cubit.CubitPlugin;
  */
 
 public class InternalRegenerateCO {
-    public static boolean regenerate(final Player player) {
+	public static boolean regenerate(final Player player) {
 
-        try {
-            Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
-                public void run() {
-                    Chunk c = player.getLocation().getChunk();
+		try {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
+				public void run() {
+					Chunk c = player.getLocation().getChunk();
 
-                    if (player.getWorld().regenerateChunk(c.getX(), c.getZ())) {
-                        Cubli.refreshChunk(c);
-                        Cubli.teleportSave(c);
-                    }
-                }
-            });
-            return true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        }
-    }
+					if (player.getWorld().regenerateChunk(c.getX(), c.getZ())) {
+						Cubli.refreshChunk(c);
+						Cubli.teleportSave(c);
+					}
+				}
+			});
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

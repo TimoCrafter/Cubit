@@ -9,26 +9,27 @@ import de.keks.internal.core.entitylimit.Config;
 
 public class EntityListener implements Listener {
 
-    @EventHandler
-    public void onCreatureSpawnEvent(CreatureSpawnEvent e) {
-        if (e.isCancelled())
-            return;
+	@EventHandler
+	public void onCreatureSpawnEvent(CreatureSpawnEvent e) {
+		if (e.isCancelled())
+			return;
 
-        if (Config.getBoolean("CubitLimit.properties.watch-creature-spawns") == false)
-            return;
+		if (Config.getBoolean("CubitLimit.properties.watch-creature-spawns") == false)
+			return;
 
-        String reason = e.getSpawnReason().toString();
+		String reason = e.getSpawnReason().toString();
 
-        if (!Config.getBoolean("CubitLimit.spawn-reasons." + reason) || Config.getBoolean("CubitLimit.spawn-reasons." + reason) == false) {
-            return;
-        }
+		if (!Config.getBoolean("CubitLimit.spawn-reasons." + reason)
+				|| Config.getBoolean("CubitLimit.spawn-reasons." + reason) == false) {
+			return;
+		}
 
-        Chunk c = e.getLocation().getChunk();
+		Chunk c = e.getLocation().getChunk();
 
-        if (WorldListener.CheckChunk(c)) {
-            e.setCancelled(true);
-            return;
-        }
+		if (WorldListener.CheckChunk(c)) {
+			e.setCancelled(true);
+			return;
+		}
 
-    }
+	}
 }

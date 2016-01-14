@@ -20,22 +20,23 @@ import de.keks.internal.register.CubitCore;
 
 public class CMD_Version extends CubitCore {
 
-    public CMD_Version(CommandSetupLand handler) {
-        super(true);
-        this.setupLand = handler;
-    }
+	public CMD_Version(CommandSetupLand handler) {
+		super(true);
+		this.setupLand = handler;
+	}
 
-    @Override
-    public boolean execute(final CommandSender sender, String[] args) {
-        if (sender.hasPermission("cubit.land.version")) {
-            sender.sendMessage(ChatColor.YELLOW + "§n§6-==================[§2§lCubit§r§6]=================-");
-            sender.sendMessage(ChatColor.DARK_GREEN + "Cubit Version: " + ChatColor.LIGHT_PURPLE + CubitPlugin.inst().pdf.getVersion().toString());
-            sender.sendMessage(ChatColor.DARK_GREEN + "By Kekshaus");
+	@Override
+	public boolean execute(final CommandSender sender, String[] args) {
+		if (sender.hasPermission("cubit.land.version")) {
+			sender.sendMessage(ChatColor.YELLOW + "§n§6-==================[§2§lCubit§r§6]=================-");
+			sender.sendMessage(ChatColor.DARK_GREEN + "Cubit Version: " + ChatColor.LIGHT_PURPLE
+					+ CubitPlugin.inst().pdf.getVersion().toString());
+			sender.sendMessage(ChatColor.DARK_GREEN + "By Kekshaus");
 
-        } else {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-        }
-        return true;
-    }
+		} else {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+		}
+		return true;
+	}
 
 }

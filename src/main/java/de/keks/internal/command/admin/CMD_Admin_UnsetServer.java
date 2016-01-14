@@ -14,51 +14,51 @@ import de.keks.internal.register.CubitCore;
 
 public class CMD_Admin_UnsetServer extends CubitCore {
 
-    /**
-     * Copyright:
-     * <ul>
-     * <li>Autor: Kekshaus</li>
-     * <li>2016</li>
-     * <li>www.minegaming.de</li>
-     * </ul>
-     * 
-     */
+	/**
+	 * Copyright:
+	 * <ul>
+	 * <li>Autor: Kekshaus</li>
+	 * <li>2016</li>
+	 * <li>www.minegaming.de</li>
+	 * </ul>
+	 * 
+	 */
 
-    public CMD_Admin_UnsetServer(CommandSetupAdmin handler) {
-        super(true);
-        this.setupAdmin = handler;
-    }
+	public CMD_Admin_UnsetServer(CommandSetupAdmin handler) {
+		super(true);
+		this.setupAdmin = handler;
+	}
 
-    @Override
-    public boolean execute(final CommandSender sender, final String[] args) {
-        if (sender.hasPermission("cubit.admin.unsetserverregion")) {
+	@Override
+	public boolean execute(final CommandSender sender, final String[] args) {
+		if (sender.hasPermission("cubit.admin.unsetserverregion")) {
 
-            final Player player = (Player) sender;
-            final int chunkX = player.getLocation().getChunk().getX();
-            final int chunkZ = player.getLocation().getChunk().getZ();
-            final World world = player.getWorld();
-            setupAdmin.executorServiceCommands.submit(new Runnable() {
-                @Override
-                public void run() {
-                    RegionManager manager = getWorldGuard().getRegionManager(world);
-                    String serverRegionName = getServerRegionName(chunkX, chunkZ, world);
+			final Player player = (Player) sender;
+			final int chunkX = player.getLocation().getChunk().getX();
+			final int chunkZ = player.getLocation().getChunk().getZ();
+			final World world = player.getWorld();
+			setupAdmin.executorServiceCommands.submit(new Runnable() {
+				@Override
+				public void run() {
+					RegionManager manager = getWorldGuard().getRegionManager(world);
+					String serverRegionName = getServerRegionName(chunkX, chunkZ, world);
 
-                    if (manager.hasRegion(serverRegionName)) {
-                        manager.removeRegion(serverRegionName);
-                        if (isSpigot()) {
-                            playEffect(player, Effect.LARGE_SMOKE, 1);
-                        }
-                        sender.sendMessage(I18n.translate("messages.unsetServerregion", serverRegionName));
+					if (manager.hasRegion(serverRegionName)) {
+						manager.removeRegion(serverRegionName);
+						if (isSpigot()) {
+							playEffect(player, Effect.LARGE_SMOKE, 1);
+						}
+						sender.sendMessage(I18n.translate("messages.unsetServerregion", serverRegionName));
 
-                    } else {
-                        sender.sendMessage(I18n.translate("messages.isNotServerregion"));
-                    }
-                    setupAdmin.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
-                }
-            });
-        } else {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-        }
-        return true;
-    }
+					} else {
+						sender.sendMessage(I18n.translate("messages.isNotServerregion"));
+					}
+					setupAdmin.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
+				}
+			});
+		} else {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+		}
+		return true;
+	}
 }

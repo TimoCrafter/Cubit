@@ -16,20 +16,20 @@ import org.bukkit.entity.Player;
  */
 
 public class InternalTeleport {
-    public static void saveTeleport(Chunk chunk) {
-        for (Entity entity : chunk.getEntities()) {
-            try {
-                if (entity instanceof Player) {
-                    Location l = entity.getLocation();
-                    l.setY(entity.getWorld().getHighestBlockYAt(l));
-                    entity.teleport(l);
-                }
-                return;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+	public static void saveTeleport(Chunk chunk) {
+		for (Entity entity : chunk.getEntities()) {
+			try {
+				if (entity instanceof Player) {
+					Location l = entity.getLocation();
+					l.setY(entity.getWorld().getHighestBlockYAt(l));
+					entity.teleport(l);
+				}
+				return;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 
-        }
-    }
+		}
+	}
 
 }

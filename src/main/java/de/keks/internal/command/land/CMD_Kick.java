@@ -31,80 +31,84 @@ import de.keks.internal.register.CubitCore;
 
 public class CMD_Kick extends CubitCore {
 
-    public CMD_Kick(CommandSetupLand handler) {
-        super(true);
-        this.setupLand = handler;
-    }
+	public CMD_Kick(CommandSetupLand handler) {
+		super(true);
+		this.setupLand = handler;
+	}
 
-    @Override
-    public boolean execute(final CommandSender sender, final String[] args) {
-        if (!sender.hasPermission("cubit.land.kick")) {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-            return false;
-        }
+	@Override
+	public boolean execute(final CommandSender sender, final String[] args) {
+		if (!sender.hasPermission("cubit.land.kick")) {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+			return false;
+		}
 
-        final Player player = (Player) sender;
-        final int chunkX = player.getLocation().getChunk().getX();
-        final int chunkZ = player.getLocation().getChunk().getZ();
-        final World world = player.getWorld();
-        final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin().wrapPlayer(player);
+		final Player player = (Player) sender;
+		final int chunkX = player.getLocation().getChunk().getX();
+		final int chunkZ = player.getLocation().getChunk().getZ();
+		final World world = player.getWorld();
+		final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+				.wrapPlayer(player);
 
-        setupLand.executorServiceCommands.submit(new Runnable() {
-            public void run() {
-                String regionName = getRegionName(chunkX, chunkZ, world);
+		setupLand.executorServiceCommands.submit(new Runnable() {
+			public void run() {
+				String regionName = getRegionName(chunkX, chunkZ, world);
 
-                if (!ProtectedRegion.isValidId(regionName)) {
-                    player.sendMessage(translate("messages.noRegionHere"));
-                    return;
-                }
+				if (!ProtectedRegion.isValidId(regionName)) {
+					player.sendMessage(translate("messages.noRegionHere"));
+					return;
+				}
 
-                final ProtectedRegion region = getRegion(world, regionName);
-                if (region == null) {
-                    player.sendMessage(translate("messages.noRegionHere"));
-                    return;
-                }
+				final ProtectedRegion region = getRegion(world, regionName);
+				if (region == null) {
+					player.sendMessage(translate("messages.noRegionHere"));
+					return;
+				}
 
-                if (!region.isOwner(localplayer)) {
-                    player.sendMessage(translate("messages.noPermissionForRegion"));
-                    return;
-                }
-                if (isSpigot()) {
-                    playEffect(player, Effect.COLOURED_DUST, 1);
-                }
-                player.sendMessage(translate("messages.kickNoMembersInfo"));
+				if (!region.isOwner(localplayer)) {
+					player.sendMessage(translate("messages.noPermissionForRegion"));
+					return;
+				}
+				if (isSpigot()) {
+					playEffect(player, Effect.COLOURED_DUST, 1);
+				}
+				player.sendMessage(translate("messages.kickNoMembersInfo"));
 
-                final Chunk c = player.getLocation().getChunk();
-                final ArrayList<Player> playersToKick = new ArrayList<Player>();
-                for (Entity e : c.getEntities()) {
-                    if (e instanceof Player) {
+				final Chunk c = player.getLocation().getChunk();
+				final ArrayList<Player> playersToKick = new ArrayList<Player>();
+				for (Entity e : c.getEntities()) {
+					if (e instanceof Player) {
 
-                        Player p = (Player) e;
-                        if (!region.getOwners().getUniqueIds().contains(p.getUniqueId()) && !region.getMembers().getUniqueIds().contains(p.getUniqueId())) {
-                            //  p.sendMessage(translate("messages.kickInfo"));
-                            if (!p.hasPermission("cubit.land.kickbypass")) {
-                                playersToKick.add(p);
-                            }
-                        }
-                    }
-                }
-                scheduleSyncTask(setupLand, new Runnable() {
+						Player p = (Player) e;
+						if (!region.getOwners().getUniqueIds().contains(p.getUniqueId())
+								&& !region.getMembers().getUniqueIds().contains(p.getUniqueId())) {
+							// p.sendMessage(translate("messages.kickInfo"));
+							if (!p.hasPermission("cubit.land.kickbypass")) {
+								playersToKick.add(p);
+							}
+						}
+					}
+				}
+				scheduleSyncTask(setupLand, new Runnable() {
 
-                    @Override
-                    public void run() {
-                        for (Player p : playersToKick) {
-                            if (getRegion(world, getRegionName(p.getLocation().getChunk().getX(), p.getLocation().getChunk().getZ(), world)).getOwners().contains(player.getUniqueId())) {
-                                p.sendMessage(translate("messages.kickedInfo"));
-                                p.teleport(p.getWorld().getSpawnLocation());
-                                player.sendMessage(translate("messages.kickedInfoOwner"));
-                            }
-                        }
-                    }
+					@Override
+					public void run() {
+						for (Player p : playersToKick) {
+							if (getRegion(world, getRegionName(p.getLocation().getChunk().getX(),
+									p.getLocation().getChunk().getZ(), world)).getOwners()
+											.contains(player.getUniqueId())) {
+								p.sendMessage(translate("messages.kickedInfo"));
+								p.teleport(p.getWorld().getSpawnLocation());
+								player.sendMessage(translate("messages.kickedInfoOwner"));
+							}
+						}
+					}
 
-                }, 40);
-            }
-        });
+				}, 40);
+			}
+		});
 
-        return true;
-    }
+		return true;
+	}
 
 }

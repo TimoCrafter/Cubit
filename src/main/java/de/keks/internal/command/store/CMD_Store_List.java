@@ -24,53 +24,55 @@ import de.keks.internal.register.CubitCore;
 
 public class CMD_Store_List extends CubitCore {
 
-    public CMD_Store_List(CommandSetupStore handler) {
+	public CMD_Store_List(CommandSetupStore handler) {
 
-        super(true);
-        this.setupStore = handler;
-    }
+		super(true);
+		this.setupStore = handler;
+	}
 
-    public boolean execute(final CommandSender sender, final String[] args) {
-        if (sender.hasPermission("cubit.lstore.list")) {
-            setupStore.executorServiceCommands.submit(new Runnable() {
-                public void run() {
-                    if (args.length <= 2) {
-                        int pageNumb = 0;
-                        Player p = (Player) sender;
-                        try {
-                            if (args.length == 2) {
-                                int number = Integer.valueOf(args[1]);
-                                if (number < 1) {
-                                    pageNumb = 0;
-                                } else {
-                                    pageNumb = Integer.valueOf(args[1]) - 1;
-                                }
+	public boolean execute(final CommandSender sender, final String[] args) {
+		if (sender.hasPermission("cubit.lstore.list")) {
+			setupStore.executorServiceCommands.submit(new Runnable() {
+				public void run() {
+					if (args.length <= 2) {
+						int pageNumb = 0;
+						Player p = (Player) sender;
+						try {
+							if (args.length == 2) {
+								int number = Integer.valueOf(args[1]);
+								if (number < 1) {
+									pageNumb = 0;
+								} else {
+									pageNumb = Integer.valueOf(args[1]) - 1;
+								}
 
-                            } else {
-                                pageNumb = 0;
-                            }
-                        } catch (Exception e) {
-                            p.sendMessage(translate("messages.notANumber", args[1]));
-                            return;
-                        }
-                        List<String> list = DataController.getSavelist(p);
-                        int rgCount = list.size();
-                        List<String> toplist = list.subList(pageNumb * 10, pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
-                        sender.sendMessage(translate("messages.storePage", rgCount, (pageNumb * 10 + 1), (pageNumb * 10 + 10)));
-                        int counter = pageNumb * 10 + 1;
+							} else {
+								pageNumb = 0;
+							}
+						} catch (Exception e) {
+							p.sendMessage(translate("messages.notANumber", args[1]));
+							return;
+						}
+						List<String> list = DataController.getSavelist(p);
+						int rgCount = list.size();
+						List<String> toplist = list.subList(pageNumb * 10,
+								pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
+						sender.sendMessage(
+								translate("messages.storePage", rgCount, (pageNumb * 10 + 1), (pageNumb * 10 + 10)));
+						int counter = pageNumb * 10 + 1;
 
-                        for (String name : toplist) {
+						for (String name : toplist) {
 
-                            sender.sendMessage("§a" + counter + ". §6" + name);
-                            counter++;
-                        }
-                    }
-                }
-            });
-        } else {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-        }
-        return true;
-    }
+							sender.sendMessage("§a" + counter + ". §6" + name);
+							counter++;
+						}
+					}
+				}
+			});
+		} else {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+		}
+		return true;
+	}
 
 }

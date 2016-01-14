@@ -31,80 +31,82 @@ import de.keks.internal.register.CubitCore;
  */
 
 public class CMD_Land_Buy_Up extends CubitCore {
-    private static final SimpleDateFormat LAST_SEEN = new SimpleDateFormat("dd.MM.yyyy");
+	private static final SimpleDateFormat LAST_SEEN = new SimpleDateFormat("dd.MM.yyyy");
 
-    public CMD_Land_Buy_Up(CommandSetupLand handler) {
-        super(true);
-        this.setupLand = handler;
-    }
+	public CMD_Land_Buy_Up(CommandSetupLand handler) {
+		super(true);
+		this.setupLand = handler;
+	}
 
-    @Override
-    public boolean execute(final CommandSender sender, final String[] args) {
-        if (sender.hasPermission("cubit.land.buyup")) {
-            final Player player = (Player) sender;
-            final int chunkX = player.getLocation().getChunk().getX();
-            final int chunkZ = player.getLocation().getChunk().getZ();
-            final World world = player.getWorld();
-            final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin().wrapPlayer(player);
+	@Override
+	public boolean execute(final CommandSender sender, final String[] args) {
+		if (sender.hasPermission("cubit.land.buyup")) {
+			final Player player = (Player) sender;
+			final int chunkX = player.getLocation().getChunk().getX();
+			final int chunkZ = player.getLocation().getChunk().getZ();
+			final World world = player.getWorld();
+			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+					.getWorldGuardPlugin().wrapPlayer(player);
 
-            setupLand.executorServiceCommands.submit(new Runnable() {
-                public void run() {
-                    if (isServerRegion(chunkX, chunkZ, world)) {
-                        sender.sendMessage(I18n.translate("messages.isServerregion"));
-                        return;
-                    }
-                    RegionManager manager = getWorldGuard().getRegionManager(world);
-                    String regionName = getRegionName(chunkX, chunkZ, world);
+			setupLand.executorServiceCommands.submit(new Runnable() {
+				public void run() {
+					if (isServerRegion(chunkX, chunkZ, world)) {
+						sender.sendMessage(I18n.translate("messages.isServerregion"));
+						return;
+					}
+					RegionManager manager = getWorldGuard().getRegionManager(world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 
-                    if (!manager.hasRegion(regionName)) {
-                        player.sendMessage(translate("messages.noRegionHere"));
-                        return;
-                    }
+					if (!manager.hasRegion(regionName)) {
+						player.sendMessage(translate("messages.noRegionHere"));
+						return;
+					}
 
-                    ProtectedRegion region = getRegion(world, regionName);
-                    if (region.isOwner(localplayer)) {
-                        player.sendMessage(translate("messages.cannotBuyOwnRegion"));
-                        return;
-                    }
+					ProtectedRegion region = getRegion(world, regionName);
+					if (region.isOwner(localplayer)) {
+						player.sendMessage(translate("messages.cannotBuyOwnRegion"));
+						return;
+					}
 
-                    double costs = calculateCosts(player, world, true);
-                    if (!hasEnoughToBuy(player, costs)) {
-                        player.sendMessage(translate("messages.notEnoughMoney"));
-                        return;
-                    }
+					double costs = calculateCosts(player, world, true);
+					if (!hasEnoughToBuy(player, costs)) {
+						player.sendMessage(translate("messages.notEnoughMoney"));
+						return;
+					}
 
-                    if (!wasPlayerTooLongOff(getRegion(world, regionName), player)) {
-                        int buytime;
-                        if (region.isMember(localplayer)) {
-                            buytime = (int) CubitPlugin.inst().getConfig().getDouble("Land.buyup-members");
-                        } else {
-                            buytime = (int) CubitPlugin.inst().getConfig().getDouble("Land.buyup-not-members");
-                        }
+					if (!wasPlayerTooLongOff(getRegion(world, regionName), player)) {
+						int buytime;
+						if (region.isMember(localplayer)) {
+							buytime = (int) CubitPlugin.inst().getConfig().getDouble("Land.buyup-members");
+						} else {
+							buytime = (int) CubitPlugin.inst().getConfig().getDouble("Land.buyup-not-members");
+						}
 
-                        sender.sendMessage(I18n.translate("messages.errorBuyup", buytime));
-                        long buyDate = getBuyupInfoDate(region, player);
-                        sender.sendMessage(I18n.translate("messages.regionBuyupInfoDate", LAST_SEEN.format(new Date(buyDate))));
-                        return;
-                    }
-                    region.getMembers().removeAll();
-                    region.getOwners().removeAll();
-                    region.getOwners().addPlayer(localplayer);
+						sender.sendMessage(I18n.translate("messages.errorBuyup", buytime));
+						long buyDate = getBuyupInfoDate(region, player);
+						sender.sendMessage(
+								I18n.translate("messages.regionBuyupInfoDate", LAST_SEEN.format(new Date(buyDate))));
+						return;
+					}
+					region.getMembers().removeAll();
+					region.getOwners().removeAll();
+					region.getOwners().addPlayer(localplayer);
 
-                    moneyTransfer(player, null, costs);
-                    if (isSpigot()) {
-                        playEffect(player, Effect.HAPPY_VILLAGER, 1);
-                    }
-                    sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
-                }
-            });
-        } else {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-        }
-        return true;
-    }
+					moneyTransfer(player, null, costs);
+					if (isSpigot()) {
+						playEffect(player, Effect.HAPPY_VILLAGER, 1);
+					}
+					sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
+				}
+			});
+		} else {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+		}
+		return true;
+	}
 
-    private boolean hasEnoughToBuy(Player player, double costs) {
-        EconomyHook economyManager = setupLand.getCubitInstance().getHookManager().getEconomyManager();
-        return economyManager.getMoney(player) >= costs;
-    }
+	private boolean hasEnoughToBuy(Player player, double costs) {
+		EconomyHook economyManager = setupLand.getCubitInstance().getHookManager().getEconomyManager();
+		return economyManager.getMoney(player) >= costs;
+	}
 }

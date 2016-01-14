@@ -20,28 +20,28 @@ import de.keks.internal.register.CubitCore;
 
 public class CMD_Biome extends CubitCore {
 
-    public CMD_Biome(CommandSetupLand handler) {
-        super(true);
-        this.setupLand = handler;
-    }
+	public CMD_Biome(CommandSetupLand handler) {
+		super(true);
+		this.setupLand = handler;
+	}
 
-    @Override
-    public boolean execute(final CommandSender sender, String[] args) {
-        if (sender.hasPermission("cubit.biome.help")) {
+	@Override
+	public boolean execute(final CommandSender sender, String[] args) {
+		if (sender.hasPermission("cubit.biome.help")) {
 
-            String biomes = null;
-            for (Biome biome : Biome.values()) {
-                if (biomes == null)
-                    biomes = biome.toString();
-                else
-                    biomes += "§6, " + ChatColor.LIGHT_PURPLE + biome.toString();
-            }
-            sender.sendMessage("Available biomes: " + ChatColor.LIGHT_PURPLE + biomes);
+			String biomes = null;
+			for (Biome biome : Biome.values()) {
+				if (biomes == null)
+					biomes = biome.toString();
+				else
+					biomes += "§6, " + ChatColor.LIGHT_PURPLE + biome.toString();
+			}
+			sender.sendMessage("Available biomes: " + ChatColor.LIGHT_PURPLE + biomes);
 
-        } else {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-        }
-        return true;
-    }
+		} else {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+		}
+		return true;
+	}
 
 }

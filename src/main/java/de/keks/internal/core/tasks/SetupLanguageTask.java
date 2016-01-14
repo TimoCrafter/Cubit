@@ -1,7 +1,7 @@
 package de.keks.internal.core.tasks;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.SetupConfig;
+import de.keks.internal.ConfigValues;
 import de.keks.internal.I18n;
 import de.keks.internal.SkyConfig;
 
@@ -17,21 +17,22 @@ import de.keks.internal.SkyConfig;
 
 public class SetupLanguageTask implements Runnable {
 
-    private CubitPlugin cubit;
+	private CubitPlugin cubit;
 
-    public SetupLanguageTask(CubitPlugin cubit) {
-        this.cubit = cubit;
-    }
+	public SetupLanguageTask(CubitPlugin cubit) {
+		this.cubit = cubit;
+	}
 
-    @Override
-    public void run() {
-        cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
-            @Override
-            public void run() {
-                new I18n(cubit, SkyConfig.getString(SetupConfig.pluginLocale));
-            }
-        });
+	@Override
+	public void run() {
+		cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
+			@Override
+			public void run() {
+				new I18n(cubit, SkyConfig.getString(ConfigValues.pluginLocale));
 
-    }
+			}
+		});
+
+	}
 
 }

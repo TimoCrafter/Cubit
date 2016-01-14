@@ -31,54 +31,55 @@ import de.keks.cubit.CubitPlugin;
 
 public class InternalBiomeChangeCorner {
 
-    private static WorldGuardPlugin _wgPlugin;
+	private static WorldGuardPlugin _wgPlugin;
 
-    public static WorldGuardPlugin wgPlugin() {
-        if (_wgPlugin == null) {
-            _wgPlugin = (WorldGuardPlugin) CubitPlugin.inst().getServer().getPluginManager().getPlugin("WorldGuard");
-            if (_wgPlugin == null) {
-                CubitPlugin.inst().getLogger().info("[Cubit] WGPlugin not found");
-                return null;
-            }
-        }
-        return _wgPlugin;
-    }
+	public static WorldGuardPlugin wgPlugin() {
+		if (_wgPlugin == null) {
+			_wgPlugin = (WorldGuardPlugin) CubitPlugin.inst().getServer().getPluginManager().getPlugin("WorldGuard");
+			if (_wgPlugin == null) {
+				CubitPlugin.inst().getLogger().info("[Cubit] WGPlugin not found");
+				return null;
+			}
+		}
+		return _wgPlugin;
+	}
 
-    @SuppressWarnings("deprecation")
-    public static boolean setWGBiome(Player player, String regionID, Biome biome) {
-        RegionManager rm = InternalBiomeChangeCorner.wgPlugin().getGlobalRegionManager().get(player.getWorld());
-        ProtectedRegion pRegion = rm.getRegion(regionID);
-        if (pRegion == null)
-            return false;
+	@SuppressWarnings("deprecation")
+	public static boolean setWGBiome(Player player, String regionID, Biome biome) {
+		RegionManager rm = InternalBiomeChangeCorner.wgPlugin().getGlobalRegionManager().get(player.getWorld());
+		ProtectedRegion pRegion = rm.getRegion(regionID);
+		if (pRegion == null)
+			return false;
 
-        RegionSelector rs = null;
-        if (pRegion.getTypeName().equalsIgnoreCase("polygon")) {
-            rs = new Polygonal2DRegionSelector(new BukkitWorld(player.getWorld()), pRegion.getPoints(), pRegion.getMinimumPoint().getBlockY(), pRegion.getMaximumPoint().getBlockY());
-        } else {
-            rs = new CuboidRegionSelector(new BukkitWorld(player.getWorld()));
-            rs.selectPrimary(pRegion.getMinimumPoint(), null);
-            rs.selectSecondary(pRegion.getMaximumPoint(), null);
-        }
+		RegionSelector rs = null;
+		if (pRegion.getTypeName().equalsIgnoreCase("polygon")) {
+			rs = new Polygonal2DRegionSelector(new BukkitWorld(player.getWorld()), pRegion.getPoints(),
+					pRegion.getMinimumPoint().getBlockY(), pRegion.getMaximumPoint().getBlockY());
+		} else {
+			rs = new CuboidRegionSelector(new BukkitWorld(player.getWorld()));
+			rs.selectPrimary(pRegion.getMinimumPoint(), null);
+			rs.selectSecondary(pRegion.getMaximumPoint(), null);
+		}
 
-        Region region = null;
-        try {
-            region = rs.getRegion();
-        } catch (IncompleteRegionException e1) {
-            e1.printStackTrace();
-        }
-        if (region == null)
-            return false;
+		Region region = null;
+		try {
+			region = rs.getRegion();
+		} catch (IncompleteRegionException e1) {
+			e1.printStackTrace();
+		}
+		if (region == null)
+			return false;
 
-        Iterator<BlockVector> it = region.iterator();
-        HashSet<int[]> cache = new HashSet<int[]>();
-        while (it.hasNext()) {
-            BlockVector nextVector = it.next();
-            cache.add(new int[] { nextVector.getBlockX(), nextVector.getBlockZ() });
-        }
+		Iterator<BlockVector> it = region.iterator();
+		HashSet<int[]> cache = new HashSet<int[]>();
+		while (it.hasNext()) {
+			BlockVector nextVector = it.next();
+			cache.add(new int[] { nextVector.getBlockX(), nextVector.getBlockZ() });
+		}
 
-        InternalBiomeChange.replaceBiomePoints(cache, player.getWorld(), biome, player);
+		InternalBiomeChange.replaceBiomePoints(cache, player.getWorld(), biome, player);
 
-        return true;
-    }
+		return true;
+	}
 
 }

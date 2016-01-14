@@ -19,29 +19,29 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  */
 
 public class CMD_Store_Delete extends CubitCore {
-    public CMD_Store_Delete(CommandSetupStore handler) {
-        super(true);
-        this.setupStore = handler;
-    }
+	public CMD_Store_Delete(CommandSetupStore handler) {
+		super(true);
+		this.setupStore = handler;
+	}
 
-    @Override
-    public boolean execute(final CommandSender sender, final String[] args) {
-        if (sender.hasPermission("cubit.lstore.delete")) {
+	@Override
+	public boolean execute(final CommandSender sender, final String[] args) {
+		if (sender.hasPermission("cubit.lstore.delete")) {
 
-            setupStore.executorServiceCommands.submit(new Runnable() {
-                public void run() {
-                    final Player player = (Player) sender;
+			setupStore.executorServiceCommands.submit(new Runnable() {
+				public void run() {
+					final Player player = (Player) sender;
 
-                    String regionName = args[1];
-                    CubitFTP.delete(regionName, player.getUniqueId().toString());
-                    sender.sendMessage(I18n.translate("messages.storeDelete", regionName, player.getName()));
+					String regionName = args[1];
+					CubitFTP.delete(regionName, player.getUniqueId().toString());
+					sender.sendMessage(I18n.translate("messages.storeDelete", regionName, player.getName()));
 
-                }
-            });
-        } else {
-            sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
-        }
-        return true;
-    }
+				}
+			});
+		} else {
+			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+		}
+		return true;
+	}
 
 }

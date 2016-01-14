@@ -18,33 +18,33 @@ import de.keks.internal.plugin.hooks.HookCheck;
 
 public class WorldEditHook implements HookCheck {
 
-    private Plugin plugin;
+	private Plugin plugin;
 
-    private WorldEditPlugin worldEdit;
+	private WorldEditPlugin worldEdit;
 
-    private boolean loaded = false;
+	private boolean loaded = false;
 
-    public WorldEditHook(Plugin plugin) {
-        this.plugin = plugin;
-    }
+	public WorldEditHook(Plugin plugin) {
+		this.plugin = plugin;
+	}
 
-    public WorldEditPlugin getWorldEditPlugin() {
-        return worldEdit;
-    }
+	public WorldEditPlugin getWorldEditPlugin() {
+		return worldEdit;
+	}
 
-    public void load() {
-        Plugin worldEditPlugin = plugin.getServer().getPluginManager().getPlugin("WorldEdit");
+	public void load() {
+		Plugin worldEditPlugin = plugin.getServer().getPluginManager().getPlugin("WorldEdit");
 
-        if (worldEditPlugin == null || !(worldEditPlugin instanceof WorldEditPlugin)) {
-            plugin.getLogger().severe("Plugin not found: WorldEdit");
-        } else {
-            worldEdit = (WorldEditPlugin) worldEditPlugin;
-            loaded = true;
-        }
-    }
+		if (worldEditPlugin == null || !(worldEditPlugin instanceof WorldEditPlugin)) {
+			plugin.getLogger().severe("Plugin not found: WorldEdit");
+		} else {
+			worldEdit = (WorldEditPlugin) worldEditPlugin;
+			loaded = true;
+		}
+	}
 
-    public boolean isLoaded() {
-        return loaded;
-    }
+	public boolean isLoaded() {
+		return loaded;
+	}
 
 }

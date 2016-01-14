@@ -18,26 +18,26 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class RegionSaveTask implements Runnable {
 
-    private World            world;
-    private ProtectedRegion  region;
-    private WorldGuardPlugin worldGuard;
+	private World world;
+	private ProtectedRegion region;
+	private WorldGuardPlugin worldGuard;
 
-    public RegionSaveTask(WorldGuardPlugin pl, ProtectedRegion region, World world) {
-        this.region = region;
-        this.world = world;
-        this.worldGuard = pl;
-    }
+	public RegionSaveTask(WorldGuardPlugin pl, ProtectedRegion region, World world) {
+		this.region = region;
+		this.world = world;
+		this.worldGuard = pl;
+	}
 
-    public void run() {
-        try {
-            RegionManager manager = worldGuard.getRegionManager(world);
-            if (region != null) {
-                manager.addRegion(region);
-            }
-            manager.saveChanges();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+	public void run() {
+		try {
+			RegionManager manager = worldGuard.getRegionManager(world);
+			if (region != null) {
+				manager.addRegion(region);
+			}
+			manager.saveChanges();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }

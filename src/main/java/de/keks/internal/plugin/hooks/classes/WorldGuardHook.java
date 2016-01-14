@@ -18,39 +18,39 @@ import de.keks.internal.plugin.hooks.HookCheck;
 
 public class WorldGuardHook implements HookCheck {
 
-    private Plugin plugin;
+	private Plugin plugin;
 
-    private WorldGuardPlugin worldGuard;
+	private WorldGuardPlugin worldGuard;
 
-    private boolean loaded = false;
+	private boolean loaded = false;
 
-    public WorldGuardHook(Plugin plugin) {
-        this.plugin = plugin;
-    }
+	public WorldGuardHook(Plugin plugin) {
+		this.plugin = plugin;
+	}
 
-    public WorldGuardPlugin getWorldGuardPlugin() {
-        return worldGuard;
-    }
+	public WorldGuardPlugin getWorldGuardPlugin() {
+		return worldGuard;
+	}
 
-    @Override
-    public void load() {
-        Plugin worldGuardPlugin = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
+	@Override
+	public void load() {
+		Plugin worldGuardPlugin = plugin.getServer().getPluginManager().getPlugin("WorldGuard");
 
-        if (worldGuardPlugin == null || !(worldGuardPlugin instanceof WorldGuardPlugin)) {
-            if (WorldGuardPlugin.inst() != null) {
-                worldGuard = WorldGuardPlugin.inst();
-                loaded = true;
-                return;
-            } else {
-                plugin.getLogger().severe("Plugin not found: WorldGuard");
-            }
-        } else {
-            worldGuard = (WorldGuardPlugin) worldGuardPlugin;
-        }
-    }
+		if (worldGuardPlugin == null || !(worldGuardPlugin instanceof WorldGuardPlugin)) {
+			if (WorldGuardPlugin.inst() != null) {
+				worldGuard = WorldGuardPlugin.inst();
+				loaded = true;
+				return;
+			} else {
+				plugin.getLogger().severe("Plugin not found: WorldGuard");
+			}
+		} else {
+			worldGuard = (WorldGuardPlugin) worldGuardPlugin;
+		}
+	}
 
-    @Override
-    public boolean isLoaded() {
-        return loaded;
-    }
+	@Override
+	public boolean isLoaded() {
+		return loaded;
+	}
 }
