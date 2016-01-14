@@ -2,7 +2,7 @@ package de.keks.internal.command.land;
 
 import org.bukkit.command.CommandSender;
 
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.I18n;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.register.CommandSetupLand;
@@ -62,7 +62,7 @@ public class CMD_Land_Help extends CubitCore {
                 sender.sendMessage(I18n.translate("landHelpPage4.help8"));
                 return true;
             } else if (args[1].toString().equalsIgnoreCase("5")) {
-                double biomeprice = SkyConfig.getDouble(ConfigValues.setBiome);
+                double biomeprice = SkyConfig.getDouble(SetupConfig.setBiome);
                 sender.sendMessage(I18n.translate("landHelpPage5.help1"));
                 sender.sendMessage(I18n.translate("landHelpPage5.help2"));
                 sender.sendMessage(I18n.translate("landHelpPage5.help3"));

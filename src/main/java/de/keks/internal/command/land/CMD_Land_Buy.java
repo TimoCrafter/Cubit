@@ -25,7 +25,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.I18n;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.core.cubli.InternalBlockHighlight;
@@ -87,10 +87,10 @@ public class CMD_Land_Buy extends CubitCore {
                     }
                     if (args.length < 2) {
                         scheduleSyncTask(setupLand,
-                                new InternalBlockHighlight(setupLand.getCubitInstance(), playerLocation.getChunk(), (Material) SkyConfig.getObject(ConfigValues.landBuyChunkBorders)));
+                                new InternalBlockHighlight(setupLand.getCubitInstance(), playerLocation.getChunk(), (Material) SkyConfig.getObject(SetupConfig.landBuyChunkBorders)));
                     } else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
                         scheduleSyncTask(setupLand,
-                                new InternalBlockHighlight(setupLand.getCubitInstance(), playerLocation.getChunk(), (Material) SkyConfig.getObject(ConfigValues.landBuyChunkBorders)));
+                                new InternalBlockHighlight(setupLand.getCubitInstance(), playerLocation.getChunk(), (Material) SkyConfig.getObject(SetupConfig.landBuyChunkBorders)));
                     }
                     setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
 

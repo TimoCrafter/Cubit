@@ -10,7 +10,7 @@ import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.I18n;
 import de.keks.internal.SkyConfig;
 
@@ -33,7 +33,7 @@ public class InternalBiomeChange {
                 public void run() {
                     if (InternalBiomeChangeCorner.setWGBiome(player, regionID, biome)) {
                         Cubli.refreshChunk(player.getLocation().getChunk());
-                        double costs = SkyConfig.getDouble(ConfigValues.setBiome);
+                        double costs = SkyConfig.getDouble(SetupConfig.setBiome);
                         player.sendMessage(I18n.translate("messages.buyBiome", regionID, costs));
                     }
 

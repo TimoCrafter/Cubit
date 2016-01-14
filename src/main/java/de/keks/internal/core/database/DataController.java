@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.core.database.mysql.SQLInject;
 import de.keks.internal.core.database.yaml.YAMLInject;
@@ -13,7 +13,7 @@ import de.keks.internal.core.database.yaml.YAMLInject;
 public class DataController {
 
     public static long getLastLogin(Player player) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.getLastlogin(player);
         }
         return YAMLInject.getLastlogin(player);
@@ -21,7 +21,7 @@ public class DataController {
     }
 
     public static long getLastLogin(String player) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.getLastloginfromString(player);
         }
         return YAMLInject.getLastloginfromString(player);
@@ -29,7 +29,7 @@ public class DataController {
     }
 
     public static long getLastLogin(UUID uuid) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.getLastloginfromUUID(uuid);
         }
         return YAMLInject.getLastloginfromUUID(uuid);
@@ -37,7 +37,7 @@ public class DataController {
     }
 
     public static double getOfferdata(String regionid) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.getOffer(regionid);
         }
         return YAMLInject.getOffer(regionid);
@@ -45,7 +45,7 @@ public class DataController {
     }
 
     public static boolean isOffered(String regionid) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.isOffered(regionid);
         }
         return YAMLInject.isOffered(regionid);
@@ -53,7 +53,7 @@ public class DataController {
     }
 
     public static void addOfferdata(String regionid, double data) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             SQLInject.setOffer(regionid, data);
             return;
         }
@@ -62,7 +62,7 @@ public class DataController {
     }
 
     public static void removeOfferdata(String regionid) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             SQLInject.removeOffer(regionid);
             return;
         }
@@ -71,7 +71,7 @@ public class DataController {
     }
 
     public static boolean saveRegionSQL(Player player, String regionid, Boolean remote) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.saveRegionfile(player, regionid, remote);
         }
         return YAMLInject.saveRegionfile(player, regionid, remote);
@@ -79,7 +79,7 @@ public class DataController {
     }
 
     public static boolean pasteRegionSQL(Player player, String regionid) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.loadRegionfile(player, regionid);
         }
         return YAMLInject.loadRegionfile(player, regionid);
@@ -87,7 +87,7 @@ public class DataController {
     }
 
     public static List<String> getSavelist(Player player) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return SQLInject.getSavelist(player);
         }
         return YAMLInject.getSavelist(player);
@@ -95,7 +95,7 @@ public class DataController {
     }
 
     public static void savePlayer(Player player) {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             SQLInject.savePlayer(player);
             return;
         }

@@ -11,7 +11,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.I18n;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.core.cubli.Cubli;
@@ -69,7 +69,7 @@ public class CMD_Store_Save extends CubitCore {
                         return;
                     }
 
-                    double costs = SkyConfig.getDouble(ConfigValues.landSave);
+                    double costs = SkyConfig.getDouble(SetupConfig.landSave);
                     if (!hasEnoughToBuy(player, costs)) {
                         player.sendMessage(translate("messages.notEnoughMoney"));
                         return;

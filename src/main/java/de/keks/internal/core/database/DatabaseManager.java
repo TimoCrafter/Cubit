@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.core.database.mysql.SQLConnectionFactory;
 import de.keks.internal.core.database.mysql.SQLConnectionHandler;
@@ -15,7 +15,7 @@ import de.keks.internal.core.database.mysql.SQLConnectionManager;
 
 public class DatabaseManager {
     public static boolean setupManager() {
-        if (SkyConfig.getBoolean(ConfigValues.isSQL, ConfigValues.getDefaultValue(ConfigValues.isSQL))) {
+        if (SkyConfig.getBoolean(SetupConfig.isSQL, SetupConfig.getDefaultValue(SetupConfig.isSQL))) {
             return startsql();
         }
         return startYAML();

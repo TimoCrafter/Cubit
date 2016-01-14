@@ -4,7 +4,7 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.I18n;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.core.cubli.Cubli;
@@ -75,7 +75,7 @@ public class CMD_Biome_Set extends CubitCore
                             sender.sendMessage(I18n.translate("messages.alreadyBiome"));
                             return;
                         }
-                        double costs = SkyConfig.getDouble(ConfigValues.setBiome);
+                        double costs = SkyConfig.getDouble(SetupConfig.setBiome);
                         if (!hasEnoughToBuy(player, costs)) {
                             player.sendMessage(translate("messages.notEnoughMoney"));
                             return;

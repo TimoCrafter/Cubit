@@ -15,7 +15,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.SetupConfig;
 import de.keks.internal.SkyConfig;
 import de.keks.internal.core.cubli.InternalHighlight;
 import de.keks.internal.core.database.DataController;
@@ -110,10 +110,10 @@ public abstract class CubitCore {
     }
 
     protected double calculateCosts(Player player, World world, boolean buy) {
-        double first_region_costs = SkyConfig.getDouble(ConfigValues.firstRegionCosts);
-        double tax_increase = SkyConfig.getDouble(ConfigValues.taxIncreasePerRegion);
-        double max_region_costs = SkyConfig.getDouble(ConfigValues.maxTaxAmount);
-        double percentage_at_sell = SkyConfig.getDouble(ConfigValues.percentageAtRegionSell);
+        double first_region_costs = SkyConfig.getDouble(SetupConfig.firstRegionCosts);
+        double tax_increase = SkyConfig.getDouble(SetupConfig.taxIncreasePerRegion);
+        double max_region_costs = SkyConfig.getDouble(SetupConfig.maxTaxAmount);
+        double percentage_at_sell = SkyConfig.getDouble(SetupConfig.percentageAtRegionSell);
         WorldGuardPlugin worldGuardPlugin = getWorldGuard();
         int regions = worldGuardPlugin.getRegionManager(world).getRegionCountOfPlayer(worldGuardPlugin.wrapPlayer(player));
         double costs = first_region_costs + tax_increase * (regions);
@@ -155,11 +155,11 @@ public abstract class CubitCore {
             OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
             LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
             if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
-                if (timeNow - lastSeen(lplayer.getUniqueId()) < SkyConfig.getDouble(ConfigValues.buyupMembers)) {
+                if (timeNow - lastSeen(lplayer.getUniqueId()) < SkyConfig.getDouble(SetupConfig.buyupMembers)) {
                     return false;
                 }
             } else {
-                if (timeNow - lastSeen(lplayer.getUniqueId()) < SkyConfig.getDouble(ConfigValues.buyupNoMembers)) {
+                if (timeNow - lastSeen(lplayer.getUniqueId()) < SkyConfig.getDouble(SetupConfig.buyupNoMembers)) {
                     return false;
                 }
             }
@@ -175,11 +175,11 @@ public abstract class CubitCore {
             OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
             LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
             if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
-                if (timeNow - lastSeen(lplayer.getUniqueId()) < (SkyConfig.getDouble(ConfigValues.buyupMembers) - (SkyConfig.getDouble(ConfigValues.buyupInfo) * 24 * 60 * 60 * 1000))) {
+                if (timeNow - lastSeen(lplayer.getUniqueId()) < (SkyConfig.getDouble(SetupConfig.buyupMembers) - (SkyConfig.getDouble(SetupConfig.buyupInfo) * 24 * 60 * 60 * 1000))) {
                     return false;
                 }
             } else {
-                if (timeNow - lastSeen(lplayer.getUniqueId()) < (SkyConfig.getDouble(ConfigValues.buyupNoMembers) - (SkyConfig.getDouble(ConfigValues.buyupInfo) * 24 * 60 * 60 * 1000))) {
+                if (timeNow - lastSeen(lplayer.getUniqueId()) < (SkyConfig.getDouble(SetupConfig.buyupNoMembers) - (SkyConfig.getDouble(SetupConfig.buyupInfo) * 24 * 60 * 60 * 1000))) {
                     return false;
                 }
             }
@@ -195,9 +195,9 @@ public abstract class CubitCore {
             OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
             LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
             if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
-                time = lastSeen(lplayer.getUniqueId()) + (long) SkyConfig.getDouble(ConfigValues.buyupMembers);
+                time = lastSeen(lplayer.getUniqueId()) + (long) SkyConfig.getDouble(SetupConfig.buyupMembers);
             } else {
-                time = lastSeen(lplayer.getUniqueId()) + (long) SkyConfig.getDouble(ConfigValues.buyupNoMembers);
+                time = lastSeen(lplayer.getUniqueId()) + (long) SkyConfig.getDouble(SetupConfig.buyupNoMembers);
             }
         }
         return time;
