@@ -17,7 +17,7 @@ import org.bukkit.Material;
  */
 
 public class SetupConfig {
-	private static HashMap<String, Object> defaultvalue;
+	// private static HashMap<String, Object> defaultvalue;
 
 	// Plugin.X
 	private static String pluginLocale = "Plugin.locale";
@@ -177,7 +177,7 @@ public class SetupConfig {
 	}
 
 	private static Object setupPath(String path, Object value) {
-		defaultvalue.put(path, value);
+		// defaultvalue.put(path, value);
 		if (!ConfigFile.existPath(path)) {
 			ConfigFile.addToPath(path, value);
 			return value;
@@ -185,8 +185,8 @@ public class SetupConfig {
 		return ConfigFile.getObject(path);
 	}
 
-	public static Object getDefaultValue(String path) {
-		return defaultvalue.get(path);
-
-	}
+	// public static Object getDefaultValue(String path) {
+	// return defaultvalue.get(path);
+	//
+	// }
 }
