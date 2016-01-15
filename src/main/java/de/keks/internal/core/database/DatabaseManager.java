@@ -11,8 +11,11 @@ import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.mysql.SQLConnectionFactory;
 import de.keks.internal.core.database.mysql.SQLConnectionHandler;
 import de.keks.internal.core.database.mysql.SQLConnectionManager;
+import de.keks.internal.core.database.yaml.SetupYAML;
 
 public class DatabaseManager {
+	public static SetupYAML yamlProvider;
+
 	public static boolean setupManager() {
 		if (ConfigValues.isSQL) {
 			return startsql();
@@ -22,6 +25,8 @@ public class DatabaseManager {
 	}
 
 	private static boolean startYAML() {
+		yamlProvider = new SetupYAML(CubitPlugin.inst());
+		yamlProvider.setup();
 		return true;
 
 	}
