@@ -112,8 +112,8 @@ public class SetupConfig {
 		ConfigValues.taxIncreasePerRegion = (double) setupPath(taxIncreasePerRegion, 10.0D);
 		ConfigValues.firstRegionCosts = (double) setupPath(firstRegionCosts, 256.0D);
 		ConfigValues.percentageAtRegionSell = (double) setupPath(percentageAtRegionSell, 0.5D);
-		ConfigValues.buyupMembers = (long) setupPath(buyupMembers, 20) * 24 * 60 * 60 * 1000;
-		ConfigValues.buyupNoMembers = (long) setupPath(buyupNoMembers, 35) * 24 * 60 * 60 * 1000;
+		ConfigValues.buyupMembers = (double) setupPath(buyupMembers, 20D) * 24 * 60 * 60 * 1000;
+		ConfigValues.buyupNoMembers = (double) setupPath(buyupNoMembers, 35D) * 24 * 60 * 60 * 1000;
 		ConfigValues.buyupInfo = (double) setupPath(buyupInfo, 10D);
 		ConfigValues.landBuyChunkBorders = Material
 				.getMaterial((String) setupPath(landBuyChunkBorders, Material.TORCH.name()));
