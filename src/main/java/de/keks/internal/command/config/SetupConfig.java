@@ -20,7 +20,7 @@ public class SetupConfig {
 
 	// Plugin.X
 	private static String pluginLocale = "Plugin.locale";
-	private static String disabledWorlds = "Plugin.excluded-worlds";
+	private static String disabledWorlds = "Plugin.disabledWorlds";
 	private static String configVersion = "Plugin.version";
 
 	// Land.X
@@ -95,28 +95,29 @@ public class SetupConfig {
 	public SetupConfig() {
 
 		List<String> pluginDisabledIn = new ArrayList<String>();
-		pluginDisabledIn.add("Plugin.disabledIn.worldx");
-		pluginDisabledIn.add("Plugin.disabledIn.worldy");
-		pluginDisabledIn.add("Plugin.disabledIn.worldz");
+		pluginDisabledIn.add("worldx");
+		pluginDisabledIn.add("worldy");
+		pluginDisabledIn.add("worldz");
 
 		List<String> limitDisabledIn = new ArrayList<String>();
-		limitDisabledIn.add("CubitLimit.disabledIn.worldx");
-		limitDisabledIn.add("CubitLimit.disabledIn.worldy");
-		limitDisabledIn.add("CubitLimit.disabledIn.worldz");
+		limitDisabledIn.add("worldx");
+		limitDisabledIn.add("worldy");
+		limitDisabledIn.add("worldz");
 
 		ConfigValues.pluginLocale = (String) setupPath(pluginLocale, "enEN");
 		ConfigValues.disabledWorlds = (List<String>) setupPath(disabledWorlds, pluginDisabledIn);
 		ConfigValues.configVersion = (double) setupPath(configVersion, 1.0D);
-		ConfigValues.maxTaxAmount = (double) setupPath(maxTaxAmount, 400.00D);
 
+		ConfigValues.maxTaxAmount = (double) setupPath(maxTaxAmount, 400.00D);
 		ConfigValues.taxIncreasePerRegion = (double) setupPath(taxIncreasePerRegion, 10.0D);
 		ConfigValues.firstRegionCosts = (double) setupPath(firstRegionCosts, 256.0D);
 		ConfigValues.percentageAtRegionSell = (double) setupPath(percentageAtRegionSell, 0.5D);
-		ConfigValues.buyupMembers = (int) setupPath(buyupMembers, 20 * 24 * 60 * 60 * 1000);
-		ConfigValues.buyupNoMembers = (int) setupPath(buyupNoMembers, 35 * 24 * 60 * 60 * 1000);
+		ConfigValues.buyupMembers = (long) setupPath(buyupMembers, 20) * 24 * 60 * 60 * 1000;
+		ConfigValues.buyupNoMembers = (long) setupPath(buyupNoMembers, 35) * 24 * 60 * 60 * 1000;
 		ConfigValues.buyupInfo = (double) setupPath(buyupInfo, 10D);
-		ConfigValues.landBuyChunkBorders = (Material) setupPath(landBuyChunkBorders, Material.TORCH);
-		ConfigValues.landSellChunkBorders = (Material) setupPath(landSellChunkBorders, Material.REDSTONE_TORCH_ON);
+		ConfigValues.landBuyChunkBorders = (Material) setupPath(landBuyChunkBorders, Material.TORCH.getData());
+		ConfigValues.landSellChunkBorders = (Material) setupPath(landSellChunkBorders,
+				Material.REDSTONE_TORCH_ON.getData());
 		ConfigValues.setBiome = (double) setupPath(setBiome, 300D);
 		ConfigValues.landSave = (double) setupPath(landSave, 300D);
 
