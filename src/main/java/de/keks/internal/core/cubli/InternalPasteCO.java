@@ -17,6 +17,7 @@ import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 
 import de.keks.cubit.CubitPlugin;
+import de.keks.internal.command.config.ConfigValues;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
 
 /**
@@ -33,7 +34,7 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
 public class InternalPasteCO {
 	public static boolean loadRegion(final Player player, final String region) {
 
-		if (CubitPlugin.inst().getConfig().getBoolean("ftp.enable")) {
+		if (ConfigValues.ftpEnabled) {
 			File local = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit");
 			File saves = new File("plugins/Cubit/" + File.separator + "saves");
 			if (!saves.exists()) {

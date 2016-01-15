@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import de.keks.cubit.CubitPlugin;
+import de.keks.internal.command.config.ConfigValues;
 
 /**
  * Copyright:
@@ -18,10 +19,10 @@ import de.keks.cubit.CubitPlugin;
 public class CubitFTP {
 
 	public static boolean upload(File localfile, String UUID) {
-		String host = CubitPlugin.inst().getConfig().getString("ftp.host");
-		int port = CubitPlugin.inst().getConfig().getInt("ftp.port");
-		String user = CubitPlugin.inst().getConfig().getString("ftp.username");
-		String pass = CubitPlugin.inst().getConfig().getString("ftp.password");
+		String host = ConfigValues.ftpHostname;
+		int port = ConfigValues.ftpPort;
+		String user = ConfigValues.ftpUsername;
+		String pass = ConfigValues.ftpPassword;
 
 		try {
 			FTPClient client = new FTPClient();
@@ -70,10 +71,10 @@ public class CubitFTP {
 																				// is
 																				// a
 																				// function
-		String host = CubitPlugin.inst().getConfig().getString("ftp.host");
-		int port = CubitPlugin.inst().getConfig().getInt("ftp.port");
-		String user = CubitPlugin.inst().getConfig().getString("ftp.username");
-		String pass = CubitPlugin.inst().getConfig().getString("ftp.password");
+		String host = ConfigValues.ftpHostname;
+		int port = ConfigValues.ftpPort;
+		String user = ConfigValues.ftpUsername;
+		String pass = ConfigValues.ftpPassword;
 
 		try {
 			FTPClient client = new FTPClient();
@@ -116,10 +117,10 @@ public class CubitFTP {
 
 	public static boolean delete(String regionid, String UUID) { // this is a
 																	// function
-		String host = CubitPlugin.inst().getConfig().getString("ftp.host");
-		int port = CubitPlugin.inst().getConfig().getInt("ftp.port");
-		String user = CubitPlugin.inst().getConfig().getString("ftp.username");
-		String pass = CubitPlugin.inst().getConfig().getString("ftp.password");
+		String host = ConfigValues.ftpHostname;
+		int port = ConfigValues.ftpPort;
+		String user = ConfigValues.ftpUsername;
+		String pass = ConfigValues.ftpPassword;
 
 		try {
 			FTPClient client = new FTPClient();

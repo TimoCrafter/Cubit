@@ -83,12 +83,14 @@ public class SetupConfig {
 	private static String limitSpawnReasonReinforcements = "SpawnLimit.spawnreasons.Reinforcements";
 	private static String limitSpawnReasonCustom = "SpawnLimit.spawnreasons.Costum";
 	private static String limitSpawnReasonDefault = "SpawnLimit.spawnreasons.Default";
+	public static String limitSpawnReason = "SpawnLimit.entities-per-region";
 
 	// Entities
 	private static String limitEntitiesAnimal = "SpawnLimit.entities-per-region.Animal";
 	private static String limitEntitiesMonster = "SpawnLimit.entities-per-region.Monster";
 	private static String limitEntitiesNpc = "SpawnLimit.entities-per-region.Npc";
 	private static String limitEntitiesOther = "SpawnLimit.entities-per-region.Other";
+	public static String limitEntitiesDefault = "SpawnLimit.entities-per-region";
 
 	public SetupConfig() {
 

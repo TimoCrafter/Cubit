@@ -16,6 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.CubitCore;
@@ -77,9 +78,9 @@ public class CMD_Land_Buy_Up extends CubitCore {
 					if (!wasPlayerTooLongOff(getRegion(world, regionName), player)) {
 						int buytime;
 						if (region.isMember(localplayer)) {
-							buytime = (int) CubitPlugin.inst().getConfig().getDouble("Land.buyup-members");
+							buytime = (int) ConfigValues.buyupMembers;
 						} else {
-							buytime = (int) CubitPlugin.inst().getConfig().getDouble("Land.buyup-not-members");
+							buytime = (int) ConfigValues.buyupNoMembers;
 						}
 
 						sender.sendMessage(I18n.translate("messages.errorBuyup", buytime));

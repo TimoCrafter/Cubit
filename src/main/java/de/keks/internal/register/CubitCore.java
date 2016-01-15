@@ -226,8 +226,7 @@ public abstract class CubitCore {
 	public static boolean isPluginDisabled(CommandSender sender) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
-			if (CubitPlugin.inst().getConfig().getStringList("Plugin.excluded-worlds")
-					.contains(p.getLocation().getWorld().getName())) {
+			if (ConfigValues.disabledWorlds.equals(p.getLocation().getWorld().getName())) {
 				return true;
 			}
 		}

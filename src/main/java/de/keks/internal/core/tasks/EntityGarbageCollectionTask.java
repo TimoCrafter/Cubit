@@ -12,7 +12,9 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.core.entitylimit.Config;
+import de.keks.internal.command.config.ConfigFile;
+import de.keks.internal.command.config.ConfigValues;
+import de.keks.internal.command.config.SetupConfig;
 import de.keks.internal.core.entitylimit.MobGroupCompare;
 
 public class EntityGarbageCollectionTask implements Runnable {
@@ -30,7 +32,7 @@ public class EntityGarbageCollectionTask implements Runnable {
 				new BukkitRunnable() {
 					@Override
 					public void run() {
-						if (Config.getStringList("CubitLimit.excluded-worlds").contains(c.getWorld().getName())) {
+						if (ConfigValues.limitWorldList.equals(c.getWorld().getName())) {
 							return;
 						}
 						Entity[] ents = c.getEntities();
@@ -40,12 +42,12 @@ public class EntityGarbageCollectionTask implements Runnable {
 							EntityType t = ents[i].getType();
 							String eType = t.toString();
 							String eGroup = MobGroupCompare.getMobGroup(ents[i]);
-							if (Config.contains("CubitLimit.entities." + eType)) {
+							if (ConfigFile.existPath(SetupConfig.limitEntitiesDefault + "." + eType)) {
 								if (!types.containsKey(eType))
 									types.put(eType, new ArrayList<Entity>());
 								types.get(eType).add(ents[i]);
 							}
-							if (Config.contains("CubitLimit.entities." + eGroup)) {
+							if (ConfigFile.existPath(SetupConfig.limitEntitiesDefault + "." + eGroup)) {
 								if (!types.containsKey(eGroup))
 									types.put(eGroup, new ArrayList<Entity>());
 								types.get(eGroup).add(ents[i]);
@@ -53,7 +55,7 @@ public class EntityGarbageCollectionTask implements Runnable {
 						}
 						for (final Map.Entry<String, ArrayList<Entity>> entry : types.entrySet()) {
 							String eType = entry.getKey();
-							int limit = Config.getInt("CubitLimit.entities." + eType);
+							int limit = ConfigFile.getInteger(SetupConfig.limitEntitiesDefault + "." + eType);
 							if (entry.getValue().size() > limit) {
 								for (int i = entry.getValue().size() - 1; i >= limit; i--) {
 									final int ii = i;

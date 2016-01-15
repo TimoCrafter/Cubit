@@ -14,7 +14,9 @@ import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.core.entitylimit.Config;
+import de.keks.internal.command.config.ConfigFile;
+import de.keks.internal.command.config.ConfigValues;
+import de.keks.internal.command.config.SetupConfig;
 import de.keks.internal.core.entitylimit.MobGroupCompare;
 
 public class WorldListener implements Listener {
@@ -48,16 +50,16 @@ public class WorldListener implements Listener {
 
 	@EventHandler
 	public void onChunkLoadEvent(final ChunkLoadEvent e) {
-		if (Config.getBoolean("CubitLimit.properties.active-inspections")) {
+		if (ConfigValues.limitPropertiesActiveInspection) {
 			inspectTask task = new inspectTask(e.getChunk());
 			int taskID = CubitPlugin.inst().scheduleSyncRepeatingTask(task,
-					Config.getInt("CubitLimit.properties.inspection-frequency") * 20L);
+					ConfigValues.limitPropertiesInspectionFrequency * 20L);
 			task.setId(taskID);
 
 			chunkTasks.put(e.getChunk(), taskID);
 		}
 
-		if (Config.getBoolean("CubitLimit.properties.check-chunk-load"))
+		if (ConfigValues.limitPropertiesCheckChunkLoad)
 			CheckChunk(e.getChunk());
 	}
 
@@ -69,12 +71,12 @@ public class WorldListener implements Listener {
 			chunkTasks.remove(e.getChunk());
 		}
 
-		if (Config.getBoolean("CubitLimit.properties.check-chunk-unload"))
+		if (ConfigValues.limitPropertiesCheckChunkUnload)
 			CheckChunk(e.getChunk());
 	}
 
 	public static boolean CheckChunk(Chunk c) {
-		if (Config.getStringList("CubitLimit.excluded-worlds").contains(c.getWorld().getName())) {
+		if (ConfigValues.limitWorldList.equals(c.getWorld().getName())) {
 			return false;
 		}
 
@@ -88,13 +90,13 @@ public class WorldListener implements Listener {
 			String eType = t.toString();
 			String eGroup = MobGroupCompare.getMobGroup(ents[i]);
 
-			if (Config.contains("CubitLimit.entities." + eType)) {
+			if (ConfigFile.existPath(SetupConfig.limitEntitiesDefault + "." + eType)) {
 				if (!types.containsKey(eType))
 					types.put(eType, new ArrayList<Entity>());
 				types.get(eType).add(ents[i]);
 			}
 
-			if (Config.contains("CubitLimit.entities." + eGroup)) {
+			if (ConfigFile.existPath(SetupConfig.limitEntitiesDefault + "." + eGroup)) {
 				if (!types.containsKey(eGroup))
 					types.put(eGroup, new ArrayList<Entity>());
 				types.get(eGroup).add(ents[i]);
@@ -103,7 +105,7 @@ public class WorldListener implements Listener {
 
 		for (Entry<String, ArrayList<Entity>> entry : types.entrySet()) {
 			String eType = entry.getKey();
-			int limit = Config.getInt("CubitLimit.entities." + eType);
+			int limit = ConfigFile.getInteger(SetupConfig.limitEntitiesDefault + "." + eType);
 
 			if (entry.getValue().size() >= limit) {
 				return true;

@@ -76,8 +76,7 @@ public class CMD_Store_Save extends CubitCore {
 					}
 
 					player.sendMessage(translate("messages.storeTask", regionName));
-					if (DataController.saveRegionSQL(player, region.getId(),
-							CubitPlugin.inst().getConfig().getBoolean("ftp.enable"))) {
+					if (DataController.saveRegionSQL(player, region.getId(), ConfigValues.ftpEnabled)) {
 						moneyTransfer(player, null, costs);
 						if (Cubli.saveRegion(player, region)) {
 							if (Cubli.regenerateRegion(player)) {

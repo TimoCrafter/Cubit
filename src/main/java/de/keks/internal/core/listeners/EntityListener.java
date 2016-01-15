@@ -5,7 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
 
-import de.keks.internal.core.entitylimit.Config;
+import de.keks.internal.command.config.ConfigFile;
+import de.keks.internal.command.config.ConfigValues;
+import de.keks.internal.command.config.SetupConfig;
 
 public class EntityListener implements Listener {
 
@@ -14,13 +16,12 @@ public class EntityListener implements Listener {
 		if (e.isCancelled())
 			return;
 
-		if (Config.getBoolean("CubitLimit.properties.watch-creature-spawns") == false)
+		if (ConfigValues.limitPropertiesWatchCreatureSpawn == false)
 			return;
 
 		String reason = e.getSpawnReason().toString();
 
-		if (!Config.getBoolean("CubitLimit.spawn-reasons." + reason)
-				|| Config.getBoolean("CubitLimit.spawn-reasons." + reason) == false) {
+		if (ConfigFile.existPath(SetupConfig.limitSpawnReason + "." + reason) == false) {
 			return;
 		}
 

@@ -27,12 +27,12 @@ public class DatabaseManager {
 	}
 
 	private static boolean startsql() {
-		String db = CubitPlugin.inst().getConfig().getString("sql.database");
-		String port = CubitPlugin.inst().getConfig().getString("sql.port");
-		String host = CubitPlugin.inst().getConfig().getString("sql.host");
+		String db = ConfigValues.sqlDatabase;
+		String port = String.valueOf(ConfigValues.sqlPort);
+		String host = ConfigValues.sqlHostname;
 		String url = "jdbc:mysql://" + host + ":" + port + "/" + db;
-		String username = CubitPlugin.inst().getConfig().getString("sql.username");
-		String password = CubitPlugin.inst().getConfig().getString("sql.password");
+		String username = ConfigValues.sqlUsername;
+		String password = ConfigValues.sqlPassword;
 		SQLConnectionFactory factory = new SQLConnectionFactory(url, username, password);
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		SQLConnectionHandler handler = manager.getHandler("cubitdb", factory);
@@ -57,7 +57,7 @@ public class DatabaseManager {
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Unable to connect to database.");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "Pls check you mysql connection in config.yml.");
 			Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "==================CUBIT-ERROR================");
-			if (CubitPlugin.inst().getConfig().getBoolean("sql.debugmode")) {
+			if (ConfigValues.sqlDebugmode) {
 				e.printStackTrace();
 			}
 			return false;

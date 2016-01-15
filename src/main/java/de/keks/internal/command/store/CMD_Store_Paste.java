@@ -23,6 +23,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cubli.Cubli;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.core.tasks.RegionSaveTask;
@@ -85,7 +86,7 @@ public class CMD_Store_Paste extends CubitCore {
 					player.sendMessage(translate("messages.storeTask", regionid));
 					if (DataController.pasteRegionSQL(player, regionid)) {
 						if (Cubli.pasteRegion(player, regionid)) {
-							if (CubitPlugin.inst().getConfig().getBoolean("ftp.enable")) {
+							if (ConfigValues.ftpEnabled) {
 								CubitFTP.delete(regionid, player.getUniqueId().toString());
 							}
 							sender.sendMessage(I18n.translate("messages.storePaste", regionName));

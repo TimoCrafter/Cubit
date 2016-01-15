@@ -12,6 +12,7 @@ import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
+import de.keks.internal.command.config.ConfigValues;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
 
 /**
@@ -56,7 +57,7 @@ public class InternalSaveCO {
 			return false;
 		}
 
-		if (CubitPlugin.inst().getConfig().getBoolean("ftp.enable")) {
+		if (ConfigValues.ftpEnabled) {
 			File local = new File("plugins/Cubit/saves/" + player.getUniqueId(), region.getId() + ".cubit");
 			if (CubitFTP.upload(local, player.getUniqueId().toString())) {
 			}

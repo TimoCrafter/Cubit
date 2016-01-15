@@ -7,6 +7,7 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import de.keks.internal.command.config.ConfigFile;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.DatabaseManager;
 import de.keks.internal.core.entitylimit.CubitLimitModule;
 import de.keks.internal.core.listeners.CubitListener;
@@ -91,7 +92,7 @@ public class CubitPlugin extends JavaPlugin {
 			return false;
 		}
 
-		if (this.getConfig().getBoolean("CubitLimit.enable")) {
+		if (ConfigValues.limitEnabled) {
 			CubitLimitModule.start(this);
 		}
 
