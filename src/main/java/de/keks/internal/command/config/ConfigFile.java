@@ -31,6 +31,7 @@ public class ConfigFile {
 		pl.saveDefaultConfig();
 		ConfigFile.pl = pl;
 		configfile = pl.getConfig();
+		new SetupConfig();
 	}
 
 	public static boolean existPath(String path) {

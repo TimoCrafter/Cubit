@@ -6,8 +6,6 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-
-import de.keks.internal.command.config.SetupConfig;
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.core.database.DatabaseManager;
 import de.keks.internal.core.entitylimit.CubitLimitModule;
@@ -61,7 +59,6 @@ public class CubitPlugin extends JavaPlugin {
 		inst = this;
 		this.saveDefaultConfig();
 		skyconfig = new ConfigFile(this);
-		new SetupConfig();
 		setupCommands();
 		registerListenerAndHandler();
 		if (!checkAndSetupPlugins()) {

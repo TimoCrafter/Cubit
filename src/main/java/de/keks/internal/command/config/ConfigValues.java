@@ -58,7 +58,7 @@ public class ConfigValues {
 	public static boolean limitPropertiesCheckChunkUnload;
 	public static boolean limitPropertiesWatchCreatureSpawn;
 	public static boolean limitPropertiesActiveInspection;
-	public static boolean limitPropertiesInspectionFrequency;
+	public static int limitPropertiesInspectionFrequency;
 	// Spawnreasons
 	public static boolean limitSpawnReasonNatural;
 	public static boolean limitSpawnReasonJockey;

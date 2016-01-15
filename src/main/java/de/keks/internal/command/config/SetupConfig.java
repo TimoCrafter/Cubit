@@ -91,11 +91,18 @@ public class SetupConfig {
 	private static String limitEntitiesOther = "SpawnLimit.entities-per-region.Other";
 
 	public SetupConfig() {
-		ConfigValues.pluginLocale = (String) setupPath(pluginLocale, "enEN");
+
 		List<String> pluginDisabledIn = new ArrayList<String>();
 		pluginDisabledIn.add("Plugin.disabledIn.worldx");
 		pluginDisabledIn.add("Plugin.disabledIn.worldy");
 		pluginDisabledIn.add("Plugin.disabledIn.worldz");
+
+		List<String> limitDisabledIn = new ArrayList<String>();
+		limitDisabledIn.add("CubitLimit.disabledIn.worldx");
+		limitDisabledIn.add("CubitLimit.disabledIn.worldy");
+		limitDisabledIn.add("CubitLimit.disabledIn.worldz");
+
+		ConfigValues.pluginLocale = (String) setupPath(pluginLocale, "enEN");
 		ConfigValues.disabledWorlds = (String[]) SetupConfig.setupPath(disabledWorlds, pluginDisabledIn);
 		ConfigValues.configVersion = (double) setupPath(configVersion, 1.0D);
 		ConfigValues.maxTaxAmount = (double) setupPath(maxTaxAmount, 400.00D);
@@ -112,61 +119,57 @@ public class SetupConfig {
 		ConfigValues.landSave = (double) setupPath(landSave, 300D);
 
 		// MySQL
-		setupPath(isSQL, false);
-		setupPath(sqlHostname, "localhost");
-		setupPath(sqlPort, 3306);
-		setupPath(sqlDatabase, "MyDatabaseName");
-		setupPath(sqlUsername, "MySqlUsername");
-		setupPath(sqlPassword, "MySqlPassword");
-		setupPath(sqlDebugmode, false);
+		ConfigValues.isSQL = (boolean) setupPath(isSQL, false);
+		ConfigValues.sqlHostname = (String) setupPath(sqlHostname, "localhost");
+		ConfigValues.sqlPort = (int) setupPath(sqlPort, 3306);
+		ConfigValues.sqlDatabase = (String) setupPath(sqlDatabase, "MyDatabaseName");
+		ConfigValues.sqlUsername = (String) setupPath(sqlUsername, "MySqlUsername");
+		ConfigValues.sqlPassword = (String) setupPath(sqlPassword, "MySqlPassword");
+		ConfigValues.sqlDebugmode = (boolean) setupPath(sqlDebugmode, false);
 
 		// Ftp
-		setupPath(ftpEnabled, false);
-		setupPath(ftpHostname, "locahost");
-		setupPath(ftpPort, 21);
-		setupPath(ftpUsername, "MyFtpUsername");
-		setupPath(ftpPassword, "MyFtpPassword");
+		ConfigValues.ftpEnabled = (boolean) setupPath(ftpEnabled, false);
+		ConfigValues.ftpHostname = (String) setupPath(ftpHostname, "locahost");
+		ConfigValues.ftpPort = (int) setupPath(ftpPort, 21);
+		ConfigValues.ftpUsername = (String) setupPath(ftpUsername, "MyFtpUsername");
+		ConfigValues.ftpPassword = (String) setupPath(ftpPassword, "MyFtpPassword");
 
 		// RegionLimits
 		// Module
 
-		setupPath(limitEnabled, false);
-		List<String> limitDisabledIn = new ArrayList<String>();
-		limitDisabledIn.add("CubitLimit.disabledIn.worldx");
-		limitDisabledIn.add("CubitLimit.disabledIn.worldy");
-		limitDisabledIn.add("CubitLimit.disabledIn.worldz");
-		setupPath(limitWorldList, limitDisabledIn);
+		ConfigValues.limitEnabled = (boolean) setupPath(limitEnabled, false);
+		ConfigValues.limitWorldList = (String[]) setupPath(limitWorldList, limitDisabledIn);
 		// Properties
-		setupPath(limitPropertiesCheckChunkLoad, false);
-		setupPath(limitPropertiesCheckChunkUnload, false);
-		setupPath(limitPropertiesWatchCreatureSpawn, true);
-		setupPath(limitPropertiesActiveInspection, true);
-		setupPath(limitPropertiesInspectionFrequency, 300);
+		ConfigValues.limitPropertiesCheckChunkLoad = (boolean) setupPath(limitPropertiesCheckChunkLoad, false);
+		ConfigValues.limitPropertiesCheckChunkUnload = (boolean) setupPath(limitPropertiesCheckChunkUnload, false);
+		ConfigValues.limitPropertiesWatchCreatureSpawn = (boolean) setupPath(limitPropertiesWatchCreatureSpawn, true);
+		ConfigValues.limitPropertiesActiveInspection = (boolean) setupPath(limitPropertiesActiveInspection, true);
+		ConfigValues.limitPropertiesInspectionFrequency = (int) setupPath(limitPropertiesInspectionFrequency, 300);
 		// Spawnreasons
-		setupPath(limitSpawnReasonNatural, true);
-		setupPath(limitSpawnReasonJockey, true);
-		setupPath(limitSpawnReasonChunkGen, true);
-		setupPath(limitSpawnReasonSpawner, true);
-		setupPath(limitSpawnReasonEgg, true);
-		setupPath(limitSpawnReasonSpawnerEgg, true);
-		setupPath(limitSpawnReasonLightning, true);
-		setupPath(limitSpawnReasonBed, true);
-		setupPath(limitSpawnReasonBuildSnowman, true);
-		setupPath(limitSpawnReasonBuildIrongolem, true);
-		setupPath(limitSpawnReasonBuildWither, true);
-		setupPath(limitSpawnReasonVillageDefense, true);
-		setupPath(limitSpawnReasonVillageInvasion, true);
-		setupPath(limitSpawnReasonBreeding, true);
-		setupPath(limitSpawnReasonSlimeSplit, true);
-		setupPath(limitSpawnReasonReinforcements, true);
-		setupPath(limitSpawnReasonCustom, true);
-		setupPath(limitSpawnReasonDefault, true);
+		ConfigValues.limitSpawnReasonNatural = (boolean) setupPath(limitSpawnReasonNatural, true);
+		ConfigValues.limitSpawnReasonJockey = (boolean) setupPath(limitSpawnReasonJockey, true);
+		ConfigValues.limitSpawnReasonChunkGen = (boolean) setupPath(limitSpawnReasonChunkGen, true);
+		ConfigValues.limitSpawnReasonSpawner = (boolean) setupPath(limitSpawnReasonSpawner, true);
+		ConfigValues.limitSpawnReasonEgg = (boolean) setupPath(limitSpawnReasonEgg, true);
+		ConfigValues.limitSpawnReasonSpawnerEgg = (boolean) setupPath(limitSpawnReasonSpawnerEgg, true);
+		ConfigValues.limitSpawnReasonLightning = (boolean) setupPath(limitSpawnReasonLightning, true);
+		ConfigValues.limitSpawnReasonBed = (boolean) setupPath(limitSpawnReasonBed, true);
+		ConfigValues.limitSpawnReasonBuildSnowman = (boolean) setupPath(limitSpawnReasonBuildSnowman, true);
+		ConfigValues.limitSpawnReasonBuildIrongolem = (boolean) setupPath(limitSpawnReasonBuildIrongolem, true);
+		ConfigValues.limitSpawnReasonBuildWither = (boolean) setupPath(limitSpawnReasonBuildWither, true);
+		ConfigValues.limitSpawnReasonVillageDefense = (boolean) setupPath(limitSpawnReasonVillageDefense, true);
+		ConfigValues.limitSpawnReasonVillageInvasion = (boolean) setupPath(limitSpawnReasonVillageInvasion, true);
+		ConfigValues.limitSpawnReasonBreeding = (boolean) setupPath(limitSpawnReasonBreeding, true);
+		ConfigValues.limitSpawnReasonSlimeSplit = (boolean) setupPath(limitSpawnReasonSlimeSplit, true);
+		ConfigValues.limitSpawnReasonReinforcements = (boolean) setupPath(limitSpawnReasonReinforcements, true);
+		ConfigValues.limitSpawnReasonCustom = (boolean) setupPath(limitSpawnReasonCustom, true);
+		ConfigValues.limitSpawnReasonDefault = (boolean) setupPath(limitSpawnReasonDefault, true);
 
 		// Entities
-		setupPath(limitEntitiesAnimal, 50);
-		setupPath(limitEntitiesMonster, 50);
-		setupPath(limitEntitiesNpc, 50);
-		setupPath(limitEntitiesOther, 120);
+		ConfigValues.limitEntitiesAnimal = (int) setupPath(limitEntitiesAnimal, 50);
+		ConfigValues.limitEntitiesMonster = (int) setupPath(limitEntitiesMonster, 50);
+		ConfigValues.limitEntitiesNpc = (int) setupPath(limitEntitiesNpc, 50);
+		ConfigValues.limitEntitiesOther = (int) setupPath(limitEntitiesOther, 120);
 
 		ConfigFile.saveAndReload();
 	}
