@@ -8,7 +8,7 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import de.keks.internal.command.config.SetupConfig;
-import de.keks.internal.command.config.SkyConfig;
+import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.core.database.DatabaseManager;
 import de.keks.internal.core.entitylimit.CubitLimitModule;
 import de.keks.internal.core.listeners.CubitListener;
@@ -44,7 +44,7 @@ public class CubitPlugin extends JavaPlugin {
 	private CommandSetupLand landCommandHandler;
 	private CommandSetupAdmin adminCommandHandler;
 	private CommandSetupStore storeCommandHandler;
-	private static SkyConfig skyconfig;
+	private static ConfigFile skyconfig;
 
 	public static CubitPlugin inst() {
 		return inst;
@@ -60,7 +60,7 @@ public class CubitPlugin extends JavaPlugin {
 		pdf = this.getDescription();
 		inst = this;
 		this.saveDefaultConfig();
-		skyconfig = new SkyConfig(this);
+		skyconfig = new ConfigFile(this);
 		new SetupConfig();
 		setupCommands();
 		registerListenerAndHandler();
@@ -158,7 +158,7 @@ public class CubitPlugin extends JavaPlugin {
 		}
 	}
 
-	public static SkyConfig getSkyConfig() {
+	public static ConfigFile getSkyConfig() {
 		return CubitPlugin.skyconfig;
 	}
 

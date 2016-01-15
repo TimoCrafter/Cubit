@@ -168,16 +168,16 @@ public class SetupConfig {
 		setupPath(limitEntitiesNpc, 50);
 		setupPath(limitEntitiesOther, 120);
 
-		SkyConfig.saveAndReload();
+		ConfigFile.saveAndReload();
 	}
 
 	private static Object setupPath(String path, Object value) {
 		defaultvalue.put(path, value);
-		if (!SkyConfig.existPath(path)) {
-			SkyConfig.addToPath(path, value);
+		if (!ConfigFile.existPath(path)) {
+			ConfigFile.addToPath(path, value);
 			return value;
 		}
-		return SkyConfig.getObject(path);
+		return ConfigFile.getObject(path);
 	}
 
 	public static Object getDefaultValue(String path) {

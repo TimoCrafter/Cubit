@@ -3,7 +3,7 @@ package de.keks.internal.core.tasks;
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.command.config.SkyConfig;
+import de.keks.internal.command.config.ConfigFile;
 
 /**
  * Copyright:
@@ -28,7 +28,7 @@ public class SetupLanguageTask implements Runnable {
 		cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
 			@Override
 			public void run() {
-				new I18n(cubit, SkyConfig.getString(ConfigValues.pluginLocale));
+				new I18n(cubit, ConfigFile.getString(ConfigValues.pluginLocale));
 
 			}
 		});

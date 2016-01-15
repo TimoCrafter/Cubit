@@ -22,14 +22,14 @@ import org.bukkit.plugin.Plugin;
  * Example: <b>new (SkyConfig(this))</b>
  **/
 
-public class SkyConfig {
+public class ConfigFile {
 
 	private static FileConfiguration configfile;
 	private static Plugin pl;
 
-	public SkyConfig(Plugin pl) {
+	public ConfigFile(Plugin pl) {
 		pl.saveDefaultConfig();
-		SkyConfig.pl = pl;
+		ConfigFile.pl = pl;
 		configfile = pl.getConfig();
 	}
 
