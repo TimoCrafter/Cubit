@@ -115,9 +115,10 @@ public class SetupConfig {
 		ConfigValues.buyupMembers = (long) setupPath(buyupMembers, 20) * 24 * 60 * 60 * 1000;
 		ConfigValues.buyupNoMembers = (long) setupPath(buyupNoMembers, 35) * 24 * 60 * 60 * 1000;
 		ConfigValues.buyupInfo = (double) setupPath(buyupInfo, 10D);
-		ConfigValues.landBuyChunkBorders = (Material) setupPath(landBuyChunkBorders, Material.TORCH.getData());
-		ConfigValues.landSellChunkBorders = (Material) setupPath(landSellChunkBorders,
-				Material.REDSTONE_TORCH_ON.getData());
+		ConfigValues.landBuyChunkBorders = Material
+				.getMaterial((String) setupPath(landBuyChunkBorders, Material.TORCH.name()));
+		ConfigValues.landSellChunkBorders = Material
+				.getMaterial((String) setupPath(landSellChunkBorders, Material.REDSTONE_TORCH_ON.name()));
 		ConfigValues.setBiome = (double) setupPath(setBiome, 300D);
 		ConfigValues.landSave = (double) setupPath(landSave, 300D);
 
