@@ -22,13 +22,27 @@ public class YAMLInject {
 	}
 
 	public static long getLastlogin(Player p) {
-		return p.getLastPlayed();
+		long lastloginString = 0;
+		if (p.isOnline()) {
+			Date now = new Date();
+			lastloginString = now.getTime();
+		} else {
+			lastloginString = p.getLastPlayed();
+		}
+		return lastloginString;
 
 	}
 
 	public static long getLastloginfromUUID(UUID uuid) {
+		long lastloginString = 0;
 		OfflinePlayer p = Bukkit.getOfflinePlayer(uuid);
-		return p.getLastPlayed();
+		if (p.isOnline()) {
+			Date now = new Date();
+			lastloginString = now.getTime();
+		} else {
+			lastloginString = p.getLastPlayed();
+		}
+		return lastloginString;
 
 	}
 
