@@ -76,7 +76,7 @@ public class WorldListener implements Listener {
 	}
 
 	public static boolean CheckChunk(Chunk c) {
-		if (ConfigValues.limitWorldList.equals(c.getWorld().getName())) {
+		if (ConfigValues.limitWorldList.contains(c.getWorld().getName())) {
 			return false;
 		}
 

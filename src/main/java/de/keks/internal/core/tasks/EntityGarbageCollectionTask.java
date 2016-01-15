@@ -32,7 +32,7 @@ public class EntityGarbageCollectionTask implements Runnable {
 				new BukkitRunnable() {
 					@Override
 					public void run() {
-						if (ConfigValues.limitWorldList.equals(c.getWorld().getName())) {
+						if (ConfigValues.limitWorldList.contains(c.getWorld().getName())) {
 							return;
 						}
 						Entity[] ents = c.getEntities();

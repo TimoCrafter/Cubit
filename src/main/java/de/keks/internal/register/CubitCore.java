@@ -226,7 +226,7 @@ public abstract class CubitCore {
 	public static boolean isPluginDisabled(CommandSender sender) {
 		if (sender instanceof Player) {
 			Player p = (Player) sender;
-			if (ConfigValues.disabledWorlds.equals(p.getLocation().getWorld().getName())) {
+			if (ConfigValues.disabledWorlds.contains(p.getLocation().getWorld().getName())) {
 				return true;
 			}
 		}

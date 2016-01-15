@@ -1,6 +1,5 @@
 package de.keks.internal.core.database.yaml;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -16,6 +15,7 @@ public class YAMLInject {
 
 	private static String offerPath = "offer";
 	private static String cubliPath = "data";
+	private static String cubliIDPath = "regionList";
 
 	public static void savePlayer(Player player) {
 		// No needed
@@ -107,6 +107,8 @@ public class YAMLInject {
 
 		config.set(cubliPath + "." + player.getUniqueId() + ".regionID", regionid);
 		config.set(cubliPath + "." + player.getUniqueId() + ".remote", remote);
+
+		config.set(cubliIDPath + "." + player.getUniqueId(), regionid);
 		provider.saveCubliData();
 		return true;
 	}
@@ -118,18 +120,16 @@ public class YAMLInject {
 		config.set(cubliPath + "." + player.getUniqueId() + ".regionID", null);
 		config.set(cubliPath + "." + player.getUniqueId() + ".remote", null);
 		config.set(cubliPath + "." + player.getUniqueId(), null);
+		config.set(cubliIDPath + "." + player.getUniqueId(), null);
 		provider.saveCubliData();
 		return true;
 	}
 
 	public static List<String> getSavelist(Player player) {
-		List<String> list = new ArrayList<String>();
 		SetupYAML provider = DatabaseManager.yamlProvider;
 		FileConfiguration config = provider.getCubliConfig();
+		List<String> list = config.getStringList(cubliIDPath + "." + player.getUniqueId());
 
-		for (String regionID : config.getStringList(cubliPath + "." + player.getUniqueId() + ".regionID")) {
-			list.add(regionID);
-		}
 		return list;
 
 	}
