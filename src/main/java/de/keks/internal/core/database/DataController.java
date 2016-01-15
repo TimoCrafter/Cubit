@@ -5,7 +5,7 @@ import java.util.UUID;
 
 import org.bukkit.entity.Player;
 
-import de.keks.internal.ConfigValues;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.mysql.SQLInject;
 import de.keks.internal.core.database.yaml.YAMLInject;
 

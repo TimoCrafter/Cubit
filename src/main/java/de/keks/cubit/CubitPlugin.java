@@ -7,8 +7,8 @@ import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import de.keks.internal.SetupConfig;
-import de.keks.internal.SkyConfig;
+import de.keks.internal.command.config.SetupConfig;
+import de.keks.internal.command.config.SkyConfig;
 import de.keks.internal.core.database.DatabaseManager;
 import de.keks.internal.core.entitylimit.CubitLimitModule;
 import de.keks.internal.core.listeners.CubitListener;

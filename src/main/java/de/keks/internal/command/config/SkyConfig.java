@@ -7,7 +7,7 @@
  * </ul>
  * 
  **/
-package de.keks.internal;
+package de.keks.internal.command.config;
 
 import java.util.List;
 

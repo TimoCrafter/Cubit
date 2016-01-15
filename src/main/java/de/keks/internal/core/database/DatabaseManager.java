@@ -7,7 +7,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.mysql.SQLConnectionFactory;
 import de.keks.internal.core.database.mysql.SQLConnectionHandler;
 import de.keks.internal.core.database.mysql.SQLConnectionManager;

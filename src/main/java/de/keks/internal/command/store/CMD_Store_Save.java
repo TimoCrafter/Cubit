@@ -11,8 +11,8 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
 import de.keks.internal.I18n;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cubli.Cubli;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.core.tasks.RegionSaveTask;

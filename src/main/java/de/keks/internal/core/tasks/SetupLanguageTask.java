@@ -1,9 +1,9 @@
 package de.keks.internal.core.tasks;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
 import de.keks.internal.I18n;
-import de.keks.internal.SkyConfig;
+import de.keks.internal.command.config.ConfigValues;
+import de.keks.internal.command.config.SkyConfig;
 
 /**
  * Copyright:

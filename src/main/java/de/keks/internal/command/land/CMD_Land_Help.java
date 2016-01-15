@@ -2,8 +2,8 @@ package de.keks.internal.command.land;
 
 import org.bukkit.command.CommandSender;
 
-import de.keks.internal.ConfigValues;
 import de.keks.internal.I18n;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.CubitCore;
 

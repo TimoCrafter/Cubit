@@ -15,7 +15,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.ConfigValues;
+import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cubli.InternalHighlight;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
