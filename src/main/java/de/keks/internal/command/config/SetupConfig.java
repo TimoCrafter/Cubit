@@ -1,7 +1,6 @@
 package de.keks.internal.command.config;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.bukkit.Material;
@@ -92,6 +91,7 @@ public class SetupConfig {
 	private static String limitEntitiesOther = "SpawnLimit.entities-per-region.Other";
 	public static String limitEntitiesDefault = "SpawnLimit.entities-per-region";
 
+	@SuppressWarnings("unchecked")
 	public SetupConfig() {
 
 		List<String> pluginDisabledIn = new ArrayList<String>();
@@ -105,7 +105,7 @@ public class SetupConfig {
 		limitDisabledIn.add("CubitLimit.disabledIn.worldz");
 
 		ConfigValues.pluginLocale = (String) setupPath(pluginLocale, "enEN");
-		ConfigValues.disabledWorlds = (String[]) SetupConfig.setupPath(disabledWorlds, pluginDisabledIn);
+		ConfigValues.disabledWorlds = (List<String>) setupPath(disabledWorlds, pluginDisabledIn);
 		ConfigValues.configVersion = (double) setupPath(configVersion, 1.0D);
 		ConfigValues.maxTaxAmount = (double) setupPath(maxTaxAmount, 400.00D);
 
@@ -140,7 +140,7 @@ public class SetupConfig {
 		// Module
 
 		ConfigValues.limitEnabled = (boolean) setupPath(limitEnabled, false);
-		ConfigValues.limitWorldList = (String[]) setupPath(limitWorldList, limitDisabledIn);
+		ConfigValues.limitWorldList = (List<String>) setupPath(limitWorldList, limitDisabledIn);
 		// Properties
 		ConfigValues.limitPropertiesCheckChunkLoad = (boolean) setupPath(limitPropertiesCheckChunkLoad, false);
 		ConfigValues.limitPropertiesCheckChunkUnload = (boolean) setupPath(limitPropertiesCheckChunkUnload, false);

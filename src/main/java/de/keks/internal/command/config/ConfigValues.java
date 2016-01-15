@@ -1,5 +1,7 @@
 package de.keks.internal.command.config;
 
+import java.util.List;
+
 import org.bukkit.Material;
 
 /**
@@ -16,7 +18,7 @@ public class ConfigValues {
 
 	// Plugin.X
 	public static String pluginLocale;
-	public static String[] disabledWorlds;
+	public static List<String> disabledWorlds;
 	public static double configVersion;
 
 	// Land.X
@@ -52,7 +54,7 @@ public class ConfigValues {
 	// Module
 
 	public static boolean limitEnabled;
-	public static String[] limitWorldList;
+	public static List<String> limitWorldList;
 	// Properties
 	public static boolean limitPropertiesCheckChunkLoad;
 	public static boolean limitPropertiesCheckChunkUnload;
