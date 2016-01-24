@@ -10,8 +10,6 @@ import com.sk89q.worldedit.Vector;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
-
-import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigValues;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
 
