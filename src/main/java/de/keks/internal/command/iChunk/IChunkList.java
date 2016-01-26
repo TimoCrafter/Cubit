@@ -1,4 +1,4 @@
-package de.keks.internal.command.store;
+package de.keks.internal.command.iChunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import de.keks.internal.I18n;
 import de.keks.internal.core.database.DataController;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.CubitCore;
 
 /**
@@ -22,17 +22,17 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Store_List extends CubitCore {
+public class IChunkList extends CubitCore {
 
-	public CMD_Store_List(CommandSetupStore handler) {
+	public IChunkList(CommandSetupIChunk handler) {
 
 		super(true);
-		this.setupStore = handler;
+		this.setupIChunk = handler;
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.lstore.list")) {
-			setupStore.executorServiceCommands.submit(new Runnable() {
+		if (sender.hasPermission("cubit.iChunk.list")) {
+			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 2) {
 						int pageNumb = 0;

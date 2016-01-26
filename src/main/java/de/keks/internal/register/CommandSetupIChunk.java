@@ -13,12 +13,12 @@ import com.google.common.collect.Maps;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.command.store.CMD_Store_Delete;
-import de.keks.internal.command.store.CMD_Store_Help;
-import de.keks.internal.command.store.CMD_Store_List;
-import de.keks.internal.command.store.CMD_Store_Paste;
-import de.keks.internal.command.store.CMD_Store_Regen;
-import de.keks.internal.command.store.CMD_Store_Save;
+import de.keks.internal.command.iChunk.IChunkDelete;
+import de.keks.internal.command.iChunk.IChunkHelp;
+import de.keks.internal.command.iChunk.IChunkList;
+import de.keks.internal.command.iChunk.IChunkPaste;
+import de.keks.internal.command.iChunk.IChunkRegen;
+import de.keks.internal.command.iChunk.IChunkSave;
 import de.keks.internal.plugin.hooks.OfferManager;
 
 /**
@@ -31,7 +31,7 @@ import de.keks.internal.plugin.hooks.OfferManager;
  * 
  */
 
-public class CommandSetupStore implements CommandExecutor {
+public class CommandSetupIChunk implements CommandExecutor {
 	public boolean isInitialized() {
 		return initialized;
 	}
@@ -42,7 +42,7 @@ public class CommandSetupStore implements CommandExecutor {
 	public ThreadPoolExecutor executorServiceCommands;
 	public ThreadPoolExecutor executorServiceRegions;
 
-	public CommandSetupStore(final CubitPlugin cubit) {
+	public CommandSetupIChunk(final CubitPlugin cubit) {
 		this.cubit = cubit;
 		offerManager = new OfferManager(cubit);
 		executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
@@ -64,8 +64,8 @@ public class CommandSetupStore implements CommandExecutor {
 			sender.sendMessage(I18n.translate("messages.pluginDisabled"));
 			return true;
 		}
-		if (CubitPlugin.inst().cubitStoreTask.containsKey(sender.getName())) {
-			long secondsLeft = ((CubitPlugin.inst().cubitStoreTask.get(sender.getName()) / 1000)
+		if (CubitPlugin.inst().cubitIChunkTask.containsKey(sender.getName())) {
+			long secondsLeft = ((CubitPlugin.inst().cubitIChunkTask.get(sender.getName()) / 1000)
 					+ CubitPlugin.inst().cubitTaskTime) - (System.currentTimeMillis() / 1000);
 
 			if (secondsLeft > 0) {
@@ -74,26 +74,26 @@ public class CommandSetupStore implements CommandExecutor {
 				return true;
 			}
 		}
-		CubitPlugin.inst().cubitStoreTask.put(sender.getName(), System.currentTimeMillis());
+		CubitPlugin.inst().cubitIChunkTask.put(sender.getName(), System.currentTimeMillis());
 		if (args.length == 0) {
 
-			if (sender.hasPermission("cubit.lstore.help")) {
+			if (sender.hasPermission("cubit.iChunk.help")) {
 
-				sender.sendMessage(I18n.translate("lstoreHelpPage1.help1"));
-				sender.sendMessage(I18n.translate("lstoreHelpPage1.help2"));
-				sender.sendMessage(I18n.translate("lstoreHelpPage1.help3"));
-				sender.sendMessage(I18n.translate("lstoreHelpPage1.help4"));
-				sender.sendMessage(I18n.translate("lstoreHelpPage1.help5"));
+				sender.sendMessage(I18n.translate("iChunkHelpPage1.help1"));
+				sender.sendMessage(I18n.translate("iChunkHelpPage1.help2"));
+				sender.sendMessage(I18n.translate("iChunkHelpPage1.help3"));
+				sender.sendMessage(I18n.translate("iChunkHelpPage1.help4"));
+				sender.sendMessage(I18n.translate("iChunkHelpPage1.help5"));
 			} else {
 				sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
 			}
 		} else if (getCommands().containsKey(args[0])) {
 			String command = args[0];
 			if (!getCommands().get(command).execute(sender, args)) {
-				sender.sendMessage(I18n.translate("messages.unknownCommand", "/lstore help"));
+				sender.sendMessage(I18n.translate("messages.unknownCommand", "/iChunk help"));
 			}
 		} else {
-			sender.sendMessage(I18n.translate("messages.unknownCommand", "/lstore help"));
+			sender.sendMessage(I18n.translate("messages.unknownCommand", "/iChunk help"));
 		}
 		return true;
 	}
@@ -108,12 +108,12 @@ public class CommandSetupStore implements CommandExecutor {
 
 	public void initialize() {
 		try {
-			this.commands.put("save", new CMD_Store_Save(this));
-			this.commands.put("paste", new CMD_Store_Paste(this));
-			this.commands.put("regen", new CMD_Store_Regen(this));
-			this.commands.put("delete", new CMD_Store_Delete(this));
-			this.commands.put("list", new CMD_Store_List(this));
-			this.commands.put("help", new CMD_Store_Help(this));
+			this.commands.put("save", new IChunkSave(this));
+			this.commands.put("paste", new IChunkPaste(this));
+			this.commands.put("regen", new IChunkRegen(this));
+			this.commands.put("delete", new IChunkDelete(this));
+			this.commands.put("list", new IChunkList(this));
+			this.commands.put("help", new IChunkHelp(this));
 			initialized = true;
 		} catch (Exception e) {
 			e.printStackTrace();

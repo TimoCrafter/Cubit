@@ -14,7 +14,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cubli.Cubli;
+import de.keks.internal.core.iChunk.IChunk;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
@@ -81,7 +81,7 @@ public class CMD_Biome_Set extends CubitCore
 							return;
 						}
 						sender.sendMessage(I18n.translate("messages.storeTask", regionName));
-						if (Cubli.setBiome(player, regionName, Biome.valueOf(args[1].toUpperCase()))) {
+						if (IChunk.setBiome(player, regionName, Biome.valueOf(args[1].toUpperCase()))) {
 							moneyTransfer(player, null, costs);
 						}
 						if (isSpigot()) {

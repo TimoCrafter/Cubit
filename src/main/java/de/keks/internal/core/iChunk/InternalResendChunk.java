@@ -1,4 +1,4 @@
-package de.keks.internal.core.cubli;
+package de.keks.internal.core.iChunk;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;

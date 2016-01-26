@@ -154,24 +154,24 @@ ladminHelpPage2:
   help4: '&2 Create serverregion: &a/ladmin setserver'
   help5: '&2 Delete serverregion: &a/ladmin unsetserver'
   help6: '&2 Teleport a player to an estate: &a/ladmin tp <Player> <RegionID>'
-  help7: '&2 Generate current Chunk new: &a/lstore regen'
+  help7: '&2 Generate current Chunk new: &a/iChunk regen'
   help8: '&aBack to Page 1 by &e/ladmin help 1'
 
-  # /lstore or /lstore help 1
-lstoreHelpPage1:
-  help1: '&e&n&6-==================[&2&lCubit LStore&r&6]=================-'
-  help2: '&a Cubit LStore Help: &e/lstore help'
-  help3: '&a List your saved estates: &e/lstore list [PAGE]'
+  # /iChunk or /iChunk help 1
+iChunkHelpPage1:
+  help1: '&e&n&6-==================[&2&lCubit iChunk&r&6]=================-'
+  help2: '&a Cubit iChunk Help: &e/iChunk help'
+  help3: '&a List your saved estates: &e/iChunk list [PAGE]'
   help4: '&6&lMore commands on the following pages:'
-  help5: '&2 Page 2: Manage saves &a/lstore help 2'
+  help5: '&2 Page 2: Manage saves &a/iChunk help 2'
 
-  # /lstore help 2
-lstoreHelpPage2:
+  # /iChunk help 2
+iChunkHelpPage2:
   help1: '&6&lManage saved estates: (Page 2)'
-  help2: '&2 Save current estate: &a/lstore save (Name)'
-  help3: '&2 Load and paste an estate: &a/lstore paste [Name]'
-  help4: '&2 List your saved estates: &a/lstore list [PAGE]'
-  help5: '&aBack to Page 1 by &e/lstore help 1'
+  help2: '&2 Save current estate: &a/iChunk save (Name)'
+  help3: '&2 Load and paste an estate: &a/iChunk paste [Name]'
+  help4: '&2 List your saved estates: &a/iChunk list [PAGE]'
+  help5: '&aBack to Page 1 by &e/iChunk help 1'
   
   # /land info
 landInfo:

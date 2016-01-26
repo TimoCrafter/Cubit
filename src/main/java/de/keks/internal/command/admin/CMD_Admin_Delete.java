@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cubli.InternalBlockHighlight;
+import de.keks.internal.core.iChunk.InternalBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.CubitCore;

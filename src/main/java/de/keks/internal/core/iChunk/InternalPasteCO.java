@@ -1,4 +1,4 @@
-package de.keks.internal.core.cubli;
+package de.keks.internal.core.iChunk;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,8 +83,8 @@ public class InternalPasteCO {
 				if (remove.exists()) {
 					remove.delete();
 				}
-				Cubli.refreshChunk(player.getLocation().getChunk());
-				Cubli.teleportSave(player.getLocation().getChunk());
+				IChunk.refreshChunk(player.getLocation().getChunk());
+				IChunk.teleportSave(player.getLocation().getChunk());
 			}
 		});
 		return true;

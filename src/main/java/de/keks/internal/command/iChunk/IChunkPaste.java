@@ -1,4 +1,4 @@
-package de.keks.internal.command.store;
+package de.keks.internal.command.iChunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -24,10 +24,10 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cubli.Cubli;
 import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.iChunk.IChunk;
 import de.keks.internal.core.tasks.RegionSaveTask;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.CubitCore;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
 
@@ -41,15 +41,15 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  * 
  */
 
-public class CMD_Store_Paste extends CubitCore {
-	public CMD_Store_Paste(CommandSetupStore handler) {
+public class IChunkPaste extends CubitCore {
+	public IChunkPaste(CommandSetupIChunk handler) {
 		super(true);
-		this.setupStore = handler;
+		this.setupIChunk = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.lstore.paste")) {
+		if (sender.hasPermission("cubit.iChunk.paste")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -58,7 +58,7 @@ public class CMD_Store_Paste extends CubitCore {
 			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
-			setupStore.executorServiceCommands.submit(new Runnable() {
+			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					RegionManager manager = getWorldGuard().getRegionManager(world);
 
@@ -67,7 +67,7 @@ public class CMD_Store_Paste extends CubitCore {
 					ProtectedRegion region;
 					if (!manager.hasRegion(regionName)) {
 						region = createRegion(chunkX, chunkZ, world, player, regionName);
-						setupStore.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
+						setupIChunk.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
 					} else {
 						region = getRegion(world, regionName);
 					}
@@ -85,7 +85,7 @@ public class CMD_Store_Paste extends CubitCore {
 
 					player.sendMessage(translate("messages.storeTask", regionid));
 					if (DataController.pasteRegionSQL(player, regionid)) {
-						if (Cubli.pasteRegion(player, regionid)) {
+						if (IChunk.pasteRegion(player, regionid)) {
 							if (ConfigValues.ftpEnabled) {
 								CubitFTP.delete(regionid, player.getUniqueId().toString());
 							}

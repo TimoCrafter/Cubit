@@ -16,8 +16,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cubli.InternalHighlight;
 import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.iChunk.InternalHighlight;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 
 /**
@@ -33,7 +33,7 @@ import de.keks.internal.plugin.hooks.classes.EconomyHook;
 public abstract class CubitCore {
 
 	protected CommandSetupLand setupLand;
-	protected CommandSetupStore setupStore;
+	protected CommandSetupIChunk setupIChunk;
 	protected CommandSetupAdmin setupAdmin;
 	public InternalHighlight effects;
 
@@ -84,11 +84,11 @@ public abstract class CubitCore {
 				delay);
 	}
 
-	protected void scheduleSyncTaskStore(CommandSetupStore handler, Runnable run) {
+	protected void scheduleSyncTaskStore(CommandSetupIChunk handler, Runnable run) {
 		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run);
 	}
 
-	protected void scheduleSyncTaskStore(CommandSetupStore handler, Runnable run, long delay) {
+	protected void scheduleSyncTaskStore(CommandSetupIChunk handler, Runnable run, long delay) {
 		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run,
 				delay);
 	}

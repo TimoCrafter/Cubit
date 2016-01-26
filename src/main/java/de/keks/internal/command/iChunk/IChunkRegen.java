@@ -1,4 +1,4 @@
-package de.keks.internal.command.store;
+package de.keks.internal.command.iChunk;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -6,8 +6,8 @@ import org.bukkit.entity.Player;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.core.cubli.Cubli;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.core.iChunk.IChunk;
+import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.CubitCore;
 
 /**
@@ -20,23 +20,23 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Store_Regen extends CubitCore {
-	public CMD_Store_Regen(CommandSetupStore handler) {
+public class IChunkRegen extends CubitCore {
+	public IChunkRegen(CommandSetupIChunk handler) {
 		super(true);
-		this.setupStore = handler;
+		this.setupIChunk = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.lstore.regen")) {
+		if (sender.hasPermission("cubit.iChunk.regen")) {
 
-			setupStore.executorServiceCommands.submit(new Runnable() {
+			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 
 					Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
 						public void run() {
-							if (Cubli.regenerateRegion(player)) {
+							if (IChunk.regenerateRegion(player)) {
 								sender.sendMessage(I18n.translate("messages.storeRegen"));
 							}
 						}

@@ -1,4 +1,4 @@
-package de.keks.internal.core.cubli;
+package de.keks.internal.core.iChunk;
 
 import org.bukkit.Chunk;
 import org.bukkit.block.Biome;
@@ -16,7 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
  * 
  */
 
-public class Cubli {
+public class IChunk {
 
 	/**
 	 * <ul>

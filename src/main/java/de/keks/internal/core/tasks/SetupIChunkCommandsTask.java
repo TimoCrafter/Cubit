@@ -1,7 +1,7 @@
 package de.keks.internal.core.tasks;
 
 import de.keks.cubit.CubitPlugin;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.register.CommandSetupIChunk;
 
 /**
  * Copyright:
@@ -13,13 +13,13 @@ import de.keks.internal.register.CommandSetupStore;
  * 
  */
 
-public class SetupStoreCommandsTask implements Runnable {
+public class SetupIChunkCommandsTask implements Runnable {
 
 	private CubitPlugin cubit;
 
-	private CommandSetupStore handler;
+	private CommandSetupIChunk handler;
 
-	public SetupStoreCommandsTask(CubitPlugin cubit, CommandSetupStore handler) {
+	public SetupIChunkCommandsTask(CubitPlugin cubit, CommandSetupIChunk handler) {
 		this.cubit = cubit;
 
 		this.handler = handler;

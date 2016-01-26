@@ -2,8 +2,6 @@ package thirdparty.ftp.it.sauronsoftware.ftp4j;
 
 import java.io.File;
 import java.io.IOException;
-
-import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigValues;
 
 /**

@@ -1,4 +1,4 @@
-package de.keks.internal.command.store;
+package de.keks.internal.command.iChunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -13,11 +13,11 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cubli.Cubli;
 import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.iChunk.IChunk;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.CubitCore;
 
 /**
@@ -30,15 +30,15 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Store_Save extends CubitCore {
-	public CMD_Store_Save(CommandSetupStore handler) {
+public class IChunkSave extends CubitCore {
+	public IChunkSave(CommandSetupIChunk handler) {
 		super(true);
-		this.setupStore = handler;
+		this.setupIChunk = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.lstore.save")) {
+		if (sender.hasPermission("cubit.iChunk.save")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -47,7 +47,7 @@ public class CMD_Store_Save extends CubitCore {
 			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
-			setupStore.executorServiceCommands.submit(new Runnable() {
+			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
 					RegionManager manager = getWorldGuard().getRegionManager(world);
@@ -78,12 +78,12 @@ public class CMD_Store_Save extends CubitCore {
 					player.sendMessage(translate("messages.storeTask", regionName));
 					if (DataController.saveRegionSQL(player, region.getId(), ConfigValues.ftpEnabled)) {
 						moneyTransfer(player, null, costs);
-						if (Cubli.saveRegion(player, region)) {
-							if (Cubli.regenerateRegion(player)) {
+						if (IChunk.saveRegion(player, region)) {
+							if (IChunk.regenerateRegion(player)) {
 								manager.removeRegion(regionName);
-								setupStore.getOfferManager().removeOffer(regionName);
+								setupIChunk.getOfferManager().removeOffer(regionName);
 								sender.sendMessage(I18n.translate("messages.storeSave", regionName, region.getId()));
-								setupStore.executorServiceRegions
+								setupIChunk.executorServiceRegions
 										.submit(new RegionSaveTask(getWorldGuard(), null, world));
 							}
 						}
@@ -99,7 +99,7 @@ public class CMD_Store_Save extends CubitCore {
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupStore.getCubitInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupIChunk.getCubitInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 

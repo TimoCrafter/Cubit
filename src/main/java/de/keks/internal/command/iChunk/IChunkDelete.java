@@ -1,10 +1,10 @@
-package de.keks.internal.command.store;
+package de.keks.internal.command.iChunk;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.keks.internal.I18n;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.CubitCore;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
 
@@ -18,17 +18,17 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  * 
  */
 
-public class CMD_Store_Delete extends CubitCore {
-	public CMD_Store_Delete(CommandSetupStore handler) {
+public class IChunkDelete extends CubitCore {
+	public IChunkDelete(CommandSetupIChunk handler) {
 		super(true);
-		this.setupStore = handler;
+		this.setupIChunk = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.lstore.delete")) {
+		if (sender.hasPermission("cubit.iChunk.delete")) {
 
-			setupStore.executorServiceCommands.submit(new Runnable() {
+			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 

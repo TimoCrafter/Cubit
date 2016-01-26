@@ -14,11 +14,11 @@ import de.keks.internal.core.listeners.CubitListener;
 import de.keks.internal.core.tasks.SetupAdminCommandsTask;
 import de.keks.internal.core.tasks.SetupLandCommandsTask;
 import de.keks.internal.core.tasks.SetupLanguageTask;
-import de.keks.internal.core.tasks.SetupStoreCommandsTask;
+import de.keks.internal.core.tasks.SetupIChunkCommandsTask;
 import de.keks.internal.plugin.hooks.HookManager;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CommandSetupStore;
+import de.keks.internal.register.CommandSetupIChunk;
 import net.milkbowl.vault.economy.Economy;
 
 /**
@@ -34,7 +34,7 @@ import net.milkbowl.vault.economy.Economy;
 public class CubitPlugin extends JavaPlugin {
 	public HashMap<String, Long> cubitLandTask = new HashMap<String, Long>();
 	public HashMap<String, Long> cubitAdminTask = new HashMap<String, Long>();
-	public HashMap<String, Long> cubitStoreTask = new HashMap<String, Long>();
+	public HashMap<String, Long> cubitIChunkTask = new HashMap<String, Long>();
 
 	public int cubitTaskTime = 1;
 	private static CubitPlugin inst;
@@ -42,7 +42,7 @@ public class CubitPlugin extends JavaPlugin {
 	private HookManager hookManager;
 	private CommandSetupLand landCommandHandler;
 	private CommandSetupAdmin adminCommandHandler;
-	private CommandSetupStore storeCommandHandler;
+	private CommandSetupIChunk iChunkCommandHandler;
 	private static ConfigFile skyconfig;
 
 	public static CubitPlugin inst() {
@@ -71,13 +71,13 @@ public class CubitPlugin extends JavaPlugin {
 	private void setupCommands() {
 		landCommandHandler = new CommandSetupLand(this);
 		adminCommandHandler = new CommandSetupAdmin(this);
-		storeCommandHandler = new CommandSetupStore(this);
+		iChunkCommandHandler = new CommandSetupIChunk(this);
 		this.getServer().getScheduler().runTask(this, new SetupLandCommandsTask(this, landCommandHandler));
 		this.getServer().getScheduler().runTask(this, new SetupAdminCommandsTask(this, adminCommandHandler));
-		this.getServer().getScheduler().runTask(this, new SetupStoreCommandsTask(this, storeCommandHandler));
+		this.getServer().getScheduler().runTask(this, new SetupIChunkCommandsTask(this, iChunkCommandHandler));
 		getCommand("land").setExecutor(landCommandHandler);
 		getCommand("ladmin").setExecutor(adminCommandHandler);
-		getCommand("lstore").setExecutor(storeCommandHandler);
+		getCommand("iChunk").setExecutor(iChunkCommandHandler);
 
 	}
 

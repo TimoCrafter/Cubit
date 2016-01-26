@@ -154,24 +154,24 @@ ladminHelpPage2:
   help4: '&2 Serverregion erstellen: &a/ladmin setserver'
   help5: '&2 Serverregion entfernen: &a/ladmin unsetserver'
   help6: '&2 Spieler zu einem Land teleportieren: &a/ladmin tp <Spieler> <RegionID>'
-  help7: '&2 Aktuellen Chunk neu generieren: &a/lstore regen'
+  help7: '&2 Aktuellen Chunk neu generieren: &a/iChunk regen'
   help8: '&aZurück auf Seite 1 mit &e/ladmin help 1'
 
-  # /lstore or /lstore help 1
-lstoreHelpPage1:
-  help1: '&e&n&6-==================[&2&lCubit LStore&r&6]=================-'
-  help2: '&a Cubit LStore Hilfeseite: &e/lstore help'
-  help3: '&a Deine gespeicherten Länder auflisten: &e/lstore list [SEITE]'
+  # /iChunk or /iChunk help 1
+iChunkHelpPage1:
+  help1: '&e&n&6-==================[&2&lCubit iChunk&r&6]=================-'
+  help2: '&a Cubit iChunk Hilfeseite: &e/iChunk help'
+  help3: '&a Deine gespeicherten Länder auflisten: &e/iChunk list [SEITE]'
   help4: '&6&lMehr Befehle auf den folgenden Seiten:'
-  help5: '&2 Seite 2: Speicherungen verwalten &a/lstore help 2'
+  help5: '&2 Seite 2: Speicherungen verwalten &a/iChunk help 2'
 
-  # /lstore help 2
-lstoreHelpPage2:
+  # /iChunk help 2
+iChunkHelpPage2:
   help1: '&6&lGespeicherte Länder verwalten: (Seite 2)'
-  help2: '&2 Aktuelles Land abspeichern: &a/lstore save (Speichername)'
-  help3: '&2 Ein Land laden und einfügen: &a/lstore paste [Speichername]'
-  help4: '&2 Deine gespeicherten Länder auflisten: &a/lstore list [SEITE]'
-  help5: '&aZurück auf Seite 1 mit &e/lstore help 1'
+  help2: '&2 Aktuelles Land abspeichern: &a/iChunk save (Speichername)'
+  help3: '&2 Ein Land laden und einfügen: &a/iChunk paste [Speichername]'
+  help4: '&2 Deine gespeicherten Länder auflisten: &a/iChunk list [SEITE]'
+  help5: '&aZurück auf Seite 1 mit &e/iChunk help 1'
   
   # /land info
 landInfo:
