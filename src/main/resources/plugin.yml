@@ -11,7 +11,7 @@ commands:
    ladmin:
       description: Alle Land-Admin-Befehle
       usage: /<command>
-   lstore:
+   iChunk:
       description: Alle Land-Store-Befehle
       usage: /<command>
 permissions:
@@ -31,9 +31,9 @@ permissions:
             cubit.admin.tp: true
             cubit.admin.unsetserverregion: true
             cubit.admin.setserverregion: true
-            cubit.lstore: true
-            cubit.lstore.regen: true
-            cubit.lstore.delete: true
+            cubit.iChunk: true
+            cubit.iChunk.regen: true
+            cubit.iChunk.delete: true
     cubit.land:
         description: Alle Land Befehle
         children:
@@ -53,13 +53,13 @@ permissions:
             cubit.land.addallmember: true
             cubit.land.cleanmember: true
             cubit.land.removeallmember: true
-    cubit.lstore:
-        description: Alle lStore Commands
+    cubit.iChunk:
+        description: Alle iChunk Commands
         children:
-            cubit.lstore.list: true
-            cubit.lstore.paste: true
-            cubit.lstore.save: true
-            cubit.lstore.help: true
+            cubit.iChunk.list: true
+            cubit.iChunk.paste: true
+            cubit.iChunk.save: true
+            cubit.iChunk.help: true
     cubit.flags:
         description: Gibt alle Flags frei
         children:
@@ -177,18 +177,18 @@ permissions:
     cubit.admin.tp:
         description: Teleportierten zu einer Region
         default: op
-    cubit.lstore.delete:
+    cubit.iChunk.delete:
         description: Delete a file
         default: op
-    cubit.lstore.list:
+    cubit.iChunk.list:
         description: List all your files
         default: op
-    cubit.lstore.paste:
+    cubit.iChunk.paste:
         description: Paste a file
         default: op
-    cubit.lstore.save:
+    cubit.iChunk.save:
         description: Save a file
         default: op
-    cubit.lstore.regen:
+    cubit.iChunk.regen:
         description: Regenerate a chunk
         default: op
