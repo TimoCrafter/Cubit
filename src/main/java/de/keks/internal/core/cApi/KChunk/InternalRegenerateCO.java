@@ -1,4 +1,4 @@
-package de.keks.internal.core.iChunk;
+package de.keks.internal.core.cApi.KChunk;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
@@ -25,8 +25,8 @@ public class InternalRegenerateCO {
 					Chunk c = player.getLocation().getChunk();
 
 					if (player.getWorld().regenerateChunk(c.getX(), c.getZ())) {
-						IChunk.refreshChunk(c);
-						IChunk.teleportSave(c);
+						CChunk.refreshChunk(c);
+						CChunk.teleportSave(c);
 					}
 				}
 			});

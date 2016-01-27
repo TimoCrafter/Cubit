@@ -1,4 +1,4 @@
-package de.keks.internal.core.iChunk;
+package de.keks.internal.core.cApi.KChunk;
 
 import java.io.File;
 import java.io.IOException;
@@ -83,8 +83,8 @@ public class InternalPasteCO {
 				if (remove.exists()) {
 					remove.delete();
 				}
-				IChunk.refreshChunk(player.getLocation().getChunk());
-				IChunk.teleportSave(player.getLocation().getChunk());
+				CChunk.refreshChunk(player.getLocation().getChunk());
+				CChunk.teleportSave(player.getLocation().getChunk());
 			}
 		});
 		return true;

@@ -1,4 +1,4 @@
-package de.keks.internal.core.iChunk;
+package de.keks.internal.core.cApi.KChunk;
 
 import java.util.ArrayList;
 import java.util.HashMap;

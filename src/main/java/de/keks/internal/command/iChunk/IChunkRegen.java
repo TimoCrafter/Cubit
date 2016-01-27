@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.core.iChunk.IChunk;
+import de.keks.internal.core.cApi.KChunk.CChunk;
 import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.CubitCore;
 
@@ -36,7 +36,7 @@ public class IChunkRegen extends CubitCore {
 
 					Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
 						public void run() {
-							if (IChunk.regenerateRegion(player)) {
+							if (CChunk.regenerateRegion(player)) {
 								sender.sendMessage(I18n.translate("messages.storeRegen"));
 							}
 						}

@@ -1,4 +1,4 @@
-package de.keks.internal.core.iChunk;
+package de.keks.internal.core.cApi.KChunk;
 
 import java.util.HashSet;
 import java.util.concurrent.Callable;
@@ -31,7 +31,7 @@ public class InternalBiomeChange {
 			Bukkit.getScheduler().scheduleAsyncDelayedTask(CubitPlugin.inst(), new Runnable() {
 				public void run() {
 					if (InternalBiomeChangeCorner.setWGBiome(player, regionID, biome)) {
-						IChunk.refreshChunk(player.getLocation().getChunk());
+						CChunk.refreshChunk(player.getLocation().getChunk());
 						double costs = ConfigValues.setBiome;
 						player.sendMessage(I18n.translate("messages.buyBiome", regionID, costs));
 					}

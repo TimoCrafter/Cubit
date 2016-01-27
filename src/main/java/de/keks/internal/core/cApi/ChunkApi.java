@@ -1,4 +1,4 @@
-package de.keks.internal.core.iChunk;
+package de.keks.internal.core.cApi;
 
 import org.bukkit.Chunk;
 import org.bukkit.block.Biome;
@@ -16,7 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
  * 
  */
 
-public class IChunk {
+public class ChunkApi {
 
 	/**
 	 * <ul>
@@ -27,7 +27,7 @@ public class IChunk {
 	 * 
 	 */
 	public static boolean pasteRegion(Player player, String region) {
-		return InternalPasteCO.loadRegion(player, region);
+		return false;
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class IChunk {
 	 * 
 	 */
 	public static boolean saveRegion(Player player, ProtectedRegion region) {
-		return InternalSaveCO.saveRegion(player, region);
+		return false;
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class IChunk {
 	 * 
 	 */
 	public static boolean regenerateRegion(Player player) {
-		return InternalRegenerateCO.regenerate(player);
+		return false;
 	}
 
 	/**
@@ -60,7 +60,6 @@ public class IChunk {
 	 * 
 	 */
 	public static void refreshChunk(Chunk chunk) {
-		InternalResendChunk.refreshChunk(chunk);
 		return;
 	}
 
@@ -71,7 +70,7 @@ public class IChunk {
 	 * 
 	 */
 	public static boolean setBiome(Player player, String regionid, Biome biome) {
-		return InternalBiomeChange.createCubitBiome(player, regionid, biome);
+		return false;
 	}
 
 	/**
@@ -81,7 +80,6 @@ public class IChunk {
 	 * 
 	 */
 	public static void teleportSave(Chunk chunk) {
-		InternalTeleport.saveTeleport(chunk);
 		return;
 	}
 
