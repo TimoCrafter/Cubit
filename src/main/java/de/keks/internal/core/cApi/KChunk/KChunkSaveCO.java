@@ -24,7 +24,7 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  */
 
 @SuppressWarnings("deprecation")
-public class InternalSaveCO {
+public class KChunkSaveCO {
 	public static boolean saveRegion(Player player, ProtectedRegion region) {
 		try {
 			Vector min = new Vector(region.getMinimumPoint());

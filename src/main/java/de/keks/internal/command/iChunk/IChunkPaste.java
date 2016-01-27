@@ -24,7 +24,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cApi.KChunk.CChunk;
+import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupIChunk;
@@ -85,7 +85,7 @@ public class IChunkPaste extends CubitCore {
 
 					player.sendMessage(translate("messages.storeTask", regionid));
 					if (DataController.pasteRegionSQL(player, regionid)) {
-						if (CChunk.pasteRegion(player, regionid)) {
+						if (KChunkFacade.pasteRegion(player, regionid)) {
 							if (ConfigValues.ftpEnabled) {
 								CubitFTP.delete(regionid, player.getUniqueId().toString());
 							}

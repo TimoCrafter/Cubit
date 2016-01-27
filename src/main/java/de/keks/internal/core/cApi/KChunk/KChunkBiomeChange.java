@@ -23,15 +23,15 @@ import de.keks.internal.command.config.ConfigValues;
  * 
  */
 
-public class InternalBiomeChange {
+public class KChunkBiomeChange {
 
 	@SuppressWarnings("deprecation")
 	public static boolean createCubitBiome(final Player player, final String regionID, final Biome biome) {
 		try {
 			Bukkit.getScheduler().scheduleAsyncDelayedTask(CubitPlugin.inst(), new Runnable() {
 				public void run() {
-					if (InternalBiomeChangeCorner.setWGBiome(player, regionID, biome)) {
-						CChunk.refreshChunk(player.getLocation().getChunk());
+					if (KChunkBiomeChangeCorner.setWGBiome(player, regionID, biome)) {
+						KChunkFacade.refreshChunk(player.getLocation().getChunk());
 						double costs = ConfigValues.setBiome;
 						player.sendMessage(I18n.translate("messages.buyBiome", regionID, costs));
 					}
@@ -65,7 +65,7 @@ public class InternalBiomeChange {
 		HashSet<String> loadedChunks = new HashSet<String>();
 
 		for (int[] point : points) {
-			InternalBiomeChange.setBiomeAt(world, point[0], point[1], biome, cache, loadedChunks);
+			KChunkBiomeChange.setBiomeAt(world, point[0], point[1], biome, cache, loadedChunks);
 			if (((counter * 100 / maxCount) % jumpAt) == 0) {
 				int percent = counter * 100 / maxCount;
 				if (jump != percent) {
@@ -84,7 +84,7 @@ public class InternalBiomeChange {
 			return;
 		}
 
-		InternalBiomeChange.flushBiomeSetHunks(world, biome, cache, loadedChunks);
+		KChunkBiomeChange.flushBiomeSetHunks(world, biome, cache, loadedChunks);
 
 	}
 
@@ -97,12 +97,12 @@ public class InternalBiomeChange {
 		}
 		blockHunk.add(new int[] { x, z });
 
-		InternalBiomeChange.flushBiomeSetHunks(world, biome, blockHunk, loadedChunks);
+		KChunkBiomeChange.flushBiomeSetHunks(world, biome, blockHunk, loadedChunks);
 
 	}
 
 	static void flushBiomeSetHunks(World world, Biome biome, HashSet<int[]> blockHunk, HashSet<String> loadedChunks) {
-		InternalBiomeChange.setBiomeOnMainThread(world, blockHunk, biome, loadedChunks);
+		KChunkBiomeChange.setBiomeOnMainThread(world, blockHunk, biome, loadedChunks);
 		blockHunk.clear();
 	}
 

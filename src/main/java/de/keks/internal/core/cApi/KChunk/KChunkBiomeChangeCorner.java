@@ -29,7 +29,7 @@ import de.keks.cubit.CubitPlugin;
  * 
  */
 
-public class InternalBiomeChangeCorner {
+public class KChunkBiomeChangeCorner {
 
 	private static WorldGuardPlugin _wgPlugin;
 
@@ -46,7 +46,7 @@ public class InternalBiomeChangeCorner {
 
 	@SuppressWarnings("deprecation")
 	public static boolean setWGBiome(Player player, String regionID, Biome biome) {
-		RegionManager rm = InternalBiomeChangeCorner.wgPlugin().getGlobalRegionManager().get(player.getWorld());
+		RegionManager rm = KChunkBiomeChangeCorner.wgPlugin().getGlobalRegionManager().get(player.getWorld());
 		ProtectedRegion pRegion = rm.getRegion(regionID);
 		if (pRegion == null)
 			return false;
@@ -77,7 +77,7 @@ public class InternalBiomeChangeCorner {
 			cache.add(new int[] { nextVector.getBlockX(), nextVector.getBlockZ() });
 		}
 
-		InternalBiomeChange.replaceBiomePoints(cache, player.getWorld(), biome, player);
+		KChunkBiomeChange.replaceBiomePoints(cache, player.getWorld(), biome, player);
 
 		return true;
 	}

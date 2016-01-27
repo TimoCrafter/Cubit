@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cApi.KChunk.InternalBlockHighlight;
+import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.CubitCore;
@@ -70,10 +70,10 @@ public class CMD_Admin_Delete extends CubitCore {
 					}
 					player.sendMessage(translate("messages.adminDeleteLand", regionName, owner));
 					if (args.length < 2) {
-						scheduleSyncTaskAdmin(setupAdmin, new InternalBlockHighlight(setupAdmin.getCubitInstance(),
+						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getCubitInstance(),
 								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
-						scheduleSyncTaskAdmin(setupAdmin, new InternalBlockHighlight(setupAdmin.getCubitInstance(),
+						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getCubitInstance(),
 								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
 					}
 					setupAdmin.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));

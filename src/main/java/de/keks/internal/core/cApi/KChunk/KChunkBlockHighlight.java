@@ -16,7 +16,7 @@ import org.bukkit.plugin.Plugin;
  * 
  */
 
-public class InternalBlockHighlight implements Runnable {
+public class KChunkBlockHighlight implements Runnable {
 
 	private Plugin plugin;
 	private Chunk chunk;
@@ -24,7 +24,7 @@ public class InternalBlockHighlight implements Runnable {
 
 	private TorchPlaceWork work;
 
-	public InternalBlockHighlight(Plugin plugin, Chunk chunk, Material torchMaterial) {
+	public KChunkBlockHighlight(Plugin plugin, Chunk chunk, Material torchMaterial) {
 		this.plugin = plugin;
 		this.chunk = chunk;
 		this.torchMaterial = torchMaterial;

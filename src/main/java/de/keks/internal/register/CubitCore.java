@@ -16,7 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cApi.KChunk.InternalHighlight;
+import de.keks.internal.core.cApi.KChunk.KChunkHighlight;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 
@@ -35,7 +35,7 @@ public abstract class CubitCore {
 	protected CommandSetupLand setupLand;
 	protected CommandSetupIChunk setupIChunk;
 	protected CommandSetupAdmin setupAdmin;
-	public InternalHighlight effects;
+	public KChunkHighlight effects;
 
 	public CubitCore(boolean isOnlyPlayerCommand) {
 
@@ -44,7 +44,7 @@ public abstract class CubitCore {
 	public abstract boolean execute(CommandSender sender, String[] args);
 
 	public void playEffect(Player p, Effect e, int i) {
-		InternalHighlight.startChunkEffect(p, p.getLocation(), p.getLocation().getChunk(), e);
+		KChunkHighlight.startChunkEffect(p, p.getLocation(), p.getLocation().getChunk(), e);
 	}
 
 	protected String getRegionName(int x, int z, World world) {

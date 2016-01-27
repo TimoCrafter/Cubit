@@ -22,7 +22,7 @@ import de.keks.cubit.CubitPlugin;
  * 
  */
 
-public class InternalHighlight {
+public class KChunkHighlight {
 
 	public static Map<UUID, Integer> taskID = new HashMap<UUID, Integer>();
 	public static Map<UUID, Integer> taskvalue = new HashMap<UUID, Integer>();

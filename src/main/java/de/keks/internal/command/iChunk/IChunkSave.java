@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cApi.KChunk.CChunk;
+import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
@@ -78,8 +78,8 @@ public class IChunkSave extends CubitCore {
 					player.sendMessage(translate("messages.storeTask", regionName));
 					if (DataController.saveRegionSQL(player, region.getId(), ConfigValues.ftpEnabled)) {
 						moneyTransfer(player, null, costs);
-						if (CChunk.saveRegion(player, region)) {
-							if (CChunk.regenerateRegion(player)) {
+						if (KChunkFacade.saveRegion(player, region)) {
+							if (KChunkFacade.regenerateRegion(player)) {
 								manager.removeRegion(regionName);
 								setupIChunk.getOfferManager().removeOffer(regionName);
 								sender.sendMessage(I18n.translate("messages.storeSave", regionName, region.getId()));

@@ -15,7 +15,7 @@ import org.bukkit.entity.Player;
  * 
  */
 
-public class InternalTeleport {
+public class KChunkTeleport {
 	public static void saveTeleport(Chunk chunk) {
 		for (Entity entity : chunk.getEntities()) {
 			try {

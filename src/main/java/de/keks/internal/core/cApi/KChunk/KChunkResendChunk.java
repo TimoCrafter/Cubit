@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
  * 
  */
 
-public class InternalResendChunk {
+public class KChunkResendChunk {
 
 	private static String getVersion() {
 		String[] array = Bukkit.getServer().getClass().getPackage().getName().replace(".", ",").split(",");
@@ -27,13 +27,13 @@ public class InternalResendChunk {
 	public static void refreshChunk(final Chunk chunk) {
 
 		if (getVersion().contains("1_8_R1")) {
-			Version1_8_R1.refreshChunk(chunk);
+			NMSVersion1_8_R1.refreshChunk(chunk);
 
 		} else if (getVersion().contains("1_8_R2")) {
-			Version1_8_R2.refreshChunk(chunk);
+			NMSVersion1_8_R2.refreshChunk(chunk);
 
 		} else if (getVersion().contains("1_8_R3")) {
-			Version1_8_R3.refreshChunk(chunk);
+			NMSVersion1_8_R3.refreshChunk(chunk);
 
 		} else {
 			for (Player player : Bukkit.getOnlinePlayers()) {

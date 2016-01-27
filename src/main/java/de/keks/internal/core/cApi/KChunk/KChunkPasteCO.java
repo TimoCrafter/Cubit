@@ -31,7 +31,7 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  */
 
 @SuppressWarnings("deprecation")
-public class InternalPasteCO {
+public class KChunkPasteCO {
 	public static boolean loadRegion(final Player player, final String region) {
 
 		if (ConfigValues.ftpEnabled) {
@@ -83,8 +83,8 @@ public class InternalPasteCO {
 				if (remove.exists()) {
 					remove.delete();
 				}
-				CChunk.refreshChunk(player.getLocation().getChunk());
-				CChunk.teleportSave(player.getLocation().getChunk());
+				KChunkFacade.refreshChunk(player.getLocation().getChunk());
+				KChunkFacade.teleportSave(player.getLocation().getChunk());
 			}
 		});
 		return true;

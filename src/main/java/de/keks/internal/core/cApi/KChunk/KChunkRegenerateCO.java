@@ -16,7 +16,7 @@ import de.keks.cubit.CubitPlugin;
  * 
  */
 
-public class InternalRegenerateCO {
+public class KChunkRegenerateCO {
 	public static boolean regenerate(final Player player) {
 
 		try {
@@ -25,8 +25,8 @@ public class InternalRegenerateCO {
 					Chunk c = player.getLocation().getChunk();
 
 					if (player.getWorld().regenerateChunk(c.getX(), c.getZ())) {
-						CChunk.refreshChunk(c);
-						CChunk.teleportSave(c);
+						KChunkFacade.refreshChunk(c);
+						KChunkFacade.teleportSave(c);
 					}
 				}
 			});

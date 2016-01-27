@@ -21,7 +21,7 @@ import net.minecraft.server.v1_8_R3.PacketPlayOutMapChunk;
  * 
  */
 
-public class Version1_8_R3 {
+public class NMSVersion1_8_R3 {
 	private final net.minecraft.server.v1_8_R3.Chunk chunk;
 
 	/**
@@ -35,7 +35,7 @@ public class Version1_8_R3 {
 	 *            The chunk's Z.
 	 */
 
-	public Version1_8_R3(final World world, final int x, final int z) {
+	public NMSVersion1_8_R3(final World world, final int x, final int z) {
 		this(world.getChunkAt(x, z));
 	}
 
@@ -46,7 +46,7 @@ public class Version1_8_R3 {
 	 *            The chunk.
 	 */
 
-	public Version1_8_R3(final org.bukkit.Chunk chunk) {
+	public NMSVersion1_8_R3(final org.bukkit.Chunk chunk) {
 		this.chunk = ((CraftChunk) chunk).getHandle();
 	}
 
@@ -104,7 +104,7 @@ public class Version1_8_R3 {
 
 	@SuppressWarnings("deprecation")
 	public static final void refreshChunk(final World world, final int x, final int z, final Player... players) {
-		final Version1_8_R3 packet = new Version1_8_R3(world.getChunkAt(x, z));
+		final NMSVersion1_8_R3 packet = new NMSVersion1_8_R3(world.getChunkAt(x, z));
 		for (final Player player : players) {
 			packet.send(player);
 		}

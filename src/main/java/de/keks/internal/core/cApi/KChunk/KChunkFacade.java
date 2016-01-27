@@ -16,7 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
  * 
  */
 
-public class CChunk {
+public class KChunkFacade {
 
 	/**
 	 * <ul>
@@ -27,7 +27,7 @@ public class CChunk {
 	 * 
 	 */
 	public static boolean pasteRegion(Player player, String region) {
-		return InternalPasteCO.loadRegion(player, region);
+		return KChunkPasteCO.loadRegion(player, region);
 	}
 
 	/**
@@ -39,7 +39,7 @@ public class CChunk {
 	 * 
 	 */
 	public static boolean saveRegion(Player player, ProtectedRegion region) {
-		return InternalSaveCO.saveRegion(player, region);
+		return KChunkSaveCO.saveRegion(player, region);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class CChunk {
 	 * 
 	 */
 	public static boolean regenerateRegion(Player player) {
-		return InternalRegenerateCO.regenerate(player);
+		return KChunkRegenerateCO.regenerate(player);
 	}
 
 	/**
@@ -60,7 +60,7 @@ public class CChunk {
 	 * 
 	 */
 	public static void refreshChunk(Chunk chunk) {
-		InternalResendChunk.refreshChunk(chunk);
+		KChunkResendChunk.refreshChunk(chunk);
 		return;
 	}
 
@@ -71,7 +71,7 @@ public class CChunk {
 	 * 
 	 */
 	public static boolean setBiome(Player player, String regionid, Biome biome) {
-		return InternalBiomeChange.createCubitBiome(player, regionid, biome);
+		return KChunkBiomeChange.createCubitBiome(player, regionid, biome);
 	}
 
 	/**
@@ -81,7 +81,7 @@ public class CChunk {
 	 * 
 	 */
 	public static void teleportSave(Chunk chunk) {
-		InternalTeleport.saveTeleport(chunk);
+		KChunkTeleport.saveTeleport(chunk);
 		return;
 	}
 

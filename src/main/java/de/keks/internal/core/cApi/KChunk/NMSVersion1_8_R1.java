@@ -5,11 +5,11 @@ import java.util.Collection;
 import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.World;
-import org.bukkit.craftbukkit.v1_8_R2.CraftChunk;
-import org.bukkit.craftbukkit.v1_8_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_8_R1.CraftChunk;
+import org.bukkit.craftbukkit.v1_8_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import net.minecraft.server.v1_8_R2.PacketPlayOutMapChunk;
+import net.minecraft.server.v1_8_R1.PacketPlayOutMapChunk;
 
 /**
  * Copyright:
@@ -21,8 +21,8 @@ import net.minecraft.server.v1_8_R2.PacketPlayOutMapChunk;
  * 
  */
 
-public class Version1_8_R2 {
-	private final net.minecraft.server.v1_8_R2.Chunk chunk;
+public class NMSVersion1_8_R1 {
+	private final net.minecraft.server.v1_8_R1.Chunk chunk;
 
 	/**
 	 * Creates a PacketMapChunk.
@@ -35,7 +35,7 @@ public class Version1_8_R2 {
 	 *            The chunk's Z.
 	 */
 
-	public Version1_8_R2(final World world, final int x, final int z) {
+	public NMSVersion1_8_R1(final World world, final int x, final int z) {
 		this(world.getChunkAt(x, z));
 	}
 
@@ -46,7 +46,7 @@ public class Version1_8_R2 {
 	 *            The chunk.
 	 */
 
-	public Version1_8_R2(final org.bukkit.Chunk chunk) {
+	public NMSVersion1_8_R1(final org.bukkit.Chunk chunk) {
 		this.chunk = ((CraftChunk) chunk).getHandle();
 	}
 
@@ -104,7 +104,7 @@ public class Version1_8_R2 {
 
 	@SuppressWarnings("deprecation")
 	public static final void refreshChunk(final World world, final int x, final int z, final Player... players) {
-		final Version1_8_R2 packet = new Version1_8_R2(world.getChunkAt(x, z));
+		final NMSVersion1_8_R1 packet = new NMSVersion1_8_R1(world.getChunkAt(x, z));
 		for (final Player player : players) {
 			packet.send(player);
 		}
