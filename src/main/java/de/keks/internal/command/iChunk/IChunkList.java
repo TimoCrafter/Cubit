@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 import de.keks.internal.I18n;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.register.CommandSetupIChunk;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -22,7 +22,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class IChunkList extends CubitCore {
+public class IChunkList extends MainCore {
 
 	public IChunkList(CommandSetupIChunk handler) {
 
@@ -31,7 +31,7 @@ public class IChunkList extends CubitCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.iChunk.list")) {
+		if (sender.hasPermission("iLand.iChunk.list")) {
 			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 2) {

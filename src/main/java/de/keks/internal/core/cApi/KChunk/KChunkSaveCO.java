@@ -11,7 +11,7 @@ import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.internal.command.config.ConfigValues;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
+import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -34,17 +34,17 @@ public class KChunkSaveCO {
 			CuboidClipboard c1 = new CuboidClipboard(max.subtract(min).add(new Vector(1, 1, 1)), min);
 			c1.copy(es);
 
-			File saves = new File("plugins/Cubit/" + File.separator + "saves");
+			File saves = new File("plugins/iLand/" + File.separator + "saves");
 			if (!saves.exists()) {
 				saves.mkdirs();
 			}
 
-			File uuid = new File("plugins/Cubit/saves" + File.separator + player.getUniqueId().toString());
+			File uuid = new File("plugins/iLand/saves" + File.separator + player.getUniqueId().toString());
 			if (!uuid.exists()) {
 				uuid.mkdirs();
 			}
 
-			File file = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region.getId() + ".cubit");
+			File file = new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region.getId() + ".iLand");
 			if (file.exists()) {
 				file.delete();
 			}
@@ -56,8 +56,8 @@ public class KChunkSaveCO {
 		}
 
 		if (ConfigValues.ftpEnabled) {
-			File local = new File("plugins/Cubit/saves/" + player.getUniqueId(), region.getId() + ".cubit");
-			if (CubitFTP.upload(local, player.getUniqueId().toString())) {
+			File local = new File("plugins/iLand/saves/" + player.getUniqueId(), region.getId() + ".iLand");
+			if (ILandFTP.upload(local, player.getUniqueId().toString())) {
 			}
 
 		}

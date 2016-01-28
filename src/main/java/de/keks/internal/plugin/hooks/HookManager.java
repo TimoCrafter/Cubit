@@ -1,6 +1,6 @@
 package de.keks.internal.plugin.hooks;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.core.tasks.RegisterPluginHooksTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.plugin.hooks.classes.VaultHook;
@@ -22,16 +22,16 @@ public class HookManager {
 	private WorldEditHook worldEditManager;
 	private VaultHook vaultManager;
 
-	public HookManager(final CubitPlugin cubit) {
+	public HookManager(final ILandPlugin iLand) {
 		/* WorldEditing */
-		worldGuardManager = new WorldGuardHook(cubit);
-		cubit.getServer().getScheduler().scheduleSyncDelayedTask(cubit, new RegisterPluginHooksTask(worldGuardManager));
+		worldGuardManager = new WorldGuardHook(iLand);
+		iLand.getServer().getScheduler().scheduleSyncDelayedTask(iLand, new RegisterPluginHooksTask(worldGuardManager));
 
-		worldEditManager = new WorldEditHook(cubit);
-		cubit.getServer().getScheduler().scheduleSyncDelayedTask(cubit, new RegisterPluginHooksTask(worldEditManager));
+		worldEditManager = new WorldEditHook(iLand);
+		iLand.getServer().getScheduler().scheduleSyncDelayedTask(iLand, new RegisterPluginHooksTask(worldEditManager));
 
-		vaultManager = new VaultHook(cubit);
-		cubit.getServer().getScheduler().scheduleSyncDelayedTask(cubit, new RegisterPluginHooksTask(vaultManager));
+		vaultManager = new VaultHook(iLand);
+		iLand.getServer().getScheduler().scheduleSyncDelayedTask(iLand, new RegisterPluginHooksTask(vaultManager));
 
 	}
 

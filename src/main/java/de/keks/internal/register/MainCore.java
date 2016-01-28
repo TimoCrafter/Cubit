@@ -14,7 +14,7 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkHighlight;
 import de.keks.internal.core.database.DataController;
@@ -30,14 +30,14 @@ import de.keks.internal.plugin.hooks.classes.EconomyHook;
  * 
  */
 
-public abstract class CubitCore {
+public abstract class MainCore {
 
 	protected CommandSetupLand setupLand;
 	protected CommandSetupIChunk setupIChunk;
 	protected CommandSetupAdmin setupAdmin;
 	public KChunkHighlight effects;
 
-	public CubitCore(boolean isOnlyPlayerCommand) {
+	public MainCore(boolean isOnlyPlayerCommand) {
 
 	}
 
@@ -67,35 +67,35 @@ public abstract class CubitCore {
 	}
 
 	protected void scheduleSyncTask(CommandSetupLand handler, Runnable run) {
-		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run);
+		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run);
 	}
 
 	protected void scheduleSyncTask(CommandSetupLand handler, Runnable run, long delay) {
-		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run,
+		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
 				delay);
 	}
 
 	protected void scheduleSyncTaskAdmin(CommandSetupAdmin handler, Runnable run) {
-		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run);
+		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run);
 	}
 
 	protected void scheduleSyncTaskAdmin(CommandSetupAdmin handler, Runnable run, long delay) {
-		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run,
+		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
 				delay);
 	}
 
 	protected void scheduleSyncTaskStore(CommandSetupIChunk handler, Runnable run) {
-		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run);
+		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run);
 	}
 
 	protected void scheduleSyncTaskStore(CommandSetupIChunk handler, Runnable run, long delay) {
-		handler.getCubitInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getCubitInstance(), run,
+		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
 				delay);
 	}
 
 	protected WorldGuardPlugin getWorldGuard() {
 		try {
-			return CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin();
+			return ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -104,7 +104,7 @@ public abstract class CubitCore {
 
 	protected WorldEditPlugin getWorldEdit() {
 		try {
-			return CubitPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
+			return ILandPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -135,7 +135,7 @@ public abstract class CubitCore {
 			return;
 		}
 
-		EconomyHook economyManager = CubitPlugin.inst().getHookManager().getEconomyManager();
+		EconomyHook economyManager = ILandPlugin.inst().getHookManager().getEconomyManager();
 		if (from == null) {
 			economyManager.giveMoney(to, amount);
 		} else if (to == null) {
@@ -151,13 +151,13 @@ public abstract class CubitCore {
 	}
 
 	protected boolean wasPlayerTooLongOff(ProtectedRegion region, Player questionerName) {
-		LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapOfflinePlayer(questionerName);
 
 		long timeNow = System.currentTimeMillis();
 		for (UUID splayer : region.getOwners().getUniqueIds()) {
 			OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
-			LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+			LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 					.wrapOfflinePlayer(oplayer);
 			if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
 				if (timeNow - lastSeen(lplayer.getUniqueId()) < ConfigValues.buyupMembers) {
@@ -173,13 +173,13 @@ public abstract class CubitCore {
 	}
 
 	protected boolean timeForBuyupInfo(ProtectedRegion region, Player questionerName) {
-		LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapOfflinePlayer(questionerName);
 
 		long timeNow = System.currentTimeMillis();
 		for (UUID splayer : region.getOwners().getUniqueIds()) {
 			OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
-			LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+			LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 					.wrapOfflinePlayer(oplayer);
 			if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
 				if (timeNow - lastSeen(lplayer.getUniqueId()) < ConfigValues.buyupMembers
@@ -197,13 +197,13 @@ public abstract class CubitCore {
 	}
 
 	protected long getBuyupInfoDate(ProtectedRegion region, Player questionerName) {
-		LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapOfflinePlayer(questionerName);
 
 		long time = 0;
 		for (UUID splayer : region.getOwners().getUniqueIds()) {
 			OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
-			LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+			LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 					.wrapOfflinePlayer(oplayer);
 			if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
 				time = lastSeen(lplayer.getUniqueId()) + (long) ConfigValues.buyupMembers;

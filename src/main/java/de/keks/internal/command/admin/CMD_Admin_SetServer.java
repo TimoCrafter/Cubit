@@ -21,9 +21,9 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
-public class CMD_Admin_SetServer extends CubitCore {
+public class CMD_Admin_SetServer extends MainCore {
 
 	/**
 	 * Copyright:
@@ -42,7 +42,7 @@ public class CMD_Admin_SetServer extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.admin.setserverregion")) {
+		if (sender.hasPermission("iLand.admin.setserverregion")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();

@@ -18,7 +18,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -30,7 +30,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_CleanAll_Member extends CubitCore {
+public class CMD_CleanAll_Member extends MainCore {
 
 	public CMD_CleanAll_Member(CommandSetupLand handler) {
 		super(true);
@@ -39,14 +39,14 @@ public class CMD_CleanAll_Member extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.land.cleanmember")) {
+		if (sender.hasPermission("iLand.land.cleanmember")) {
 
 			final Player player = (Player) sender;
 			final World world = player.getWorld();
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
-					WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
+					WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
 							.getWorldGuardPlugin();
 					RegionManager rm = wg.getRegionManager(player.getWorld());
 
@@ -91,7 +91,7 @@ public class CMD_CleanAll_Member extends CubitCore {
 	}
 
 	public List<String> getLandsOfPlayer(Player p) {
-		WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
+		WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
 		RegionManager rm = wg.getRegionManager(p.getWorld());
 		List<String> toReturn = new ArrayList<String>();

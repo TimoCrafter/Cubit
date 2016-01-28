@@ -18,9 +18,9 @@ public class SQLInject {
 	public static void savePlayer(Player player) {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn.prepareStatement(
-					"SELECT Lastlogin FROM CubitDB WHERE UUID = '" + player.getUniqueId().toString() + "';");
+					"SELECT Lastlogin FROM iLandDB WHERE UUID = '" + player.getUniqueId().toString() + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				updatePlayer(player);
@@ -29,7 +29,7 @@ public class SQLInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -39,9 +39,9 @@ public class SQLInject {
 		long lastlogin = 0;
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn.prepareStatement(
-					"SELECT Lastlogin FROM CubitDB WHERE UUID = '" + p.getUniqueId().toString() + "';");
+					"SELECT Lastlogin FROM iLandDB WHERE UUID = '" + p.getUniqueId().toString() + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 
@@ -52,7 +52,7 @@ public class SQLInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -64,8 +64,8 @@ public class SQLInject {
 		long lastlogin = 0;
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
-			PreparedStatement sql = conn.prepareStatement("SELECT Lastlogin FROM CubitDB WHERE UUID = '" + uuid + "';");
+			Connection conn = manager.getConnection("iLanddb");
+			PreparedStatement sql = conn.prepareStatement("SELECT Lastlogin FROM iLandDB WHERE UUID = '" + uuid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 
@@ -76,7 +76,7 @@ public class SQLInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -91,9 +91,9 @@ public class SQLInject {
 			@SuppressWarnings("deprecation")
 			OfflinePlayer player = Bukkit.getOfflinePlayer(p);
 			if (player != null) {
-				Connection conn = manager.getConnection("cubitdb");
+				Connection conn = manager.getConnection("iLanddb");
 				PreparedStatement sql = conn.prepareStatement(
-						"SELECT Lastlogin FROM CubitDB WHERE UUID = '" + player.getUniqueId().toString() + "';");
+						"SELECT Lastlogin FROM iLandDB WHERE UUID = '" + player.getUniqueId().toString() + "';");
 				ResultSet result = sql.executeQuery();
 				if (result.next()) {
 
@@ -104,7 +104,7 @@ public class SQLInject {
 				}
 				result.close();
 				sql.close();
-				manager.release("cubitdb", conn);
+				manager.release("iLanddb", conn);
 			} else {
 				Date now = new Date();
 				lastloginString = now.getTime();
@@ -122,13 +122,13 @@ public class SQLInject {
 			Date now = new Date();
 			String name = player.getName().toString();
 			String uuid = player.getUniqueId().toString();
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn
-					.prepareStatement("INSERT INTO CubitDB (UUID, Lastlogin, Lockedname, Playername) VALUES ('" + uuid
+					.prepareStatement("INSERT INTO iLandDB (UUID, Lastlogin, Lockedname, Playername) VALUES ('" + uuid
 							+ "', " + now.getTime() + ", '" + name + "', '" + name + "');");
 			sql.executeUpdate();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -140,12 +140,12 @@ public class SQLInject {
 			Date now = new Date();
 			String uuid = player.getUniqueId().toString();
 			String name = player.getName().toString();
-			Connection conn = manager.getConnection("cubitdb");
-			PreparedStatement sql = conn.prepareStatement("UPDATE CubitDB SET Lastlogin = " + now.getTime()
+			Connection conn = manager.getConnection("iLanddb");
+			PreparedStatement sql = conn.prepareStatement("UPDATE iLandDB SET Lastlogin = " + now.getTime()
 					+ ", Playername =  '" + name + "' WHERE UUID = '" + uuid + "';");
 			sql.executeUpdate();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -154,24 +154,24 @@ public class SQLInject {
 	public static void setOffer(String regionid, double data) {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn
-					.prepareStatement("SELECT data FROM CubitRegions WHERE region_id = '" + regionid + "';");
+					.prepareStatement("SELECT data FROM iLandRegions WHERE region_id = '" + regionid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				PreparedStatement update = conn.prepareStatement(
-						"UPDATE CubitRegions SET data = " + data + " WHERE region_id = '" + regionid + "';");
+						"UPDATE iLandRegions SET data = " + data + " WHERE region_id = '" + regionid + "';");
 				update.executeUpdate();
 				update.close();
 			} else {
 				PreparedStatement insert = conn.prepareStatement(
-						"INSERT INTO CubitRegions (region_id, data) VALUES ('" + regionid + "', '" + data + "');");
+						"INSERT INTO iLandRegions (region_id, data) VALUES ('" + regionid + "', '" + data + "');");
 				insert.executeUpdate();
 				insert.close();
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -181,19 +181,19 @@ public class SQLInject {
 	public static void removeOffer(String regionid) {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn
-					.prepareStatement("SELECT data FROM CubitRegions WHERE region_id = '" + regionid + "';");
+					.prepareStatement("SELECT data FROM iLandRegions WHERE region_id = '" + regionid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				PreparedStatement update = conn
-						.prepareStatement("DELETE FROM CubitRegions WHERE region_id = '" + regionid + "';");
+						.prepareStatement("DELETE FROM iLandRegions WHERE region_id = '" + regionid + "';");
 				update.executeUpdate();
 				update.close();
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 
 		}
 
@@ -206,9 +206,9 @@ public class SQLInject {
 		double offerdata = 0;
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn
-					.prepareStatement("SELECT data FROM CubitRegions WHERE region_id = '" + regionid + "';");
+					.prepareStatement("SELECT data FROM iLandRegions WHERE region_id = '" + regionid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				offerdata = result.getFloat(1);
@@ -217,7 +217,7 @@ public class SQLInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -229,9 +229,9 @@ public class SQLInject {
 		boolean isoffered = false;
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sql = conn
-					.prepareStatement("SELECT data FROM CubitRegions WHERE region_id = '" + regionid + "';");
+					.prepareStatement("SELECT data FROM iLandRegions WHERE region_id = '" + regionid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				isoffered = true;
@@ -240,7 +240,7 @@ public class SQLInject {
 			}
 			result.close();
 			sql.close();
-			manager.release("cubitdb", conn);
+			manager.release("iLanddb", conn);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -252,13 +252,13 @@ public class SQLInject {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
 			String uuid = player.getUniqueId().toString();
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sel = conn.prepareStatement(
-					"SELECT region_id FROM CubitFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
+					"SELECT region_id FROM iLandFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
 			ResultSet result = sel.executeQuery();
 			if (!result.next()) {
 				PreparedStatement sql = conn
-						.prepareStatement("INSERT INTO CubitFiles (UUID, region_id, remote) VALUES ('" + uuid + "', '"
+						.prepareStatement("INSERT INTO iLandFiles (UUID, region_id, remote) VALUES ('" + uuid + "', '"
 								+ regionid + "', '" + remote + "');");
 				sql.executeUpdate();
 				sql.close();
@@ -268,7 +268,7 @@ public class SQLInject {
 			} else {
 				result.close();
 				sel.close();
-				manager.release("cubitdb", conn);
+				manager.release("iLanddb", conn);
 				return false;
 			}
 
@@ -282,23 +282,23 @@ public class SQLInject {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
 			String uuid = player.getUniqueId().toString();
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sel = conn.prepareStatement(
-					"SELECT region_id FROM CubitFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
+					"SELECT region_id FROM iLandFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
 			ResultSet result = sel.executeQuery();
 			if (result.next()) {
 				PreparedStatement sql = conn.prepareStatement(
-						"DELETE FROM CubitFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
+						"DELETE FROM iLandFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
 				sql.executeUpdate();
 				sql.close();
 				result.close();
 				sel.close();
-				manager.release("cubitdb", conn);
+				manager.release("iLanddb", conn);
 				return true;
 			} else {
 				result.close();
 				sel.close();
-				manager.release("cubitdb", conn);
+				manager.release("iLanddb", conn);
 				return false;
 			}
 		} catch (SQLException e) {
@@ -311,9 +311,9 @@ public class SQLInject {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
 			String uuid = player.getUniqueId().toString();
-			Connection conn = manager.getConnection("cubitdb");
+			Connection conn = manager.getConnection("iLanddb");
 			PreparedStatement sel = conn
-					.prepareStatement("SELECT * FROM CubitFiles WHERE UUID = '" + uuid + "' ORDER BY id DESC;");
+					.prepareStatement("SELECT * FROM iLandFiles WHERE UUID = '" + uuid + "' ORDER BY id DESC;");
 			List<String> list = new ArrayList<String>();
 			try {
 				ResultSet result = sel.executeQuery();
@@ -327,7 +327,7 @@ public class SQLInject {
 				}
 				result.close();
 				sel.close();
-				manager.release("cubitdb", conn);
+				manager.release("iLanddb", conn);
 			} catch (SQLException e) {
 				e.printStackTrace();
 				return null;

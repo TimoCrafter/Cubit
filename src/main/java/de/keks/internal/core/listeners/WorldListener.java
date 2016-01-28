@@ -13,7 +13,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.command.config.SetupConfig;
@@ -32,7 +32,7 @@ public class WorldListener implements Listener {
 		@Override
 		public void run() {
 			if (!c.isLoaded()) {
-				CubitPlugin.inst().cancelTask(taskID);
+				ILandPlugin.inst().cancelTask(taskID);
 				return;
 			}
 
@@ -52,7 +52,7 @@ public class WorldListener implements Listener {
 	public void onChunkLoadEvent(final ChunkLoadEvent e) {
 		if (ConfigValues.limitPropertiesActiveInspection) {
 			inspectTask task = new inspectTask(e.getChunk());
-			int taskID = CubitPlugin.inst().scheduleSyncRepeatingTask(task,
+			int taskID = ILandPlugin.inst().scheduleSyncRepeatingTask(task,
 					ConfigValues.limitPropertiesInspectionFrequency * 20L);
 			task.setId(taskID);
 
@@ -67,7 +67,7 @@ public class WorldListener implements Listener {
 	public void onChunkUnloadEvent(final ChunkUnloadEvent e) {
 
 		if (chunkTasks.containsKey(e.getChunk())) {
-			CubitPlugin.inst().getServer().getScheduler().cancelTask(chunkTasks.get(e.getChunk()));
+			ILandPlugin.inst().getServer().getScheduler().cancelTask(chunkTasks.get(e.getChunk()));
 			chunkTasks.remove(e.getChunk());
 		}
 

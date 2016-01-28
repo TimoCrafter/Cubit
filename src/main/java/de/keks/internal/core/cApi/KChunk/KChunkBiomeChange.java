@@ -9,7 +9,7 @@ import org.bukkit.World;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 
@@ -26,9 +26,9 @@ import de.keks.internal.command.config.ConfigValues;
 public class KChunkBiomeChange {
 
 	@SuppressWarnings("deprecation")
-	public static boolean createCubitBiome(final Player player, final String regionID, final Biome biome) {
+	public static boolean createILandBiome(final Player player, final String regionID, final Biome biome) {
 		try {
-			Bukkit.getScheduler().scheduleAsyncDelayedTask(CubitPlugin.inst(), new Runnable() {
+			Bukkit.getScheduler().scheduleAsyncDelayedTask(ILandPlugin.inst(), new Runnable() {
 				public void run() {
 					if (KChunkBiomeChangeCorner.setWGBiome(player, regionID, biome)) {
 						KChunkFacade.refreshChunk(player.getLocation().getChunk());
@@ -70,7 +70,7 @@ public class KChunkBiomeChange {
 				int percent = counter * 100 / maxCount;
 				if (jump != percent) {
 					if (Thread.interrupted()) {
-						player.sendMessage("[Cubit] ... Cubit Task abgebrochen!");
+						player.sendMessage("[iLand] ... iLand Task abgebrochen!");
 						return;
 					}
 					jump = percent;
@@ -108,7 +108,7 @@ public class KChunkBiomeChange {
 
 	static void setBiomeOnMainThread(final World world, final HashSet<int[]> points, final Biome biome,
 			final HashSet<String> loadedChunks) {
-		Future<String> returnFuture = Bukkit.getScheduler().callSyncMethod(CubitPlugin.inst(), new Callable<String>() {
+		Future<String> returnFuture = Bukkit.getScheduler().callSyncMethod(ILandPlugin.inst(), new Callable<String>() {
 			public String call() {
 
 				for (int[] blockLoc : points) {

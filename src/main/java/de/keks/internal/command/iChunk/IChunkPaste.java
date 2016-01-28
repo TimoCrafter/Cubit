@@ -21,15 +21,15 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 import de.keks.internal.core.database.DataController;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupIChunk;
-import de.keks.internal.register.CubitCore;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
+import de.keks.internal.register.MainCore;
+import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -41,7 +41,7 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  * 
  */
 
-public class IChunkPaste extends CubitCore {
+public class IChunkPaste extends MainCore {
 	public IChunkPaste(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
@@ -49,13 +49,13 @@ public class IChunkPaste extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.iChunk.paste")) {
+		if (sender.hasPermission("iLand.iChunk.paste")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			setupIChunk.executorServiceCommands.submit(new Runnable() {
@@ -87,7 +87,7 @@ public class IChunkPaste extends CubitCore {
 					if (DataController.pasteRegionSQL(player, regionid)) {
 						if (KChunkFacade.pasteRegion(player, regionid)) {
 							if (ConfigValues.ftpEnabled) {
-								CubitFTP.delete(regionid, player.getUniqueId().toString());
+								ILandFTP.delete(regionid, player.getUniqueId().toString());
 							}
 							sender.sendMessage(I18n.translate("messages.storePaste", regionName));
 						}
@@ -108,7 +108,7 @@ public class IChunkPaste extends CubitCore {
 		final Vector min;
 		final Vector max;
 		final Vector2D min2D;
-		final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapPlayer(player);
 
 		min2D = new Vector2D(chunkX * 16, chunkZ * 16);

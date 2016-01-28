@@ -4,11 +4,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 import de.keks.internal.register.CommandSetupIChunk;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -20,7 +20,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class IChunkRegen extends CubitCore {
+public class IChunkRegen extends MainCore {
 	public IChunkRegen(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
@@ -28,13 +28,13 @@ public class IChunkRegen extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.iChunk.regen")) {
+		if (sender.hasPermission("iLand.iChunk.regen")) {
 
 			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 
-					Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
 						public void run() {
 							if (KChunkFacade.regenerateRegion(player)) {
 								sender.sendMessage(I18n.translate("messages.storeRegen"));

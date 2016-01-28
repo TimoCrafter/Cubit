@@ -4,7 +4,7 @@ import org.bukkit.command.CommandSender;
 
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupIChunk;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -16,7 +16,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class IChunkHelp extends CubitCore {
+public class IChunkHelp extends MainCore {
 
 	public IChunkHelp(CommandSetupIChunk handler) {
 		super(true);
@@ -25,7 +25,7 @@ public class IChunkHelp extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("cubit.iChunk.help")) {
+		if (sender.hasPermission("iLand.iChunk.help")) {
 
 			if (args.length < 2) {
 			} else if (args[1].toString().equalsIgnoreCase("2")) {

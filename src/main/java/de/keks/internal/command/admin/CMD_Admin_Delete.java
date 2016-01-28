@@ -16,7 +16,7 @@ import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -28,7 +28,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Admin_Delete extends CubitCore {
+public class CMD_Admin_Delete extends MainCore {
 	public CMD_Admin_Delete(CommandSetupAdmin handler) {
 		super(true);
 		this.setupAdmin = handler;
@@ -36,7 +36,7 @@ public class CMD_Admin_Delete extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.admin.delete")) {
+		if (sender.hasPermission("iLand.admin.delete")) {
 
 			final Player player = (Player) sender;
 			final Location playerLocation = player.getLocation();
@@ -70,10 +70,10 @@ public class CMD_Admin_Delete extends CubitCore {
 					}
 					player.sendMessage(translate("messages.adminDeleteLand", regionName, owner));
 					if (args.length < 2) {
-						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getCubitInstance(),
+						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getILandInstance(),
 								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
-						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getCubitInstance(),
+						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getILandInstance(),
 								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
 					}
 					setupAdmin.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));

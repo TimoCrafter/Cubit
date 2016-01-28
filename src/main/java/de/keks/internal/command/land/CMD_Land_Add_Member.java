@@ -12,11 +12,11 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -28,7 +28,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Land_Add_Member extends CubitCore {
+public class CMD_Land_Add_Member extends MainCore {
 
 	public CMD_Land_Add_Member(CommandSetupLand handler) {
 		super(true);
@@ -37,13 +37,13 @@ public class CMD_Land_Add_Member extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.land.addmember")) {
+		if (sender.hasPermission("iLand.land.addmember")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
@@ -77,7 +77,7 @@ public class CMD_Land_Add_Member extends CubitCore {
 						sender.sendMessage("gibts nit");
 						return;
 					}
-					LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+					LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 							.getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
 
 					if (region.isOwner(olocalplayer)) {

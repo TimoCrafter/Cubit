@@ -14,10 +14,10 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -29,7 +29,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Kick extends CubitCore {
+public class CMD_Kick extends MainCore {
 
 	public CMD_Kick(CommandSetupLand handler) {
 		super(true);
@@ -38,7 +38,7 @@ public class CMD_Kick extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (!sender.hasPermission("cubit.land.kick")) {
+		if (!sender.hasPermission("iLand.land.kick")) {
 			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
 			return false;
 		}
@@ -47,7 +47,7 @@ public class CMD_Kick extends CubitCore {
 		final int chunkX = player.getLocation().getChunk().getX();
 		final int chunkZ = player.getLocation().getChunk().getZ();
 		final World world = player.getWorld();
-		final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapPlayer(player);
 
 		setupLand.executorServiceCommands.submit(new Runnable() {
@@ -83,7 +83,7 @@ public class CMD_Kick extends CubitCore {
 						if (!region.getOwners().getUniqueIds().contains(p.getUniqueId())
 								&& !region.getMembers().getUniqueIds().contains(p.getUniqueId())) {
 							// p.sendMessage(translate("messages.kickInfo"));
-							if (!p.hasPermission("cubit.land.kickbypass")) {
+							if (!p.hasPermission("iLand.land.kickbypass")) {
 								playersToKick.add(p);
 							}
 						}

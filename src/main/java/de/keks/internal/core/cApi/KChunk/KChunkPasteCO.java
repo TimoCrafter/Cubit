@@ -16,9 +16,9 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.command.config.ConfigValues;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
+import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -35,30 +35,30 @@ public class KChunkPasteCO {
 	public static boolean loadRegion(final Player player, final String region) {
 
 		if (ConfigValues.ftpEnabled) {
-			File local = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit");
-			File saves = new File("plugins/Cubit/" + File.separator + "saves");
+			File local = new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region + ".iLand");
+			File saves = new File("plugins/iLand/" + File.separator + "saves");
 			if (!saves.exists()) {
 				saves.mkdirs();
 			}
 
-			File uuid = new File("plugins/Cubit/saves" + File.separator + player.getUniqueId().toString());
+			File uuid = new File("plugins/iLand/saves" + File.separator + player.getUniqueId().toString());
 			if (!uuid.exists()) {
 				uuid.mkdirs();
 			}
 
-			if (CubitFTP.download(region, local, player.getUniqueId().toString())) {
+			if (ILandFTP.download(region, local, player.getUniqueId().toString())) {
 			}
 		}
 
-		Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
 			public void run() {
-				WorldEditPlugin we = CubitPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
+				WorldEditPlugin we = ILandPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
 				final Vector min;
 				final Vector2D min2D;
 				CuboidClipboard cc;
 				try {
 					cc = SchematicFormat.MCEDIT.load(
-							new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit"));
+							new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region + ".iLand"));
 					LocalPlayer wePly = we.wrapPlayer(player);
 					EditSession es = we.getSession(player).createEditSession(wePly);
 					min2D = new Vector2D(player.getLocation().getChunk().getX() * 16,
@@ -79,7 +79,7 @@ public class KChunkPasteCO {
 					e.printStackTrace();
 
 				}
-				File remove = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit");
+				File remove = new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region + ".iLand");
 				if (remove.exists()) {
 					remove.delete();
 				}

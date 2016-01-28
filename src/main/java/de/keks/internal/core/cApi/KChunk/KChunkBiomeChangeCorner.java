@@ -17,7 +17,7 @@ import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 
 /**
  * Copyright:
@@ -35,9 +35,9 @@ public class KChunkBiomeChangeCorner {
 
 	public static WorldGuardPlugin wgPlugin() {
 		if (_wgPlugin == null) {
-			_wgPlugin = (WorldGuardPlugin) CubitPlugin.inst().getServer().getPluginManager().getPlugin("WorldGuard");
+			_wgPlugin = (WorldGuardPlugin) ILandPlugin.inst().getServer().getPluginManager().getPlugin("WorldGuard");
 			if (_wgPlugin == null) {
-				CubitPlugin.inst().getLogger().info("[Cubit] WGPlugin not found");
+				ILandPlugin.inst().getLogger().info("[iLand] WGPlugin not found");
 				return null;
 			}
 		}

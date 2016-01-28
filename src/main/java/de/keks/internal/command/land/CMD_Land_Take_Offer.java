@@ -15,14 +15,14 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
-public class CMD_Land_Take_Offer extends CubitCore {
+public class CMD_Land_Take_Offer extends MainCore {
 
 	/**
 	 * Copyright:
@@ -41,12 +41,12 @@ public class CMD_Land_Take_Offer extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("cubit.land.takeoffer")) {
+		if (sender.hasPermission("iLand.land.takeoffer")) {
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
@@ -107,7 +107,7 @@ public class CMD_Land_Take_Offer extends CubitCore {
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupLand.getCubitInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupLand.getILandInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 

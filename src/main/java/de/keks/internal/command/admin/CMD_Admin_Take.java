@@ -22,13 +22,13 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
-public class CMD_Admin_Take extends CubitCore {
+public class CMD_Admin_Take extends MainCore {
 
 	/**
 	 * Copyright:
@@ -47,13 +47,13 @@ public class CMD_Admin_Take extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.admin.take")) {
+		if (sender.hasPermission("iLand.admin.take")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 			setupAdmin.executorServiceCommands.submit(new Runnable() {
 				@Override
@@ -76,7 +76,7 @@ public class CMD_Admin_Take extends CubitCore {
 							sender.sendMessage("gibts nit");
 							return;
 						}
-						LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+						LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
 						newOwner = olocalplayer;
 					}

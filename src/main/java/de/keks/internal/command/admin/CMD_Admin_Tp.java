@@ -13,7 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupAdmin;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -24,7 +24,7 @@ import de.keks.internal.register.CubitCore;
  * </ul>
  * 
  */
-public class CMD_Admin_Tp extends CubitCore {
+public class CMD_Admin_Tp extends MainCore {
 
 	public CMD_Admin_Tp(CommandSetupAdmin handler) {
 
@@ -33,7 +33,7 @@ public class CMD_Admin_Tp extends CubitCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.admin.tp")) {
+		if (sender.hasPermission("iLand.admin.tp")) {
 
 			setupAdmin.executorServiceCommands.submit(new Runnable() {
 				public void run() {
@@ -41,7 +41,7 @@ public class CMD_Admin_Tp extends CubitCore {
 						Player pc = null;
 						ProtectedRegion region = null;
 						Player p = (Player) sender;
-						WorldGuardPlugin wg = setupAdmin.getCubitInstance().getHookManager().getWorldGuardManager()
+						WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin();
 						RegionManager rm = wg.getRegionManager(p.getWorld());
 						if (args.length == 3) {

@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.entity.Player;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 
 /**
  * Copyright:
@@ -20,7 +20,7 @@ public class KChunkRegenerateCO {
 	public static boolean regenerate(final Player player) {
 
 		try {
-			Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
+			Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
 				public void run() {
 					Chunk c = player.getLocation().getChunk();
 

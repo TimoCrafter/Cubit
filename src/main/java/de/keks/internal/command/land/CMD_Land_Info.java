@@ -17,10 +17,10 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -32,7 +32,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Land_Info extends CubitCore {
+public class CMD_Land_Info extends MainCore {
 
 	private static final SimpleDateFormat LAST_SEEN = new SimpleDateFormat("dd.MM.yyyy");
 
@@ -43,7 +43,7 @@ public class CMD_Land_Info extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("cubit.land.info")) {
+		if (sender.hasPermission("iLand.land.info")) {
 			Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
@@ -65,7 +65,7 @@ public class CMD_Land_Info extends CubitCore {
 					if (!ProtectedRegion.isValidId(regionName)) {
 						sender.sendMessage(
 								I18n.translate("messages.regionBuyInfo",
-										CMD_Land_Info.this.setupLand.getCubitInstance().getHookManager()
+										CMD_Land_Info.this.setupLand.getILandInstance().getHookManager()
 												.getEconomyManager()
 												.formatMoney(CMD_Land_Info.this.calculateCosts(player, world, true))));
 						return;
@@ -74,7 +74,7 @@ public class CMD_Land_Info extends CubitCore {
 					if (region == null) {
 						sender.sendMessage(
 								I18n.translate("messages.regionBuyInfo",
-										CMD_Land_Info.this.setupLand.getCubitInstance().getHookManager()
+										CMD_Land_Info.this.setupLand.getILandInstance().getHookManager()
 												.getEconomyManager()
 												.formatMoney(CMD_Land_Info.this.calculateCosts(player, world, true))));
 						return;
@@ -82,11 +82,11 @@ public class CMD_Land_Info extends CubitCore {
 					for (UUID regionplayer : region.getOwners().getUniqueIds()) {
 						OfflinePlayer name = Bukkit.getOfflinePlayer(regionplayer);
 						Set<String> member = new HashSet<String>();
-						LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+						LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin().wrapOfflinePlayer(name);
 						for (UUID memberuuid : region.getMembers().getUniqueIds()) {
 							OfflinePlayer omember = Bukkit.getOfflinePlayer(memberuuid);
-							LocalPlayer lmember = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+							LocalPlayer lmember = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 									.getWorldGuardPlugin().wrapOfflinePlayer(omember);
 							member.add(lmember.getName());
 						}
@@ -132,7 +132,7 @@ public class CMD_Land_Info extends CubitCore {
 					}
 
 					if (setupLand.getOfferManager().isOffered(regionName)) {
-						String formattedMoney = setupLand.getCubitInstance().getHookManager().getEconomyManager()
+						String formattedMoney = setupLand.getILandInstance().getHookManager().getEconomyManager()
 								.formatMoney(setupLand.getOfferManager().getOffer(regionName));
 						sender.sendMessage(I18n.translate("messages.regionOffered", formattedMoney));
 					}

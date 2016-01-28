@@ -18,7 +18,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupAdmin;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -30,7 +30,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Admin_List extends CubitCore {
+public class CMD_Admin_List extends MainCore {
 
 	public CMD_Admin_List(CommandSetupAdmin handler) {
 
@@ -39,13 +39,13 @@ public class CMD_Admin_List extends CubitCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.admin.list")) {
+		if (sender.hasPermission("iLand.admin.list")) {
 			setupAdmin.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 3) {
 						int pageNumb = 0;
 						Player p = (Player) sender;
-						WorldGuardPlugin wg = setupAdmin.getCubitInstance().getHookManager().getWorldGuardManager()
+						WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin();
 						RegionManager rm = wg.getRegionManager(p.getWorld());
 						try {
@@ -104,7 +104,7 @@ public class CMD_Admin_List extends CubitCore {
 	}
 
 	public List<String> getLandsOfPlayer(OfflinePlayer p, World world) {
-		WorldGuardPlugin wg = setupAdmin.getCubitInstance().getHookManager().getWorldGuardManager()
+		WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
 		RegionManager rm = wg.getRegionManager(world);
 		List<String> toReturn = new ArrayList<String>();

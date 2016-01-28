@@ -1,4 +1,4 @@
-package de.keks.cubit;
+package de.keks.iLand;
 
 import java.util.HashMap;
 
@@ -9,8 +9,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.DatabaseManager;
-import de.keks.internal.core.entitylimit.CubitLimitModule;
-import de.keks.internal.core.listeners.CubitListener;
+import de.keks.internal.core.entitylimit.ILandLimitModule;
+import de.keks.internal.core.listeners.ILandListener;
 import de.keks.internal.core.tasks.SetupAdminCommandsTask;
 import de.keks.internal.core.tasks.SetupLandCommandsTask;
 import de.keks.internal.core.tasks.SetupLanguageTask;
@@ -31,13 +31,13 @@ import net.milkbowl.vault.economy.Economy;
  * 
  */
 
-public class CubitPlugin extends JavaPlugin {
-	public HashMap<String, Long> cubitLandTask = new HashMap<String, Long>();
-	public HashMap<String, Long> cubitAdminTask = new HashMap<String, Long>();
-	public HashMap<String, Long> cubitIChunkTask = new HashMap<String, Long>();
+public class ILandPlugin extends JavaPlugin {
+	public HashMap<String, Long> iLandLandTask = new HashMap<String, Long>();
+	public HashMap<String, Long> iLandAdminTask = new HashMap<String, Long>();
+	public HashMap<String, Long> iLandIChunkTask = new HashMap<String, Long>();
 
-	public int cubitTaskTime = 1;
-	private static CubitPlugin inst;
+	public int iLandTaskTime = 1;
+	private static ILandPlugin inst;
 	public PluginDescriptionFile pdf;
 	private HookManager hookManager;
 	private CommandSetupLand landCommandHandler;
@@ -45,7 +45,7 @@ public class CubitPlugin extends JavaPlugin {
 	private CommandSetupIChunk iChunkCommandHandler;
 	private static ConfigFile skyconfig;
 
-	public static CubitPlugin inst() {
+	public static ILandPlugin inst() {
 		return inst;
 	}
 
@@ -82,7 +82,7 @@ public class CubitPlugin extends JavaPlugin {
 	}
 
 	private void registerListenerAndHandler() {
-		getServer().getPluginManager().registerEvents(new CubitListener(), this);
+		getServer().getPluginManager().registerEvents(new ILandListener(), this);
 		getServer().getScheduler().runTask(this, new SetupLanguageTask(this));
 		hookManager = new HookManager(this);
 	}
@@ -93,7 +93,7 @@ public class CubitPlugin extends JavaPlugin {
 		}
 
 		if (ConfigValues.limitEnabled) {
-			CubitLimitModule.start(this);
+			ILandLimitModule.start(this);
 		}
 
 		if (getServer().getPluginManager().getPlugin("Vault") != null) {
@@ -157,7 +157,7 @@ public class CubitPlugin extends JavaPlugin {
 	}
 
 	public static ConfigFile getSkyConfig() {
-		return CubitPlugin.skyconfig;
+		return ILandPlugin.skyconfig;
 	}
 
 }

@@ -5,8 +5,8 @@ import org.bukkit.entity.Player;
 
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupIChunk;
-import de.keks.internal.register.CubitCore;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
+import de.keks.internal.register.MainCore;
+import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -18,7 +18,7 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.CubitFTP;
  * 
  */
 
-public class IChunkDelete extends CubitCore {
+public class IChunkDelete extends MainCore {
 	public IChunkDelete(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
@@ -26,14 +26,14 @@ public class IChunkDelete extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.iChunk.delete")) {
+		if (sender.hasPermission("iLand.iChunk.delete")) {
 
 			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 
 					String regionName = args[1];
-					CubitFTP.delete(regionName, player.getUniqueId().toString());
+					ILandFTP.delete(regionName, player.getUniqueId().toString());
 					sender.sendMessage(I18n.translate("messages.storeDelete", regionName, player.getName()));
 
 				}

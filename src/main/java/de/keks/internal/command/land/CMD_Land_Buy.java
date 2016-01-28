@@ -23,14 +23,14 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -42,7 +42,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Land_Buy extends CubitCore {
+public class CMD_Land_Buy extends MainCore {
 	public CMD_Land_Buy(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
@@ -50,7 +50,7 @@ public class CMD_Land_Buy extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.land.buy")) {
+		if (sender.hasPermission("iLand.land.buy")) {
 
 			final Player player = (Player) sender;
 			final Location playerLocation = player.getLocation();
@@ -84,10 +84,10 @@ public class CMD_Land_Buy extends CubitCore {
 						playEffect(player, Effect.HAPPY_VILLAGER, 1);
 					}
 					if (args.length < 2) {
-						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getCubitInstance(),
+						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getILandInstance(),
 								playerLocation.getChunk(), ConfigValues.landBuyChunkBorders));
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
-						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getCubitInstance(),
+						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getILandInstance(),
 								playerLocation.getChunk(), ConfigValues.landBuyChunkBorders));
 					}
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
@@ -105,7 +105,7 @@ public class CMD_Land_Buy extends CubitCore {
 		final Vector min;
 		final Vector max;
 		final Vector2D min2D;
-		final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapPlayer(player);
 
 		min2D = new Vector2D(chunkX * 16, chunkZ * 16);
@@ -154,7 +154,7 @@ public class CMD_Land_Buy extends CubitCore {
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupLand.getCubitInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupLand.getILandInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 }

@@ -5,7 +5,7 @@ import org.bukkit.command.CommandSender;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -17,7 +17,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Land_Help extends CubitCore {
+public class CMD_Land_Help extends MainCore {
 
 	public CMD_Land_Help(CommandSetupLand handler) {
 		super(false);
@@ -26,7 +26,7 @@ public class CMD_Land_Help extends CubitCore {
 
 	@Override
 	public boolean execute(CommandSender sender, String[] args) {
-		if (sender.hasPermission("cubit.land.help")) {
+		if (sender.hasPermission("iLand.land.help")) {
 
 			if (args.length < 2) {
 			} else if (args[1].toString().equalsIgnoreCase("2")) {

@@ -14,7 +14,7 @@ import de.keks.internal.command.config.ConfigValues;
  * 
  */
 
-public class CubitFTP {
+public class ILandFTP {
 
 	public static boolean upload(File localfile, String UUID) {
 		String host = ConfigValues.ftpHostname;
@@ -32,9 +32,9 @@ public class CubitFTP {
 				e.printStackTrace();
 				return false;
 			}
-			if (!client.getAndGotoDirectory("cubitsave/")) {
-				client.createDirectory("cubitsave/");
-				client.changeDirectory("cubitsave/");
+			if (!client.getAndGotoDirectory("iLandsave/")) {
+				client.createDirectory("iLandsave/");
+				client.changeDirectory("iLandsave/");
 			}
 			if (!client.getAndGotoDirectory(UUID + "/")) {
 				client.createDirectory(UUID + "/");
@@ -85,10 +85,10 @@ public class CubitFTP {
 				return false;
 			}
 
-			if (!client.getAndGotoDirectory("cubitsave/" + UUID + "/")) {
+			if (!client.getAndGotoDirectory("iLandsave/" + UUID + "/")) {
 				return false;
 			}
-			client.download(regionid + ".cubit", local);
+			client.download(regionid + ".iLand", local);
 			client.disconnect(true);
 
 		} catch (IOException ex) {
@@ -131,10 +131,10 @@ public class CubitFTP {
 				return false;
 			}
 
-			if (!client.getAndGotoDirectory("cubitsave/" + UUID + "/")) {
+			if (!client.getAndGotoDirectory("iLandsave/" + UUID + "/")) {
 				return false;
 			}
-			client.deleteFile(regionid + ".cubit");
+			client.deleteFile(regionid + ".iLand");
 			client.disconnect(true);
 
 		} catch (IOException ex) {

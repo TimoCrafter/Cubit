@@ -3,11 +3,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>de.kekshaus</groupId>
-  <artifactId>Cubit-Official</artifactId>
-  <version>0.5.0</version>
+  <artifactId>iLand</artifactId>
+  <version>0.0.1</version>
   <packaging>jar</packaging>
 
-  <name>Cubit-Official</name>
+  <name>iLand</name>
   <url>http://www.hyve-software.com</url>
 
   <dependencies>

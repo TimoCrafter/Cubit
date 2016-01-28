@@ -20,9 +20,9 @@ public class ChunkApi {
 
 	/**
 	 * <ul>
-	 * <li>Load and paste a .cubit schematic file from local cubit folder or a
+	 * <li>Load and paste a .iLand schematic file from local iLand folder or a
 	 * remote ftp server</li>
-	 * <li>Example: world_4_-16.cubit</li>
+	 * <li>Example: world_4_-16.iLand</li>
 	 * </ul>
 	 * 
 	 */
@@ -32,9 +32,9 @@ public class ChunkApi {
 
 	/**
 	 * <ul>
-	 * <li>Save a selected ProtectedRegion in a .cubit schematic file to the
-	 * local cubit folder or a remote ftp server</li>
-	 * <li>Example: world_4_-16.cubit</li>
+	 * <li>Save a selected ProtectedRegion in a .iLand schematic file to the
+	 * local iLand folder or a remote ftp server</li>
+	 * <li>Example: world_4_-16.iLand</li>
 	 * </ul>
 	 * 
 	 */

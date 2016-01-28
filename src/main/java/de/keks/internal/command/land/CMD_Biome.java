@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -18,7 +18,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_Biome extends CubitCore {
+public class CMD_Biome extends MainCore {
 
 	public CMD_Biome(CommandSetupLand handler) {
 		super(true);
@@ -27,7 +27,7 @@ public class CMD_Biome extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("cubit.biome.help")) {
+		if (sender.hasPermission("iLand.biome.help")) {
 
 			String biomes = null;
 			for (Biome biome : Biome.values()) {

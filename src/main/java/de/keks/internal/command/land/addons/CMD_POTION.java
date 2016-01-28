@@ -10,11 +10,11 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -26,7 +26,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class CMD_POTION extends CubitCore {
+public class CMD_POTION extends MainCore {
 
 	public CMD_POTION(CommandSetupLand handler) {
 		super(true);
@@ -34,7 +34,7 @@ public class CMD_POTION extends CubitCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.flag.pvp")) {
+		if (sender.hasPermission("iLand.flag.pvp")) {
 
 			Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -43,7 +43,7 @@ public class CMD_POTION extends CubitCore {
 			final String statuson = I18n.translate("messages.optionson");
 			final String statusoff = I18n.translate("messages.optionsoff");
 			final String flag = I18n.translate("optionName.potion");
-			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			this.setupLand.executorServiceCommands.submit(new Runnable() {

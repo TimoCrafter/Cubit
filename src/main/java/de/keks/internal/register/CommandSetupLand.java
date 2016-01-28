@@ -11,7 +11,7 @@ import org.bukkit.command.CommandSender;
 
 import com.google.common.collect.Maps;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.land.CMD_AddAll_Member;
 import de.keks.internal.command.land.CMD_Biome;
@@ -55,21 +55,21 @@ public class CommandSetupLand implements CommandExecutor {
 	}
 
 	private OfferManager offerManager;
-	private CubitPlugin cubit;
+	private ILandPlugin iLand;
 	public ThreadPoolExecutor executorServiceCommands;
 	public ThreadPoolExecutor executorServiceRegions;
 
-	public CommandSetupLand(final CubitPlugin cubit) {
-		this.cubit = cubit;
-		offerManager = new OfferManager(cubit);
+	public CommandSetupLand(final ILandPlugin iLand) {
+		this.iLand = iLand;
+		offerManager = new OfferManager(iLand);
 		executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>());
 		executorServiceRegions = new ThreadPoolExecutor(1, 1, 120L, TimeUnit.SECONDS,
 				new LinkedBlockingQueue<Runnable>());
 	}
 
-	public CubitPlugin getCubitInstance() {
-		return this.cubit;
+	public ILandPlugin getILandInstance() {
+		return this.iLand;
 	}
 
 	public OfferManager getOfferManager() {
@@ -77,24 +77,24 @@ public class CommandSetupLand implements CommandExecutor {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
-		if (CubitCore.isPluginDisabled(sender)) {
+		if (MainCore.isPluginDisabled(sender)) {
 			sender.sendMessage(I18n.translate("messages.pluginDisabled"));
 			return true;
 		}
-		if (CubitPlugin.inst().cubitLandTask.containsKey(sender.getName())) {
-			long secondsLeft = ((CubitPlugin.inst().cubitLandTask.get(sender.getName()) / 1000)
-					+ CubitPlugin.inst().cubitTaskTime) - (System.currentTimeMillis() / 1000);
+		if (ILandPlugin.inst().iLandLandTask.containsKey(sender.getName())) {
+			long secondsLeft = ((ILandPlugin.inst().iLandLandTask.get(sender.getName()) / 1000)
+					+ ILandPlugin.inst().iLandTaskTime) - (System.currentTimeMillis() / 1000);
 
 			if (secondsLeft > 0) {
 				sender.sendMessage(I18n.translate("messages.noSpam"));
-				CubitPlugin.inst().cubitLandTask.put(sender.getName(), System.currentTimeMillis());
+				ILandPlugin.inst().iLandLandTask.put(sender.getName(), System.currentTimeMillis());
 				return true;
 			}
 		}
-		CubitPlugin.inst().cubitLandTask.put(sender.getName(), System.currentTimeMillis());
+		ILandPlugin.inst().iLandLandTask.put(sender.getName(), System.currentTimeMillis());
 		if (args.length == 0) {
 
-			if (sender.hasPermission("cubit.land.help")) {
+			if (sender.hasPermission("iLand.land.help")) {
 
 				sender.sendMessage(I18n.translate("landHelpPage1.help1"));
 				sender.sendMessage(I18n.translate("landHelpPage1.help2"));
@@ -118,9 +118,9 @@ public class CommandSetupLand implements CommandExecutor {
 		return true;
 	}
 
-	private TreeMap<String, CubitCore> commands = Maps.newTreeMap();
+	private TreeMap<String, MainCore> commands = Maps.newTreeMap();
 
-	public TreeMap<String, CubitCore> getCommands() {
+	public TreeMap<String, MainCore> getCommands() {
 		return commands;
 	}
 

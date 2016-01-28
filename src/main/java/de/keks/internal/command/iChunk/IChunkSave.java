@@ -10,7 +10,7 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
@@ -18,7 +18,7 @@ import de.keks.internal.core.database.DataController;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupIChunk;
-import de.keks.internal.register.CubitCore;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -30,7 +30,7 @@ import de.keks.internal.register.CubitCore;
  * 
  */
 
-public class IChunkSave extends CubitCore {
+public class IChunkSave extends MainCore {
 	public IChunkSave(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
@@ -38,13 +38,13 @@ public class IChunkSave extends CubitCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("cubit.iChunk.save")) {
+		if (sender.hasPermission("iLand.iChunk.save")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			setupIChunk.executorServiceCommands.submit(new Runnable() {
@@ -99,7 +99,7 @@ public class IChunkSave extends CubitCore {
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupIChunk.getCubitInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupIChunk.getILandInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 
