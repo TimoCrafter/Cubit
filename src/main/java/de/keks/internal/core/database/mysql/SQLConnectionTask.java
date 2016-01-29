@@ -2,7 +2,7 @@ package de.keks.internal.core.database.mysql;
 
 import org.bukkit.entity.Player;
 
-import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.database.DatabaseFacade;
 
 public class SQLConnectionTask implements Runnable {
 	private Player player;
@@ -12,6 +12,6 @@ public class SQLConnectionTask implements Runnable {
 	}
 
 	public void run() {
-		DataController.savePlayer(player);
+		DatabaseFacade.savePlayer(player);
 	}
 }

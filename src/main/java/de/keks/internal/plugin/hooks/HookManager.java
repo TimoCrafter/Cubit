@@ -23,7 +23,7 @@ public class HookManager {
 	private VaultHook vaultManager;
 
 	public HookManager(final ILandPlugin iLand) {
-		/* WorldEditing */
+
 		worldGuardManager = new WorldGuardHook(iLand);
 		iLand.getServer().getScheduler().scheduleSyncDelayedTask(iLand, new RegisterPluginHooksTask(worldGuardManager));
 

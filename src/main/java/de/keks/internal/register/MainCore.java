@@ -17,7 +17,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkHighlight;
-import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 
 /**
@@ -102,14 +102,6 @@ public abstract class MainCore {
 		return null;
 	}
 
-	protected WorldEditPlugin getWorldEdit() {
-		try {
-			return ILandPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
 
 	protected double calculateCosts(Player player, World world, boolean buy) {
 		double first_region_costs = ConfigValues.firstRegionCosts;
@@ -147,7 +139,7 @@ public abstract class MainCore {
 	}
 
 	protected long lastSeen(UUID uuid) {
-		return DataController.getLastLogin(uuid);
+		return DatabaseFacade.getLastLogin(uuid);
 	}
 
 	protected boolean wasPlayerTooLongOff(ProtectedRegion region, Player questionerName) {

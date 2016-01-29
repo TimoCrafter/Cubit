@@ -6,14 +6,14 @@ import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.Plugin;
 
-public class SetupYAML {
+public class YAMLConnectionHandler {
 	public FileConfiguration cubliConfig;
 	public FileConfiguration offerConfig;
 	public File cubliYML;
 	public File offerYML;
 	public Plugin plugin;
 
-	public SetupYAML(Plugin plugin) {
+	public YAMLConnectionHandler(Plugin plugin) {
 		this.plugin = plugin;
 
 	}

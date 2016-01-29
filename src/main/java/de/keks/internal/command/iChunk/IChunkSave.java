@@ -14,7 +14,7 @@ import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
-import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupIChunk;
@@ -76,7 +76,7 @@ public class IChunkSave extends MainCore {
 					}
 
 					player.sendMessage(translate("messages.storeTask", regionName));
-					if (DataController.saveRegionSQL(player, region.getId(), ConfigValues.ftpEnabled)) {
+					if (DatabaseFacade.saveRegionSQL(player, region.getId(), ConfigValues.ftpEnabled)) {
 						moneyTransfer(player, null, costs);
 						if (KChunkFacade.saveRegion(player, region)) {
 							if (KChunkFacade.regenerateRegion(player)) {

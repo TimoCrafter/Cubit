@@ -25,7 +25,7 @@ import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
-import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.MainCore;
@@ -84,7 +84,7 @@ public class IChunkPaste extends MainCore {
 					String regionid = args[1];
 
 					player.sendMessage(translate("messages.storeTask", regionid));
-					if (DataController.pasteRegionSQL(player, regionid)) {
+					if (DatabaseFacade.pasteRegionSQL(player, regionid)) {
 						if (KChunkFacade.pasteRegion(player, regionid)) {
 							if (ConfigValues.ftpEnabled) {
 								ILandFTP.delete(regionid, player.getUniqueId().toString());

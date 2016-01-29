@@ -2,7 +2,7 @@ package de.keks.internal.plugin.hooks;
 
 import org.bukkit.plugin.Plugin;
 
-import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.database.DatabaseFacade;
 
 /**
  * Copyright:
@@ -20,17 +20,17 @@ public class OfferManager {
 	}
 
 	public double getOffer(String regionName) {
-		return DataController.getOfferdata(regionName);
+		return DatabaseFacade.getOfferdata(regionName);
 	}
 
 	public boolean addOffer(String regionName, double value) {
 
 		if (isCorrectRegionName(regionName) && value >= 0) {
 			if (value <= 0) {
-				DataController.removeOfferdata(regionName);
+				DatabaseFacade.removeOfferdata(regionName);
 
 			} else {
-				DataController.addOfferdata(regionName, value);
+				DatabaseFacade.addOfferdata(regionName, value);
 
 			}
 		}
@@ -40,7 +40,7 @@ public class OfferManager {
 
 	public boolean removeOffer(String regionName) {
 		if (isCorrectRegionName(regionName)) {
-			DataController.removeOfferdata(regionName);
+			DatabaseFacade.removeOfferdata(regionName);
 
 		}
 		return true;
@@ -48,7 +48,7 @@ public class OfferManager {
 
 	public boolean isOffered(String regionName) {
 		if (isCorrectRegionName(regionName)) {
-			return DataController.isOffered(regionName);
+			return DatabaseFacade.isOffered(regionName);
 		}
 		return false;
 	}

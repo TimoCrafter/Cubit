@@ -8,7 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.keks.internal.I18n;
-import de.keks.internal.core.database.DataController;
+import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.MainCore;
 
@@ -53,7 +53,7 @@ public class IChunkList extends MainCore {
 							p.sendMessage(translate("messages.notANumber", args[1]));
 							return;
 						}
-						List<String> list = DataController.getSavelist(p);
+						List<String> list = DatabaseFacade.getSavelist(p);
 						int rgCount = list.size();
 						List<String> toplist = list.subList(pageNumb * 10,
 								pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);

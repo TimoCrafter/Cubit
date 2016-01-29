@@ -9,7 +9,7 @@ import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.mysql.SQLInject;
 import de.keks.internal.core.database.yaml.YAMLInject;
 
-public class DataController {
+public class DatabaseFacade {
 
 	public static long getLastLogin(Player player) {
 		if (ConfigValues.isSQL) {

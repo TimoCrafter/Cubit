@@ -9,8 +9,6 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
 
-import de.keks.internal.core.database.DatabaseManager;
-
 public class YAMLInject {
 
 	private static String offerPath = "offer";
@@ -71,14 +69,14 @@ public class YAMLInject {
 	}
 
 	public static void setOffer(String regionid, double data) {
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getOfferConfig();
 		config.set(offerPath + "." + regionid, data);
 		provider.saveOfferData();
 	}
 
 	public static void removeOffer(String regionid) {
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getOfferConfig();
 		config.set(offerPath + "." + regionid, null);
 		provider.saveOfferData();
@@ -87,7 +85,7 @@ public class YAMLInject {
 
 	public static double getOffer(String regionid) {
 		double offerdata = 0;
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getOfferConfig();
 		offerdata = config.getDouble(offerPath + "." + regionid);
 		return offerdata;
@@ -95,14 +93,14 @@ public class YAMLInject {
 
 	public static boolean isOffered(String regionid) {
 		boolean isoffered = false;
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getOfferConfig();
 		isoffered = config.contains(offerPath + "." + regionid);
 		return isoffered;
 	}
 
 	public static boolean saveRegionfile(Player player, String regionid, Boolean remote) {
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getCubliConfig();
 
 		config.set(cubliPath + "." + player.getUniqueId() + ".regionID", regionid);
@@ -114,7 +112,7 @@ public class YAMLInject {
 	}
 
 	public static boolean loadRegionfile(Player player, String regionid) {
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getCubliConfig();
 
 		config.set(cubliPath + "." + player.getUniqueId() + ".regionID", null);
@@ -126,7 +124,7 @@ public class YAMLInject {
 	}
 
 	public static List<String> getSavelist(Player player) {
-		SetupYAML provider = DatabaseManager.yamlProvider;
+		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getCubliConfig();
 		List<String> list = config.getStringList(cubliIDPath + "." + player.getUniqueId());
 
