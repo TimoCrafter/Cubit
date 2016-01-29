@@ -44,6 +44,7 @@ public class ILandPlugin extends JavaPlugin {
 	private CommandSetupAdmin adminCommandHandler;
 	private CommandSetupIChunk iChunkCommandHandler;
 	private static ConfigFile skyconfig;
+	private boolean isIChunkLoadet = false;
 
 	public static ILandPlugin inst() {
 		return inst;
@@ -123,6 +124,15 @@ public class ILandPlugin extends JavaPlugin {
 			return false;
 		}
 
+		if (getServer().getPluginManager().getPlugin("ichunk") != null) {
+			// this.isIChunkLoadet = true;
+			// Not yet activate
+			this.getLogger().info("iChunk found! Hooked");
+		} else {
+			this.getLogger().info("iChunk NOT found!");
+			return false;
+		}
+
 		if (!isSpigot()) {
 			this.getLogger().info("Warning: You are using craftbukkit. Particle effects will not work!");
 			this.getLogger().info("Warning: For enable particle effects, use spigot instead of craftbukkit!");
@@ -133,6 +143,10 @@ public class ILandPlugin extends JavaPlugin {
 
 	public HookManager getHookManager() {
 		return hookManager;
+	}
+
+	public boolean isIChunkInstance() {
+		return this.isIChunkLoadet;
 	}
 
 	public int scheduleSyncRepeatingTask(Runnable run, long delay) {

@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.keks.iLand.ILandPlugin;
+import de.keks.internal.core.cApi.KChunk.KChunkFacade;
+
 /**
  * Copyright:
  * <ul>
@@ -18,6 +21,8 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 public class ChunkApi {
 
+	private static boolean iChunk = ILandPlugin.inst().isIChunkInstance();
+
 	/**
 	 * <ul>
 	 * <li>Load and paste a .iLand schematic file from local iLand folder or a
@@ -27,7 +32,12 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean pasteRegion(Player player, String region) {
-		return false;
+		if (iChunk) {
+			return false;
+		} else {
+			return KChunkFacade.pasteRegion(player, region);
+		}
+
 	}
 
 	/**
@@ -39,7 +49,11 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean saveRegion(Player player, ProtectedRegion region) {
-		return false;
+		if (iChunk) {
+			return false;
+		} else {
+			return KChunkFacade.saveRegion(player, region);
+		}
 	}
 
 	/**
@@ -49,7 +63,11 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean regenerateRegion(Player player) {
-		return false;
+		if (iChunk) {
+			return false;
+		} else {
+			return KChunkFacade.regenerateRegion(player);
+		}
 	}
 
 	/**
@@ -60,7 +78,12 @@ public class ChunkApi {
 	 * 
 	 */
 	public static void refreshChunk(Chunk chunk) {
-		return;
+		if (iChunk) {
+			return;
+		} else {
+			KChunkFacade.refreshChunk(chunk);
+			return;
+		}
 	}
 
 	/**
@@ -70,7 +93,11 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean setBiome(Player player, String regionid, Biome biome) {
-		return false;
+		if (iChunk) {
+			return false;
+		} else {
+			return KChunkFacade.setBiome(player, regionid, biome);
+		}
 	}
 
 	/**
@@ -80,7 +107,12 @@ public class ChunkApi {
 	 * 
 	 */
 	public static void teleportSave(Chunk chunk) {
-		return;
+		if (iChunk) {
+			return;
+		} else {
+			KChunkFacade.teleportSave(chunk);
+			return;
+		}
 	}
 
 }

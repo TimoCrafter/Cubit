@@ -14,7 +14,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cApi.KChunk.KChunkFacade;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
@@ -81,7 +81,7 @@ public class CMD_Biome_Set extends MainCore
 							return;
 						}
 						sender.sendMessage(I18n.translate("messages.storeTask", regionName));
-						if (KChunkFacade.setBiome(player, regionName, Biome.valueOf(args[1].toUpperCase()))) {
+						if (ChunkApi.setBiome(player, regionName, Biome.valueOf(args[1].toUpperCase()))) {
 							moneyTransfer(player, null, costs);
 						}
 						if (isSpigot()) {

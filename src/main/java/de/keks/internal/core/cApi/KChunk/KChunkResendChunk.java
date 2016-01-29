@@ -26,13 +26,7 @@ public class KChunkResendChunk {
 	@SuppressWarnings("deprecation")
 	public static void refreshChunk(final Chunk chunk) {
 
-		if (getVersion().contains("1_8_R1")) {
-			NMSVersion1_8_R1.refreshChunk(chunk);
-
-		} else if (getVersion().contains("1_8_R2")) {
-			NMSVersion1_8_R2.refreshChunk(chunk);
-
-		} else if (getVersion().contains("1_8_R3")) {
+		if (getVersion().contains("1_8_R3")) {
 			NMSVersion1_8_R3.refreshChunk(chunk);
 
 		} else {

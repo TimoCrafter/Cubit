@@ -6,7 +6,7 @@ import org.bukkit.entity.Player;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.core.cApi.KChunk.KChunkFacade;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.MainCore;
 
@@ -36,7 +36,7 @@ public class IChunkRegen extends MainCore {
 
 					Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
 						public void run() {
-							if (KChunkFacade.regenerateRegion(player)) {
+							if (ChunkApi.regenerateRegion(player)) {
 								sender.sendMessage(I18n.translate("messages.storeRegen"));
 							}
 						}
