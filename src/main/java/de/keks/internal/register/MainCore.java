@@ -9,7 +9,6 @@ import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -101,7 +100,6 @@ public abstract class MainCore {
 		}
 		return null;
 	}
-
 
 	protected double calculateCosts(Player player, World world, boolean buy) {
 		double first_region_costs = ConfigValues.firstRegionCosts;
