@@ -1,4 +1,4 @@
-package de.keks.internal.command.iChunk;
+package de.keks.internal.command.tChunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -22,9 +22,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class IChunkList extends MainCore {
+public class TChunkList extends MainCore {
 
-	public IChunkList(CommandSetupIChunk handler) {
+	public TChunkList(CommandSetupIChunk handler) {
 
 		super(true);
 		this.setupIChunk = handler;

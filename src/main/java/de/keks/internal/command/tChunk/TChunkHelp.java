@@ -1,4 +1,4 @@
-package de.keks.internal.command.iChunk;
+package de.keks.internal.command.tChunk;
 
 import org.bukkit.command.CommandSender;
 
@@ -16,9 +16,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class IChunkHelp extends MainCore {
+public class TChunkHelp extends MainCore {
 
-	public IChunkHelp(CommandSetupIChunk handler) {
+	public TChunkHelp(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
 	}

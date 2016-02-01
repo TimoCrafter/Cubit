@@ -1,4 +1,4 @@
-package de.keks.internal.command.iChunk;
+package de.keks.internal.command.tChunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -41,8 +41,8 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
  * 
  */
 
-public class IChunkPaste extends MainCore {
-	public IChunkPaste(CommandSetupIChunk handler) {
+public class TChunkPaste extends MainCore {
+	public TChunkPaste(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
 	}

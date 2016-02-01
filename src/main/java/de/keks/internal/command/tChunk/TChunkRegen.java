@@ -1,12 +1,14 @@
-package de.keks.internal.command.iChunk;
+package de.keks.internal.command.tChunk;
 
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupIChunk;
 import de.keks.internal.register.MainCore;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -18,24 +20,27 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
  * 
  */
 
-public class IChunkDelete extends MainCore {
-	public IChunkDelete(CommandSetupIChunk handler) {
+public class TChunkRegen extends MainCore {
+	public TChunkRegen(CommandSetupIChunk handler) {
 		super(true);
 		this.setupIChunk = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.iChunk.delete")) {
+		if (sender.hasPermission("iLand.iChunk.regen")) {
 
 			setupIChunk.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 
-					String regionName = args[1];
-					ILandFTP.delete(regionName, player.getUniqueId().toString());
-					sender.sendMessage(I18n.translate("messages.storeDelete", regionName, player.getName()));
-
+					Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
+						public void run() {
+							if (ChunkApi.regenerateRegion(player)) {
+								sender.sendMessage(I18n.translate("messages.storeRegen"));
+							}
+						}
+					});
 				}
 			});
 		} else {

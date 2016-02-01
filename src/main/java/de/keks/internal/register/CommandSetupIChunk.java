@@ -13,12 +13,12 @@ import com.google.common.collect.Maps;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.command.iChunk.IChunkDelete;
-import de.keks.internal.command.iChunk.IChunkHelp;
-import de.keks.internal.command.iChunk.IChunkList;
-import de.keks.internal.command.iChunk.IChunkPaste;
-import de.keks.internal.command.iChunk.IChunkRegen;
-import de.keks.internal.command.iChunk.IChunkSave;
+import de.keks.internal.command.tChunk.TChunkDelete;
+import de.keks.internal.command.tChunk.TChunkHelp;
+import de.keks.internal.command.tChunk.TChunkList;
+import de.keks.internal.command.tChunk.TChunkPaste;
+import de.keks.internal.command.tChunk.TChunkRegen;
+import de.keks.internal.command.tChunk.TChunkSave;
 import de.keks.internal.plugin.hooks.OfferManager;
 
 /**
@@ -108,12 +108,12 @@ public class CommandSetupIChunk implements CommandExecutor {
 
 	public void initialize() {
 		try {
-			this.commands.put("save", new IChunkSave(this));
-			this.commands.put("paste", new IChunkPaste(this));
-			this.commands.put("regen", new IChunkRegen(this));
-			this.commands.put("delete", new IChunkDelete(this));
-			this.commands.put("list", new IChunkList(this));
-			this.commands.put("help", new IChunkHelp(this));
+			this.commands.put("save", new TChunkSave(this));
+			this.commands.put("paste", new TChunkPaste(this));
+			this.commands.put("regen", new TChunkRegen(this));
+			this.commands.put("delete", new TChunkDelete(this));
+			this.commands.put("list", new TChunkList(this));
+			this.commands.put("help", new TChunkHelp(this));
 			initialized = true;
 		} catch (Exception e) {
 			e.printStackTrace();

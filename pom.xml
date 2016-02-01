@@ -59,6 +59,11 @@
     	<optional>true</optional>
     	<systemPath>${project.basedir}/libs/spigot-1_8_R1.jar</systemPath>
     </dependency>
+    <dependency>
+    	<groupId>de.keks</groupId>
+    	<artifactId>iChunk</artifactId>
+    	<version>1.0.3</version>
+    </dependency>
   </dependencies>
   
   <build>
