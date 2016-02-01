@@ -16,9 +16,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Admin_Help extends MainCore {
+public class LandAdminHelp extends MainCore {
 
-	public CMD_Admin_Help(CommandSetupAdmin handler) {
+	public LandAdminHelp(CommandSetupAdmin handler) {
 		super(true);
 		this.setupAdmin = handler;
 	}

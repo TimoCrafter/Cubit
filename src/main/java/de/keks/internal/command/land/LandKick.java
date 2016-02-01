@@ -29,9 +29,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Kick extends MainCore {
+public class LandKick extends MainCore {
 
-	public CMD_Kick(CommandSetupLand handler) {
+	public LandKick(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}

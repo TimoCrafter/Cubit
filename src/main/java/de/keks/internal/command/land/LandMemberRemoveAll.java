@@ -34,9 +34,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_RemoveAll_Member extends MainCore {
+public class LandMemberRemoveAll extends MainCore {
 
-	public CMD_RemoveAll_Member(CommandSetupLand handler) {
+	public LandMemberRemoveAll(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}

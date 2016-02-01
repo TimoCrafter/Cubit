@@ -13,13 +13,13 @@ import com.google.common.collect.Maps;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.command.admin.CMD_Admin_Delete;
-import de.keks.internal.command.admin.CMD_Admin_Help;
-import de.keks.internal.command.admin.CMD_Admin_List;
-import de.keks.internal.command.admin.CMD_Admin_SetServer;
-import de.keks.internal.command.admin.CMD_Admin_Take;
-import de.keks.internal.command.admin.CMD_Admin_Tp;
-import de.keks.internal.command.admin.CMD_Admin_UnsetServer;
+import de.keks.internal.command.admin.LandAdminDelete;
+import de.keks.internal.command.admin.LandAdminHelp;
+import de.keks.internal.command.admin.LandAdminList;
+import de.keks.internal.command.admin.LandAdminSetServerRegion;
+import de.keks.internal.command.admin.LandAdminTake;
+import de.keks.internal.command.admin.LandAdminTp;
+import de.keks.internal.command.admin.LandAdminUnsetServerRegion;
 import de.keks.internal.plugin.hooks.OfferManager;
 
 /**
@@ -109,13 +109,13 @@ public class CommandSetupAdmin implements CommandExecutor {
 
 	public void initialize() {
 		try {
-			this.commands.put("delete", new CMD_Admin_Delete(this));
-			this.commands.put("setserver", new CMD_Admin_SetServer(this));
-			this.commands.put("unsetserver", new CMD_Admin_UnsetServer(this));
-			this.commands.put("help", new CMD_Admin_Help(this));
-			this.commands.put("take", new CMD_Admin_Take(this));
-			this.commands.put("list", new CMD_Admin_List(this));
-			this.commands.put("tp", new CMD_Admin_Tp(this));
+			this.commands.put("delete", new LandAdminDelete(this));
+			this.commands.put("setserver", new LandAdminSetServerRegion(this));
+			this.commands.put("unsetserver", new LandAdminUnsetServerRegion(this));
+			this.commands.put("help", new LandAdminHelp(this));
+			this.commands.put("take", new LandAdminTake(this));
+			this.commands.put("list", new LandAdminList(this));
+			this.commands.put("tp", new LandAdminTp(this));
 			initialized = true;
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -42,8 +42,8 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Land_Buy extends MainCore {
-	public CMD_Land_Buy(CommandSetupLand handler) {
+public class LandBuy extends MainCore {
+	public LandBuy(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}

@@ -24,9 +24,9 @@ import de.keks.internal.register.MainCore;
  * </ul>
  * 
  */
-public class CMD_Admin_Tp extends MainCore {
+public class LandAdminTp extends MainCore {
 
-	public CMD_Admin_Tp(CommandSetupAdmin handler) {
+	public LandAdminTp(CommandSetupAdmin handler) {
 
 		super(true);
 		this.setupAdmin = handler;

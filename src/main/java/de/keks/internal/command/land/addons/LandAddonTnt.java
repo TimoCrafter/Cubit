@@ -26,15 +26,15 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_PVP extends MainCore {
+public class LandAddonTnt extends MainCore {
 
-	public CMD_PVP(CommandSetupLand handler) {
+	public LandAddonTnt(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.flag.pvp")) {
+		if (sender.hasPermission("iLand.flag.tnt")) {
 
 			Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -42,19 +42,19 @@ public class CMD_PVP extends MainCore {
 			final World world = player.getWorld();
 			final String statuson = I18n.translate("messages.optionson");
 			final String statusoff = I18n.translate("messages.optionsoff");
-			final String flag = I18n.translate("optionName.pvp");
+			final String flag = I18n.translate("optionName.tnt");
 			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = CMD_PVP.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = LandAddonTnt.this.getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = CMD_PVP.this.getRegion(world, regionName);
+					ProtectedRegion region = LandAddonTnt.this.getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -63,56 +63,63 @@ public class CMD_PVP extends MainCore {
 						player.sendMessage(I18n.translate("messages.noPermissionForRegion", new Object[0]));
 						return;
 					}
-					//////////////////////////////////////////////////////////////////////////////
 					if (args.length < 2) {
 					} else if (args[1].toString().equalsIgnoreCase("on")) {
-						if (region.getFlag(DefaultFlag.PVP) == StateFlag.State.ALLOW) {
+						if (region.getFlag(DefaultFlag.TNT) == StateFlag.State.ALLOW) {
 							player.sendMessage(I18n.translate("messages.optionsAlready", flag, statuson));
 							return;
 						}
-						region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
+						region.setFlag(DefaultFlag.TNT, StateFlag.State.ALLOW);
+						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.ALLOW);
+						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.ALLOW);
 						if (isSpigot()) {
 							playEffect(player, Effect.FLAME, 1);
 						}
-						CMD_PVP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_PVP.this.getWorldGuard(), null, world));
+						LandAddonTnt.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
 					} else if (args[1].toString().equalsIgnoreCase("off")) {
-						if (region.getFlag(DefaultFlag.PVP) == StateFlag.State.DENY) {
+						if (region.getFlag(DefaultFlag.TNT) == StateFlag.State.DENY) {
 							player.sendMessage(I18n.translate("messages.optionsAlready", flag, statusoff));
 							return;
 						}
-						region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
+						region.setFlag(DefaultFlag.TNT, StateFlag.State.DENY);
+						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.DENY);
+						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.DENY);
 						if (isSpigot()) {
 							playEffect(player, Effect.HAPPY_VILLAGER, 1);
 						}
-						CMD_PVP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_PVP.this.getWorldGuard(), null, world));
+						LandAddonTnt.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
-					if (region.getFlag(DefaultFlag.PVP) == StateFlag.State.DENY) {
-						region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
+					if (region.getFlag(DefaultFlag.TNT) == StateFlag.State.ALLOW) {
+						region.setFlag(DefaultFlag.TNT, StateFlag.State.DENY);
+						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.DENY);
+						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.DENY);
+						if (isSpigot()) {
+							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+						}
+						LandAddonTnt.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
+						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
+						return;
+					} else {
+						region.setFlag(DefaultFlag.TNT, StateFlag.State.ALLOW);
+						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.ALLOW);
+						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.ALLOW);
 						if (isSpigot()) {
 							playEffect(player, Effect.FLAME, 1);
 						}
-						CMD_PVP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_PVP.this.getWorldGuard(), null, world));
+						LandAddonTnt.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
-					} else {
-						region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
-						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
-						}
-						CMD_PVP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_PVP.this.getWorldGuard(), null, world));
-						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
-						return;
 					}
-					//////////////////////////////////////////////////////////////////////////////
+
 				}
 			});
 		} else {

@@ -28,8 +28,8 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Admin_Delete extends MainCore {
-	public CMD_Admin_Delete(CommandSetupAdmin handler) {
+public class LandAdminDelete extends MainCore {
+	public LandAdminDelete(CommandSetupAdmin handler) {
 		super(true);
 		this.setupAdmin = handler;
 	}

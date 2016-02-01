@@ -29,9 +29,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_MOBS extends MainCore {
+public class LandAddonMobs extends MainCore {
 
-	public CMD_MOBS(CommandSetupLand handler) {
+	public LandAddonMobs(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}
@@ -53,12 +53,12 @@ public class CMD_MOBS extends MainCore {
 				@SuppressWarnings({ "serial" })
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = CMD_MOBS.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = LandAddonMobs.this.getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = CMD_MOBS.this.getRegion(world, regionName);
+					ProtectedRegion region = LandAddonMobs.this.getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -84,8 +84,8 @@ public class CMD_MOBS extends MainCore {
 						if (isSpigot()) {
 							playEffect(player, Effect.FLAME, 1);
 						}
-						CMD_MOBS.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_MOBS.this.getWorldGuard(), null, world));
+						LandAddonMobs.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -118,8 +118,8 @@ public class CMD_MOBS extends MainCore {
 						if (isSpigot()) {
 							playEffect(player, Effect.HAPPY_VILLAGER, 1);
 						}
-						CMD_MOBS.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_MOBS.this.getWorldGuard(), null, world));
+						LandAddonMobs.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
@@ -134,8 +134,8 @@ public class CMD_MOBS extends MainCore {
 						if (isSpigot()) {
 							playEffect(player, Effect.FLAME, 1);
 						}
-						CMD_MOBS.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_MOBS.this.getWorldGuard(), null, world));
+						LandAddonMobs.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					} else {
@@ -163,8 +163,8 @@ public class CMD_MOBS extends MainCore {
 						if (isSpigot()) {
 							playEffect(player, Effect.HAPPY_VILLAGER, 1);
 						}
-						CMD_MOBS.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_MOBS.this.getWorldGuard(), null, world));
+						LandAddonMobs.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}

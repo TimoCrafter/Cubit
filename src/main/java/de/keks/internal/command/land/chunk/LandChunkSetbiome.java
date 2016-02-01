@@ -1,4 +1,4 @@
-package de.keks.internal.command.land;
+package de.keks.internal.command.land.chunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -30,10 +30,10 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Biome_Set extends MainCore
+public class LandChunkSetbiome extends MainCore
 
 {
-	public CMD_Biome_Set(CommandSetupLand handler, Biome biome) {
+	public LandChunkSetbiome(CommandSetupLand handler, Biome biome) {
 		super(true);
 		this.setupLand = handler;
 	}
@@ -51,12 +51,12 @@ public class CMD_Biome_Set extends MainCore
 				this.setupLand.executorServiceCommands.submit(new Runnable() {
 					public void run() {
 						Player player = (Player) sender;
-						String regionName = CMD_Biome_Set.this.getRegionName(chunkX, chunkZ, world);
+						String regionName = LandChunkSetbiome.this.getRegionName(chunkX, chunkZ, world);
 						if (!ProtectedRegion.isValidId(regionName)) {
 							player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 							return;
 						}
-						ProtectedRegion region = CMD_Biome_Set.this.getRegion(world, regionName);
+						ProtectedRegion region = LandChunkSetbiome.this.getRegion(world, regionName);
 						if (region == null) {
 							player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 							return;
@@ -87,8 +87,8 @@ public class CMD_Biome_Set extends MainCore
 						if (isSpigot()) {
 							playEffect(player, Effect.COLOURED_DUST, 1);
 						}
-						CMD_Biome_Set.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(CMD_Biome_Set.this.getWorldGuard(), null, world));
+						LandChunkSetbiome.this.setupLand.executorServiceRegions
+								.submit(new RegionSaveTask(LandChunkSetbiome.this.getWorldGuard(), null, world));
 					}
 				});
 				return true;

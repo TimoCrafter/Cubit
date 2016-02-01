@@ -18,9 +18,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Version extends MainCore {
+public class LandVersion extends MainCore {
 
-	public CMD_Version(CommandSetupLand handler) {
+	public LandVersion(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}

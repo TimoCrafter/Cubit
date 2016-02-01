@@ -1,4 +1,4 @@
-package de.keks.internal.command.land;
+package de.keks.internal.command.admin;
 
 import static de.keks.internal.I18n.translate;
 
@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -14,7 +17,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.internal.I18n;
-import de.keks.internal.register.CommandSetupLand;
+import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
 
 /**
@@ -27,51 +30,60 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Land_List extends MainCore {
+public class LandAdminList extends MainCore {
 
-	public CMD_Land_List(CommandSetupLand handler) {
+	public LandAdminList(CommandSetupAdmin handler) {
 
 		super(true);
-		this.setupLand = handler;
+		this.setupAdmin = handler;
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.list")) {
-			setupLand.executorServiceCommands.submit(new Runnable() {
+		if (sender.hasPermission("iLand.admin.list")) {
+			setupAdmin.executorServiceCommands.submit(new Runnable() {
 				public void run() {
-					if (args.length <= 2) {
+					if (args.length <= 3) {
 						int pageNumb = 0;
 						Player p = (Player) sender;
-						WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+						WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin();
 						RegionManager rm = wg.getRegionManager(p.getWorld());
 						try {
-							if (args.length == 2) {
-								int number = Integer.valueOf(args[1]);
+							if (args.length == 3) {
+								int number = Integer.valueOf(args[2]);
 								if (number < 1) {
 									pageNumb = 0;
 								} else {
-									pageNumb = Integer.valueOf(args[1]) - 1;
+									pageNumb = Integer.valueOf(args[2]) - 1;
 								}
 
-							} else {
+							} else if (args.length == 2) {
 								pageNumb = 0;
+							} else {
+								p.sendMessage(translate("messages.adminError"));
+								return;
 							}
 						} catch (Exception e) {
-							p.sendMessage(translate("messages.notANumber", args[1]));
+							p.sendMessage(translate("messages.notANumber", args[2]));
 							return;
 						}
-						int rgCount = rm.getRegionCountOfPlayer(wg.wrapPlayer(p));
-						if (pageNumb * 10 > rgCount) {
-							sender.sendMessage(translate("messages.listLandPageError"));
-							return;
-						}
-						List<String> subList = getLandsOfPlayer(p).subList(pageNumb * 10,
-								pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
-						sender.sendMessage(
-								translate("messages.listLandPage", rm.getRegionCountOfPlayer(wg.wrapPlayer(p)),
-										(pageNumb * 10 + 1), (pageNumb * 10 + 10)));
 
+						@SuppressWarnings("deprecation")
+						OfflinePlayer pc = Bukkit.getOfflinePlayer(args[1]);
+
+						if (pc == null) {
+							p.sendMessage(translate("messages.adminNoPlayer"));
+							return;
+						}
+						int rgCount = rm.getRegionCountOfPlayer(wg.wrapOfflinePlayer(pc));
+						if (pageNumb * 10 > rgCount) {
+							sender.sendMessage(translate("messages.adminErrorPage", args[1]));
+							return;
+						}
+						List<String> subList = getLandsOfPlayer(pc, p.getWorld()).subList(pageNumb * 10,
+								pageNumb * 10 + 10 > rgCount ? rgCount : pageNumb * 10 + 10);
+						sender.sendMessage(translate("messages.adminPage", args[1], rgCount, (pageNumb * 10 + 1),
+								(pageNumb * 10 + 10)));
 						int counter = pageNumb * 10 + 1;
 
 						for (String name : subList) {
@@ -91,10 +103,10 @@ public class CMD_Land_List extends MainCore {
 		return true;
 	}
 
-	public List<String> getLandsOfPlayer(Player p) {
-		WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+	public List<String> getLandsOfPlayer(OfflinePlayer p, World world) {
+		WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
-		RegionManager rm = wg.getRegionManager(p.getWorld());
+		RegionManager rm = wg.getRegionManager(world);
 		List<String> toReturn = new ArrayList<String>();
 
 		for (Map.Entry<String, ProtectedRegion> entry : rm.getRegions().entrySet()) {

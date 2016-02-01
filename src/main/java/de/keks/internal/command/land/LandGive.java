@@ -4,7 +4,6 @@ import static de.keks.internal.I18n.translate;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -28,16 +27,16 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Land_Add_Member extends MainCore {
+public class LandGive extends MainCore {
 
-	public CMD_Land_Add_Member(CommandSetupLand handler) {
+	public LandGive(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.addmember")) {
+		if (sender.hasPermission("iLand.land.give")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -46,6 +45,9 @@ public class CMD_Land_Add_Member extends MainCore {
 			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
+			@SuppressWarnings("deprecation")
+			final LocalPlayer argplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+					.getWorldGuardPlugin().wrapOfflinePlayer(Bukkit.getOfflinePlayer(args[1]));
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length < 2) {
@@ -70,29 +72,22 @@ public class CMD_Land_Add_Member extends MainCore {
 						player.sendMessage(translate("messages.noPermissionForRegion"));
 						return;
 					}
-					@SuppressWarnings("deprecation")
-					OfflinePlayer oplayer = Bukkit.getOfflinePlayer(args[1]);
-
-					if (oplayer == null) {
-						sender.sendMessage("gibts nit");
+					if (region.isOwner(argplayer)) {
+						player.sendMessage(translate("messages.giveSelf"));
 						return;
 					}
-					LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
-							.getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
-
-					if (region.isOwner(olocalplayer)) {
-						player.sendMessage(translate("messages.memberAddOwnRegion"));
+					Player check = Bukkit.getPlayerExact(args[1]);
+					if (check == null) {
+						player.sendMessage(translate("messages.giveOffline"));
 						return;
 					}
-					if (region.isMember(olocalplayer)) {
-						player.sendMessage(translate("messages.memberAddAlready", args[1], regionName));
-						return;
-					}
-					region.getMembers().addPlayer(olocalplayer);
+					region.getOwners().removeAll();
+					region.getMembers().removeAll();
+					region.getOwners().addPlayer(argplayer);
 					if (isSpigot()) {
 						playEffect(player, Effect.HEART, 1);
 					}
-					player.sendMessage(translate("messages.memberAdd", args[1], regionName));
+					player.sendMessage(translate("messages.giveLand", regionName, args[1]));
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}
 			});

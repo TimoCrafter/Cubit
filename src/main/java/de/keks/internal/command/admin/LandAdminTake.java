@@ -28,7 +28,7 @@ import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
 
-public class CMD_Admin_Take extends MainCore {
+public class LandAdminTake extends MainCore {
 
 	/**
 	 * Copyright:
@@ -40,7 +40,7 @@ public class CMD_Admin_Take extends MainCore {
 	 * 
 	 */
 
-	public CMD_Admin_Take(CommandSetupAdmin handler) {
+	public LandAdminTake(CommandSetupAdmin handler) {
 		super(true);
 		this.setupAdmin = handler;
 	}

@@ -12,7 +12,7 @@ import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
 
-public class CMD_Admin_UnsetServer extends MainCore {
+public class LandAdminUnsetServerRegion extends MainCore {
 
 	/**
 	 * Copyright:
@@ -24,7 +24,7 @@ public class CMD_Admin_UnsetServer extends MainCore {
 	 * 
 	 */
 
-	public CMD_Admin_UnsetServer(CommandSetupAdmin handler) {
+	public LandAdminUnsetServerRegion(CommandSetupAdmin handler) {
 		super(true);
 		this.setupAdmin = handler;
 	}

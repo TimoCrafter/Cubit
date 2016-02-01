@@ -23,7 +23,7 @@ import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
 
-public class CMD_Admin_SetServer extends MainCore {
+public class LandAdminSetServerRegion extends MainCore {
 
 	/**
 	 * Copyright:
@@ -35,7 +35,7 @@ public class CMD_Admin_SetServer extends MainCore {
 	 * 
 	 */
 
-	public CMD_Admin_SetServer(CommandSetupAdmin handler) {
+	public LandAdminSetServerRegion(CommandSetupAdmin handler) {
 		super(true);
 		this.setupAdmin = handler;
 	}

@@ -2,8 +2,9 @@ package de.keks.internal.command.land;
 
 import static de.keks.internal.I18n.translate;
 
-import org.apache.commons.lang.math.NumberUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.Effect;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -13,6 +14,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
@@ -26,15 +28,16 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Land_Offer extends MainCore {
-	public CMD_Land_Offer(CommandSetupLand handler) {
+public class LandMemberRemove extends MainCore {
+
+	public LandMemberRemove(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.offer")) {
+		if (sender.hasPermission("iLand.land.removemember")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -42,9 +45,13 @@ public class CMD_Land_Offer extends MainCore {
 			final World world = player.getWorld();
 			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
-
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
+					if (args.length < 2) {
+						sender.sendMessage(translate("messages.notEnoughArguments"));
+						return;
+					}
+
 					Player player = (Player) sender;
 					String regionName = getRegionName(chunkX, chunkZ, world);
 
@@ -63,40 +70,26 @@ public class CMD_Land_Offer extends MainCore {
 						player.sendMessage(translate("messages.noPermissionForRegion"));
 						return;
 					}
-
-					if (args.length < 2) {
-						if (!setupLand.getOfferManager().addOffer(regionName, 0)) {
-							player.sendMessage(translate("messages.offerError"));
-						}
-					} else {
-						if (!NumberUtils.isNumber(args[1])) {
-							player.sendMessage(translate("messages.notANumber", args[1]));
-						} else {
-							if (!setupLand.getOfferManager().addOffer(regionName, NumberUtils.toDouble(args[1]))) {
-								player.sendMessage(translate("messages.offerError"));
-							} else {
-								String wert1 = "0";
-								String wert2 = args[1].toLowerCase();
-								if (wert2.equalsIgnoreCase(wert1)) {
-									player.sendMessage(translate("messages.offerCancel", regionName));
-
-									if (isSpigot()) {
-										playEffect(player, Effect.WATERDRIP, 1);
-									}
-								} else {
-									if (isSpigot()) {
-										playEffect(player, Effect.LAVADRIP, 1);
-									}
-									String formattedMoney = setupLand.getILandInstance().getHookManager()
-											.getEconomyManager().formatMoney(NumberUtils.toDouble(args[1]));
-									player.sendMessage(translate("messages.offerLand", regionName));
-									CMD_Land_Offer.this.setupLand.getILandInstance().getServer()
-											.broadcastMessage(translate("messages.offerInfoGlobal", sender.getName(),
-													regionName, formattedMoney));
-								}
-							}
-						}
+					@SuppressWarnings("deprecation")
+					OfflinePlayer oplayer = Bukkit.getOfflinePlayer(args[1]);
+					if (oplayer == null) {
+						sender.sendMessage("gibts nit");
+						return;
 					}
+					LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+							.getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
+
+					if (!region.isMember(olocalplayer)) {
+						player.sendMessage(translate("messages.memberRemoveAlready", args[1], regionName));
+						return;
+					}
+
+					region.getMembers().removePlayer(olocalplayer);
+					player.sendMessage(translate("messages.memberRemove", args[1], regionName));
+					if (isSpigot()) {
+						playEffect(player, Effect.VILLAGER_THUNDERCLOUD, 1);
+					}
+					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}
 			});
 		} else {

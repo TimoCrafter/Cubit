@@ -1,4 +1,4 @@
-package de.keks.internal.command.land;
+package de.keks.internal.command.land.chunk;
 
 import org.bukkit.ChatColor;
 import org.bukkit.block.Biome;
@@ -18,9 +18,9 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class CMD_Biome extends MainCore {
+public class LandChunkBiomes extends MainCore {
 
-	public CMD_Biome(CommandSetupLand handler) {
+	public LandChunkBiomes(CommandSetupLand handler) {
 		super(true);
 		this.setupLand = handler;
 	}
