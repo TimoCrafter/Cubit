@@ -6,6 +6,7 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.DatabaseManager;
@@ -14,11 +15,9 @@ import de.keks.internal.core.listeners.ILandListener;
 import de.keks.internal.core.tasks.SetupAdminCommandsTask;
 import de.keks.internal.core.tasks.SetupLandCommandsTask;
 import de.keks.internal.core.tasks.SetupLanguageTask;
-import de.keks.internal.core.tasks.SetupIChunkCommandsTask;
 import de.keks.internal.plugin.hooks.HookManager;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.CommandSetupLand;
-import de.keks.internal.register.CommandSetupIChunk;
 import net.milkbowl.vault.economy.Economy;
 
 /**
@@ -42,7 +41,6 @@ public class ILandPlugin extends JavaPlugin {
 	private HookManager hookManager;
 	private CommandSetupLand landCommandHandler;
 	private CommandSetupAdmin adminCommandHandler;
-	private CommandSetupIChunk iChunkCommandHandler;
 	private static ConfigFile skyconfig;
 	private boolean isIChunkLoadet = false;
 
@@ -72,13 +70,10 @@ public class ILandPlugin extends JavaPlugin {
 	private void setupCommands() {
 		landCommandHandler = new CommandSetupLand(this);
 		adminCommandHandler = new CommandSetupAdmin(this);
-		iChunkCommandHandler = new CommandSetupIChunk(this);
 		this.getServer().getScheduler().runTask(this, new SetupLandCommandsTask(this, landCommandHandler));
 		this.getServer().getScheduler().runTask(this, new SetupAdminCommandsTask(this, adminCommandHandler));
-		this.getServer().getScheduler().runTask(this, new SetupIChunkCommandsTask(this, iChunkCommandHandler));
 		getCommand("land").setExecutor(landCommandHandler);
 		getCommand("ladmin").setExecutor(adminCommandHandler);
-		getCommand("iChunk").setExecutor(iChunkCommandHandler);
 
 	}
 

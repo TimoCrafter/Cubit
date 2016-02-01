@@ -1,4 +1,4 @@
-package de.keks.internal.command.tChunk;
+package de.keks.internal.command.land.chunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -27,7 +27,7 @@ import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.core.tasks.RegionSaveTask;
-import de.keks.internal.register.CommandSetupIChunk;
+import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
@@ -41,10 +41,10 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
  * 
  */
 
-public class TChunkPaste extends MainCore {
-	public TChunkPaste(CommandSetupIChunk handler) {
+public class LandChunkPaste extends MainCore {
+	public LandChunkPaste(CommandSetupLand handler) {
 		super(true);
-		this.setupIChunk = handler;
+		this.setupLand = handler;
 	}
 
 	@Override
@@ -58,7 +58,7 @@ public class TChunkPaste extends MainCore {
 			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
-			setupIChunk.executorServiceCommands.submit(new Runnable() {
+			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					RegionManager manager = getWorldGuard().getRegionManager(world);
 
@@ -67,7 +67,7 @@ public class TChunkPaste extends MainCore {
 					ProtectedRegion region;
 					if (!manager.hasRegion(regionName)) {
 						region = createRegion(chunkX, chunkZ, world, player, regionName);
-						setupIChunk.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
 					} else {
 						region = getRegion(world, regionName);
 					}

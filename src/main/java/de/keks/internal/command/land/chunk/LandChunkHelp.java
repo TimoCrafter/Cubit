@@ -1,9 +1,9 @@
-package de.keks.internal.command.tChunk;
+package de.keks.internal.command.land.chunk;
 
 import org.bukkit.command.CommandSender;
 
 import de.keks.internal.I18n;
-import de.keks.internal.register.CommandSetupIChunk;
+import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
 /**
@@ -16,11 +16,11 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class TChunkHelp extends MainCore {
+public class LandChunkHelp extends MainCore {
 
-	public TChunkHelp(CommandSetupIChunk handler) {
+	public LandChunkHelp(CommandSetupLand handler) {
 		super(true);
-		this.setupIChunk = handler;
+		this.setupLand = handler;
 	}
 
 	@Override

@@ -11,9 +11,6 @@ commands:
    ladmin:
       description: Alle Land-Admin-Befehle
       usage: /<command>
-   iChunk:
-      description: Alle Land-Store-Befehle
-      usage: /<command>
 permissions:
     iLand.admin:
         description: Alle Permissions

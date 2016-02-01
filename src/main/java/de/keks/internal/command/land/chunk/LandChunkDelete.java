@@ -1,10 +1,10 @@
-package de.keks.internal.command.tChunk;
+package de.keks.internal.command.land.chunk;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import de.keks.internal.I18n;
-import de.keks.internal.register.CommandSetupIChunk;
+import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
@@ -18,17 +18,17 @@ import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
  * 
  */
 
-public class TChunkDelete extends MainCore {
-	public TChunkDelete(CommandSetupIChunk handler) {
+public class LandChunkDelete extends MainCore {
+	public LandChunkDelete(CommandSetupLand handler) {
 		super(true);
-		this.setupIChunk = handler;
+		this.setupLand = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
 		if (sender.hasPermission("iLand.iChunk.delete")) {
 
-			setupIChunk.executorServiceCommands.submit(new Runnable() {
+			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 

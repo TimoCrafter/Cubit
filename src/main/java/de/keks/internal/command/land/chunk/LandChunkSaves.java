@@ -1,4 +1,4 @@
-package de.keks.internal.command.tChunk;
+package de.keks.internal.command.land.chunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import de.keks.internal.I18n;
 import de.keks.internal.core.database.DatabaseFacade;
-import de.keks.internal.register.CommandSetupIChunk;
+import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
 /**
@@ -22,17 +22,17 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class TChunkList extends MainCore {
+public class LandChunkSaves extends MainCore {
 
-	public TChunkList(CommandSetupIChunk handler) {
+	public LandChunkSaves(CommandSetupLand handler) {
 
 		super(true);
-		this.setupIChunk = handler;
+		this.setupLand = handler;
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
 		if (sender.hasPermission("iLand.iChunk.list")) {
-			setupIChunk.executorServiceCommands.submit(new Runnable() {
+			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 2) {
 						int pageNumb = 0;

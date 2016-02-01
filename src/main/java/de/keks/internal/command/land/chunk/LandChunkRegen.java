@@ -1,4 +1,4 @@
-package de.keks.internal.command.tChunk;
+package de.keks.internal.command.land.chunk;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -7,7 +7,7 @@ import org.bukkit.entity.Player;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.ChunkApi;
-import de.keks.internal.register.CommandSetupIChunk;
+import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
 /**
@@ -20,17 +20,17 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class TChunkRegen extends MainCore {
-	public TChunkRegen(CommandSetupIChunk handler) {
+public class LandChunkRegen extends MainCore {
+	public LandChunkRegen(CommandSetupLand handler) {
 		super(true);
-		this.setupIChunk = handler;
+		this.setupLand = handler;
 	}
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
 		if (sender.hasPermission("iLand.iChunk.regen")) {
 
-			setupIChunk.executorServiceCommands.submit(new Runnable() {
+			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 

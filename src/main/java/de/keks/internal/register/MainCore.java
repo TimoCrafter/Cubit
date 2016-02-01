@@ -32,7 +32,6 @@ import de.keks.internal.plugin.hooks.classes.EconomyHook;
 public abstract class MainCore {
 
 	protected CommandSetupLand setupLand;
-	protected CommandSetupIChunk setupIChunk;
 	protected CommandSetupAdmin setupAdmin;
 	public KChunkHighlight effects;
 
@@ -79,15 +78,6 @@ public abstract class MainCore {
 	}
 
 	protected void scheduleSyncTaskAdmin(CommandSetupAdmin handler, Runnable run, long delay) {
-		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
-				delay);
-	}
-
-	protected void scheduleSyncTaskStore(CommandSetupIChunk handler, Runnable run) {
-		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run);
-	}
-
-	protected void scheduleSyncTaskStore(CommandSetupIChunk handler, Runnable run, long delay) {
 		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
 				delay);
 	}

@@ -1,4 +1,4 @@
-package de.keks.internal.command.tChunk;
+package de.keks.internal.command.land.chunk;
 
 import static de.keks.internal.I18n.translate;
 
@@ -17,7 +17,7 @@ import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
-import de.keks.internal.register.CommandSetupIChunk;
+import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
 /**
@@ -30,10 +30,10 @@ import de.keks.internal.register.MainCore;
  * 
  */
 
-public class TChunkSave extends MainCore {
-	public TChunkSave(CommandSetupIChunk handler) {
+public class LandChunkSave extends MainCore {
+	public LandChunkSave(CommandSetupLand handler) {
 		super(true);
-		this.setupIChunk = handler;
+		this.setupLand = handler;
 	}
 
 	@Override
@@ -47,7 +47,7 @@ public class TChunkSave extends MainCore {
 			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
-			setupIChunk.executorServiceCommands.submit(new Runnable() {
+			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
 					RegionManager manager = getWorldGuard().getRegionManager(world);
@@ -81,9 +81,9 @@ public class TChunkSave extends MainCore {
 						if (ChunkApi.saveRegion(player, region)) {
 							if (ChunkApi.regenerateRegion(player)) {
 								manager.removeRegion(regionName);
-								setupIChunk.getOfferManager().removeOffer(regionName);
+								setupLand.getOfferManager().removeOffer(regionName);
 								sender.sendMessage(I18n.translate("messages.storeSave", regionName, region.getId()));
-								setupIChunk.executorServiceRegions
+								setupLand.executorServiceRegions
 										.submit(new RegionSaveTask(getWorldGuard(), null, world));
 							}
 						}
@@ -99,7 +99,7 @@ public class TChunkSave extends MainCore {
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupIChunk.getILandInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupLand.getILandInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 
