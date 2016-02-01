@@ -26,7 +26,7 @@ public class LandChunkDelete extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.iChunk.delete")) {
+		if (sender.hasPermission("iLand.landEdit.delete")) {
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {

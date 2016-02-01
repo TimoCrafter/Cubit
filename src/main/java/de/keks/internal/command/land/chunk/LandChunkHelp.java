@@ -25,7 +25,7 @@ public class LandChunkHelp extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("iLand.iChunk.help")) {
+		if (sender.hasPermission("iLand.landEdit.help")) {
 
 			if (args.length < 2) {
 			} else if (args[1].toString().equalsIgnoreCase("2")) {

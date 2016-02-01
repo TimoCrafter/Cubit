@@ -39,7 +39,7 @@ public class LandChunkSetbiome extends MainCore
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.biome.setbiome")) {
+		if (sender.hasPermission("iLand.landEdit.setbiome")) {
 
 			Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();

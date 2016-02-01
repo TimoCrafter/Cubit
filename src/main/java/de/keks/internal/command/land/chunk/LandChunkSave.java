@@ -38,7 +38,7 @@ public class LandChunkSave extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.iChunk.save")) {
+		if (sender.hasPermission("iLand.landEdit.save")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();

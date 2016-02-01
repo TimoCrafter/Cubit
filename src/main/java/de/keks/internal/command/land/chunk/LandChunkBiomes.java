@@ -27,7 +27,7 @@ public class LandChunkBiomes extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("iLand.biome.help")) {
+		if (sender.hasPermission("iLand.landEdit.biomes")) {
 
 			String biomes = null;
 			for (Biome biome : Biome.values()) {
@@ -36,7 +36,8 @@ public class LandChunkBiomes extends MainCore {
 				else
 					biomes += "§6, " + ChatColor.LIGHT_PURPLE + biome.toString();
 			}
-			sender.sendMessage("Available biomes: " + ChatColor.LIGHT_PURPLE + biomes);
+			sender.sendMessage(ChatColor.GREEN + "Available biomes: ");
+			sender.sendMessage(ChatColor.LIGHT_PURPLE + biomes);
 
 		} else {
 			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));

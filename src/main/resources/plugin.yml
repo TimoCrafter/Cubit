@@ -17,8 +17,7 @@ permissions:
         children:
             iLand.land: true
             iLand.flags: true
-            iLand.chunk: true
-            iLand.biome: true
+            iLand.landEdit: true
             iLand.land.kickbypass: true
             iLand.admin.take: true
             iLand.admin.delete: true
@@ -28,9 +27,9 @@ permissions:
             iLand.admin.tp: true
             iLand.admin.unsetserverregion: true
             iLand.admin.setserverregion: true
-            iLand.iChunk: true
-            iLand.iChunk.regen: true
-            iLand.iChunk.delete: true
+            iLand.landEdit: true
+            iLand.landEdit.regen: true
+            iLand.landEdit.delete: true
     iLand.land:
         description: Alle Land Befehle
         children:
@@ -50,13 +49,15 @@ permissions:
             iLand.land.addallmember: true
             iLand.land.cleanmember: true
             iLand.land.removeallmember: true
-    iLand.iChunk:
+    iLand.landEdit:
         description: Alle iChunk Commands
         children:
-            iLand.iChunk.list: true
-            iLand.iChunk.paste: true
-            iLand.iChunk.save: true
-            iLand.iChunk.help: true
+            iLand.landEdit.list: true
+            iLand.landEdit.paste: true
+            iLand.landEdit.save: true
+            iLand.landEdit.help: true
+            iLand.landEdit.biomes: true
+            iLand.landEdit.setbiome: true
     iLand.flags:
         description: Gibt alle Flags frei
         children:
@@ -67,11 +68,6 @@ permissions:
             iLand.flag.pvp: true
             iLand.flag.tnt: true
             iLand.flag.fire: true
-    iLand.biome:
-        description: Alle Biome Befehle
-        children:
-            iLand.biome.help: true
-            iLand.biome.setbiome: true
     iLand.land.help:
         description: Haupt-Hilfeseite
         default: op
@@ -144,12 +140,6 @@ permissions:
     iLand.flag.fire:
         description: Flag Fire
         default: op
-    iLand.biome.help:
-        description: Biome-Hilfeseite
-        default: op
-    iLand.biome.setbiome:
-        description: Biome veraendern
-        default: op
     iLand.admin.take:
         description: Admin Land uebername
         default: op
@@ -174,18 +164,24 @@ permissions:
     iLand.admin.tp:
         description: Teleportierten zu einer Region
         default: op
-    iLand.iChunk.delete:
+    iLand.landEdit.delete:
         description: Delete a file
         default: op
-    iLand.iChunk.list:
+    iLand.landEdit.list:
         description: List all your files
         default: op
-    iLand.iChunk.paste:
+    iLand.landEdit.paste:
         description: Paste a file
         default: op
-    iLand.iChunk.save:
+    iLand.landEdit.save:
         description: Save a file
         default: op
-    iLand.iChunk.regen:
+    iLand.landEdit.regen:
         description: Regenerate a chunk
+        default: op
+    iLand.landEdit.biomes:
+        description: Biome-Hilfeseite
+        default: op
+    iLand.landEdit.setbiome:
+        description: Biome veraendern
         default: op

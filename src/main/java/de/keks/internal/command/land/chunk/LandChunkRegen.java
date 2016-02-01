@@ -28,7 +28,7 @@ public class LandChunkRegen extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.iChunk.regen")) {
+		if (sender.hasPermission("iLand.landEdit.regen")) {
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {

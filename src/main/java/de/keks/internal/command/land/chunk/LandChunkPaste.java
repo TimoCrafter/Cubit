@@ -49,7 +49,7 @@ public class LandChunkPaste extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.iChunk.paste")) {
+		if (sender.hasPermission("iLand.landEdit.paste")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
