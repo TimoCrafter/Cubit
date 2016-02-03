@@ -161,7 +161,7 @@ public class CommandSetupLand implements CommandExecutor {
 			this.commands.put("addall", new LandMemberAddAll(this));
 			this.commands.put("removeall", new LandMemberRemoveAll(this));
 			this.commands.put("cleanall", new LandMemberClearAll(this));
-			// Landeinstellungen. Später in Konfig anmerken!
+			// Land Options
 			this.commands.put("tnt", new LandAddonTnt(this));
 			this.commands.put("mobs", new LandAddonMobs(this));
 			this.commands.put("potion", new LandAddonPotion(this));

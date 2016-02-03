@@ -120,7 +120,7 @@ public class ILandPlugin extends JavaPlugin {
 		}
 
 		if (getServer().getPluginManager().getPlugin("ichunk") != null) {
-			// this.isIChunkLoadet = true;
+			this.isIChunkLoadet = true;
 			// Not yet activate
 			this.getLogger().info("iChunk found! Hooked");
 		} else {

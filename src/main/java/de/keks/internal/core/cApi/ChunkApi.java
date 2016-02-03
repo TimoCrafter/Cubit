@@ -7,6 +7,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
+import de.keks.internal.core.cApi.IChunk.IChunkFacade;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 
 /**
@@ -33,7 +34,7 @@ public class ChunkApi {
 	 */
 	public static boolean pasteRegion(Player player, String region) {
 		if (iChunk) {
-			return false;
+			return IChunkFacade.pasteSchematic(player, region);
 		} else {
 			return KChunkFacade.pasteRegion(player, region);
 		}
@@ -50,7 +51,7 @@ public class ChunkApi {
 	 */
 	public static boolean saveRegion(Player player, ProtectedRegion region) {
 		if (iChunk) {
-			return false;
+			return IChunkFacade.createSchematic(player, region);
 		} else {
 			return KChunkFacade.saveRegion(player, region);
 		}
