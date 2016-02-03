@@ -33,7 +33,6 @@ import net.milkbowl.vault.economy.Economy;
 public class ILandPlugin extends JavaPlugin {
 	public HashMap<String, Long> iLandLandTask = new HashMap<String, Long>();
 	public HashMap<String, Long> iLandAdminTask = new HashMap<String, Long>();
-	public HashMap<String, Long> iLandIChunkTask = new HashMap<String, Long>();
 
 	public int iLandTaskTime = 1;
 	private static ILandPlugin inst;

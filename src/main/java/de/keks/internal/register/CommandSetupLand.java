@@ -36,6 +36,11 @@ import de.keks.internal.command.land.addons.LandAddonPotion;
 import de.keks.internal.command.land.addons.LandAddonPvP;
 import de.keks.internal.command.land.addons.LandAddonTnt;
 import de.keks.internal.command.land.chunk.LandChunkBiomes;
+import de.keks.internal.command.land.chunk.LandChunkDelete;
+import de.keks.internal.command.land.chunk.LandChunkPaste;
+import de.keks.internal.command.land.chunk.LandChunkRegen;
+import de.keks.internal.command.land.chunk.LandChunkSave;
+import de.keks.internal.command.land.chunk.LandChunkSaves;
 import de.keks.internal.command.land.chunk.LandChunkSetbiome;
 import de.keks.internal.plugin.hooks.OfferManager;
 
@@ -148,8 +153,6 @@ public class CommandSetupLand implements CommandExecutor {
 			this.commands.put("aufkaufen", buyUpCommand);
 			this.commands.put("kick", new LandKick(this));
 			this.commands.put("info", new LandInfo(this));
-			this.commands.put("biome", new LandChunkBiomes(this));
-			this.commands.put("setbiome", new LandChunkSetbiome(this, null));
 			this.commands.put("add", new LandMemberAdd(this));
 			this.commands.put("remove", new LandMemberRemove(this));
 			this.commands.put("help", new LandHelp(this));
@@ -165,6 +168,14 @@ public class CommandSetupLand implements CommandExecutor {
 			this.commands.put("pvp", new LandAddonPvP(this));
 			this.commands.put("lock", new LandAddonLock(this));
 			this.commands.put("fire", new LandAddonFire(this));
+			// Chunk Tasks
+			this.commands.put("testbiomes", new LandChunkBiomes(this));
+			this.commands.put("testsetbiome", new LandChunkSetbiome(this, null));
+			this.commands.put("testsave", new LandChunkSave(this));
+			this.commands.put("testpaste", new LandChunkPaste(this));
+			this.commands.put("testregen", new LandChunkRegen(this));
+			this.commands.put("testsaves", new LandChunkSaves(this));
+			this.commands.put("testdelete", new LandChunkDelete(this));
 			initialized = true;
 		} catch (Exception e) {
 			e.printStackTrace();
