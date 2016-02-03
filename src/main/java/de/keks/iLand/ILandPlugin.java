@@ -125,7 +125,7 @@ public class ILandPlugin extends JavaPlugin {
 			this.getLogger().info("iChunk found! Hooked");
 		} else {
 			this.getLogger().info("iChunk NOT found!");
-			return false;
+			this.isIChunkLoadet = false;
 		}
 
 		if (!isSpigot()) {
