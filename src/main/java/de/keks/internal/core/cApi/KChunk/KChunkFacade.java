@@ -1,6 +1,8 @@
 package de.keks.internal.core.cApi.KChunk;
 
 import org.bukkit.Chunk;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
@@ -82,6 +84,11 @@ public class KChunkFacade {
 	 */
 	public static void teleportSave(Chunk chunk) {
 		KChunkTeleport.saveTeleport(chunk);
+		return;
+	}
+
+	public static void chunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
+		KChunkHighlight.startChunkEffect(p, l, c, effect);
 		return;
 	}
 

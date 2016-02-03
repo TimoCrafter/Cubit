@@ -15,6 +15,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -82,7 +83,8 @@ public class LandAddonMobs extends MainCore {
 							}
 						});
 						if (isSpigot()) {
-							playEffect(player, Effect.FLAME, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.FLAME);
 						}
 						LandAddonMobs.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
@@ -116,7 +118,8 @@ public class LandAddonMobs extends MainCore {
 							}
 						});
 						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.HAPPY_VILLAGER);
 						}
 						LandAddonMobs.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
@@ -132,7 +135,8 @@ public class LandAddonMobs extends MainCore {
 							}
 						});
 						if (isSpigot()) {
-							playEffect(player, Effect.FLAME, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.FLAME);
 						}
 						LandAddonMobs.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
@@ -161,7 +165,8 @@ public class LandAddonMobs extends MainCore {
 							}
 						});
 						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.HAPPY_VILLAGER);
 						}
 						LandAddonMobs.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));

@@ -14,6 +14,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -87,7 +88,8 @@ public class LandMemberRemove extends MainCore {
 					region.getMembers().removePlayer(olocalplayer);
 					player.sendMessage(translate("messages.memberRemove", args[1], regionName));
 					if (isSpigot()) {
-						playEffect(player, Effect.VILLAGER_THUNDERCLOUD, 1);
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.VILLAGER_THUNDERCLOUD);
 					}
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}

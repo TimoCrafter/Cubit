@@ -24,6 +24,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
@@ -84,7 +85,8 @@ public class LandAdminTake extends MainCore {
 					if (!manager.hasRegion(regionName)) {
 						region = createRegion(chunkX, chunkZ, world, newOwner, regionName);
 						if (isSpigot()) {
-							playEffect(player, Effect.LARGE_SMOKE, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.LARGE_SMOKE);
 						}
 						sender.sendMessage(I18n.translate("messages.adminCreateLand", regionName));
 					} else {
@@ -93,7 +95,8 @@ public class LandAdminTake extends MainCore {
 						region.getMembers().removeAll();
 						region.getOwners().addPlayer(newOwner);
 						if (isSpigot()) {
-							playEffect(player, Effect.LARGE_SMOKE, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.LARGE_SMOKE);
 						}
 						sender.sendMessage(I18n.translate("messages.adminTakeLand", regionName));
 					}

@@ -41,10 +41,6 @@ public abstract class MainCore {
 
 	public abstract boolean execute(CommandSender sender, String[] args);
 
-	public void playEffect(Player p, Effect e, int i) {
-		KChunkHighlight.startChunkEffect(p, p.getLocation(), p.getLocation().getChunk(), e);
-	}
-
 	protected String getRegionName(int x, int z, World world) {
 		return world.getName().toLowerCase() + "_" + x + "_" + z;
 	}

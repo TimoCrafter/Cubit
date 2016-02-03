@@ -12,6 +12,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -72,7 +73,8 @@ public class LandAddonPotion extends MainCore {
 						}
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
 						if (isSpigot()) {
-							playEffect(player, Effect.FLAME, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.FLAME);
 						}
 						LandAddonPotion.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
@@ -86,7 +88,8 @@ public class LandAddonPotion extends MainCore {
 						}
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
 						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.HAPPY_VILLAGER);
 						}
 						LandAddonPotion.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
@@ -96,7 +99,8 @@ public class LandAddonPotion extends MainCore {
 					if (region.getFlag(DefaultFlag.POTION_SPLASH) == StateFlag.State.ALLOW) {
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
 						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.HAPPY_VILLAGER);
 						}
 						LandAddonPotion.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
@@ -105,7 +109,8 @@ public class LandAddonPotion extends MainCore {
 					} else {
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
 						if (isSpigot()) {
-							playEffect(player, Effect.FLAME, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.FLAME);
 						}
 						LandAddonPotion.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));

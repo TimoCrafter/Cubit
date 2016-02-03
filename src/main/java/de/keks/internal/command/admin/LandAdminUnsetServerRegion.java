@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
@@ -46,7 +47,8 @@ public class LandAdminUnsetServerRegion extends MainCore {
 					if (manager.hasRegion(serverRegionName)) {
 						manager.removeRegion(serverRegionName);
 						if (isSpigot()) {
-							playEffect(player, Effect.LARGE_SMOKE, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.LARGE_SMOKE);
 						}
 						sender.sendMessage(I18n.translate("messages.unsetServerregion", serverRegionName));
 

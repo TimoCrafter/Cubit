@@ -14,6 +14,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -90,7 +91,8 @@ public class LandMemberAdd extends MainCore {
 					}
 					region.getMembers().addPlayer(olocalplayer);
 					if (isSpigot()) {
-						playEffect(player, Effect.HEART, 1);
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HEART);
 					}
 					player.sendMessage(translate("messages.memberAdd", args[1], regionName));
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));

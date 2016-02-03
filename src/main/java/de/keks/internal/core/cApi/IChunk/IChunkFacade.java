@@ -1,8 +1,13 @@
 package de.keks.internal.core.cApi.IChunk;
 
+import org.bukkit.Chunk;
+import org.bukkit.Effect;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import de.keks.iChunk.IChunkAPI;
 
 /**
  * Copyright:
@@ -87,5 +92,10 @@ public class IChunkFacade {
 	 * public static void teleportSave(Chunk chunk) {
 	 * KChunkTeleport.saveTeleport(chunk); return; }
 	 */
+
+	public static void chunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
+		IChunkAPI.chunkHighlight(p, l, c, effect);
+		return;
+	}
 
 }

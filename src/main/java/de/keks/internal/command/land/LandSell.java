@@ -15,6 +15,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
@@ -77,7 +78,8 @@ public class LandSell extends MainCore {
 					setupLand.getOfferManager().removeOffer(regionName);
 					moneyTransfer(null, player, calculateCosts(player, world, false));
 					if (isSpigot()) {
-						playEffect(player, Effect.INSTANT_SPELL, 1);
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.INSTANT_SPELL);
 					}
 					player.sendMessage(translate("messages.sellRegion", regionName,
 							LandSell.this.calculateCosts(player, world, false)));

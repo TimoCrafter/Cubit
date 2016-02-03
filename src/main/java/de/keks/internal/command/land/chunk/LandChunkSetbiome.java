@@ -85,7 +85,8 @@ public class LandChunkSetbiome extends MainCore
 							moneyTransfer(player, null, costs);
 						}
 						if (isSpigot()) {
-							playEffect(player, Effect.COLOURED_DUST, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.COLOURED_DUST);
 						}
 						LandChunkSetbiome.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandChunkSetbiome.this.getWorldGuard(), null, world));

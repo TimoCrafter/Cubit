@@ -13,6 +13,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
@@ -81,18 +82,19 @@ public class LandOffer extends MainCore {
 									player.sendMessage(translate("messages.offerCancel", regionName));
 
 									if (isSpigot()) {
-										playEffect(player, Effect.WATERDRIP, 1);
+										ChunkApi.chunkHighligh(player, player.getLocation(),
+												player.getLocation().getChunk(), Effect.WATERDRIP);
 									}
 								} else {
 									if (isSpigot()) {
-										playEffect(player, Effect.LAVADRIP, 1);
+										ChunkApi.chunkHighligh(player, player.getLocation(),
+												player.getLocation().getChunk(), Effect.LAVADRIP);
 									}
 									String formattedMoney = setupLand.getILandInstance().getHookManager()
 											.getEconomyManager().formatMoney(NumberUtils.toDouble(args[1]));
 									player.sendMessage(translate("messages.offerLand", regionName));
-									LandOffer.this.setupLand.getILandInstance().getServer()
-											.broadcastMessage(translate("messages.offerInfoGlobal", sender.getName(),
-													regionName, formattedMoney));
+									LandOffer.this.setupLand.getILandInstance().getServer().broadcastMessage(translate(
+											"messages.offerInfoGlobal", sender.getName(), regionName, formattedMoney));
 								}
 							}
 						}

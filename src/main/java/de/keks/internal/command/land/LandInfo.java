@@ -19,6 +19,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
@@ -53,7 +54,7 @@ public class LandInfo extends MainCore {
 				public void run() {
 					Player player = (Player) sender;
 					if (isSpigot()) {
-						playEffect(player, null, 1);
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(), null);
 					}
 					if (isServerRegion(chunkX, chunkZ, world)) {
 						sender.sendMessage(I18n.translate("messages.isServerregion"));
@@ -63,20 +64,16 @@ public class LandInfo extends MainCore {
 					Biome biome = player.getWorld().getBiome(player.getLocation().getBlockX(),
 							player.getLocation().getBlockZ());
 					if (!ProtectedRegion.isValidId(regionName)) {
-						sender.sendMessage(
-								I18n.translate("messages.regionBuyInfo",
-										LandInfo.this.setupLand.getILandInstance().getHookManager()
-												.getEconomyManager()
-												.formatMoney(LandInfo.this.calculateCosts(player, world, true))));
+						sender.sendMessage(I18n.translate("messages.regionBuyInfo",
+								LandInfo.this.setupLand.getILandInstance().getHookManager().getEconomyManager()
+										.formatMoney(LandInfo.this.calculateCosts(player, world, true))));
 						return;
 					}
 					ProtectedRegion region = LandInfo.this.getRegion(world, regionName);
 					if (region == null) {
-						sender.sendMessage(
-								I18n.translate("messages.regionBuyInfo",
-										LandInfo.this.setupLand.getILandInstance().getHookManager()
-												.getEconomyManager()
-												.formatMoney(LandInfo.this.calculateCosts(player, world, true))));
+						sender.sendMessage(I18n.translate("messages.regionBuyInfo",
+								LandInfo.this.setupLand.getILandInstance().getHookManager().getEconomyManager()
+										.formatMoney(LandInfo.this.calculateCosts(player, world, true))));
 						return;
 					}
 					for (UUID regionplayer : region.getOwners().getUniqueIds()) {
@@ -121,8 +118,8 @@ public class LandInfo extends MainCore {
 							sender.sendMessage(I18n.translate("landInfo.line3", member));
 						}
 						sender.sendMessage(I18n.translate("landInfo.line4", min, max, biome.toString()));
-						sender.sendMessage(I18n.translate("landInfo.line5", LandInfo.LAST_SEEN
-								.format(new Date(LandInfo.this.lastSeen(lplayer.getUniqueId())))));
+						sender.sendMessage(I18n.translate("landInfo.line5",
+								LandInfo.LAST_SEEN.format(new Date(LandInfo.this.lastSeen(lplayer.getUniqueId())))));
 						sender.sendMessage(I18n.translate("landInfo.line6",
 								(new StringBuilder()).append(locked).append(I18n.translate("landInfo.split"))
 										.append(tnt).append(I18n.translate("landInfo.split")).append(pvp)
@@ -136,12 +133,10 @@ public class LandInfo extends MainCore {
 								.formatMoney(setupLand.getOfferManager().getOffer(regionName));
 						sender.sendMessage(I18n.translate("messages.regionOffered", formattedMoney));
 					}
-					if (LandInfo.this.wasPlayerTooLongOff(LandInfo.this.getRegion(world, regionName),
-							player)) {
+					if (LandInfo.this.wasPlayerTooLongOff(LandInfo.this.getRegion(world, regionName), player)) {
 						sender.sendMessage(I18n.translate("messages.regionBuyupInfo"));
 					} else {
-						if (LandInfo.this.timeForBuyupInfo(LandInfo.this.getRegion(world, regionName),
-								player)) {
+						if (LandInfo.this.timeForBuyupInfo(LandInfo.this.getRegion(world, regionName), player)) {
 							long buyDate = LandInfo.this.getBuyupInfoDate(region, player);
 							sender.sendMessage(I18n.translate("messages.regionBuyupInfoDate",
 									LandInfo.LAST_SEEN.format(new Date(buyDate))));

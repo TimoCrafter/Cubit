@@ -17,6 +17,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
@@ -95,7 +96,8 @@ public class LandTakeOffer extends MainCore {
 
 					sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
 					if (isSpigot()) {
-						playEffect(player, Effect.HAPPY_VILLAGER, 1);
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
 					}
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}

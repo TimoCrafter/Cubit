@@ -14,6 +14,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -75,7 +76,8 @@ public class LandAddonLock extends MainCore {
 						region.setFlag(groupFlag, RegionGroup.NON_MEMBERS);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
 						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.HAPPY_VILLAGER);
 						}
 						LandAddonLock.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
@@ -91,7 +93,8 @@ public class LandAddonLock extends MainCore {
 						region.setFlag(groupFlag, RegionGroup.ALL);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
 						if (isSpigot()) {
-							playEffect(player, Effect.FLAME, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.FLAME);
 						}
 						LandAddonLock.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
@@ -103,7 +106,8 @@ public class LandAddonLock extends MainCore {
 						region.setFlag(groupFlag, RegionGroup.ALL);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
 						if (isSpigot()) {
-							playEffect(player, Effect.FLAME, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.FLAME);
 						}
 						LandAddonLock.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
@@ -114,7 +118,8 @@ public class LandAddonLock extends MainCore {
 						region.setFlag(groupFlag, RegionGroup.NON_MEMBERS);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
 						if (isSpigot()) {
-							playEffect(player, Effect.HAPPY_VILLAGER, 1);
+							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+									Effect.HAPPY_VILLAGER);
 						}
 						LandAddonLock.this.setupLand.executorServiceRegions
 								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));

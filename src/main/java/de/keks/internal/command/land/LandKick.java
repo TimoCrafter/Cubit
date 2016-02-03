@@ -16,6 +16,7 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
+import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
 
@@ -70,7 +71,8 @@ public class LandKick extends MainCore {
 					return;
 				}
 				if (isSpigot()) {
-					playEffect(player, Effect.COLOURED_DUST, 1);
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.COLOURED_DUST);
 				}
 				player.sendMessage(translate("messages.kickNoMembersInfo"));
 
