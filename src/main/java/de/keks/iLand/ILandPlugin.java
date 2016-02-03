@@ -59,10 +59,11 @@ public class ILandPlugin extends JavaPlugin {
 		inst = this;
 		this.saveDefaultConfig();
 		skyconfig = new ConfigFile(this);
-		setupCommands();
 		registerListenerAndHandler();
 		if (!checkAndSetupPlugins()) {
 			this.setEnabled(false);
+		} else {
+			setupCommands();
 		}
 
 	}
