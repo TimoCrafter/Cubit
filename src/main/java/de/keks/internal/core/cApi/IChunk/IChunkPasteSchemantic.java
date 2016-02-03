@@ -46,9 +46,9 @@ public class IChunkPasteSchemantic {
 				player.getLocation().getChunk().getZ() * 16);
 		IChunkAPI.streamSchematicAsync(schematicFile, loc);
 
-		if (schematicFile.exists()) {
-			schematicFile.delete();
-		}
+		// if (schematicFile.exists()) {
+		// schematicFile.delete();
+		// }
 		KChunkFacade.refreshChunk(player.getLocation().getChunk());
 		KChunkFacade.teleportSave(player.getLocation().getChunk());
 
