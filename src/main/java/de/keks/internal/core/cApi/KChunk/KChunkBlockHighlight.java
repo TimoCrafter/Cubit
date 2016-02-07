@@ -77,6 +77,7 @@ public class KChunkBlockHighlight implements Runnable {
 				if ((world.getBlockAt(x, y, z).getType() != Material.TORCH)
 						&& (world.getBlockAt(x, y, z).getType() != Material.REDSTONE_TORCH_ON)
 						&& (world.getBlockAt(x, y, z).getType() != Material.DEAD_BUSH)
+						&& (world.getBlockAt(x, y, z).getType() != Material.DOUBLE_PLANT)
 						&& (world.getBlockAt(x, y, z).getType() != Material.SNOW)) {
 					break;
 				}
