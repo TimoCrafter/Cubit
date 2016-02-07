@@ -1,5 +1,7 @@
 package de.keks.internal.core.cApi.IChunk;
 
+import java.util.HashSet;
+
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -9,6 +11,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iChunk.IChunkAPI;
+import de.keks.iChunk.object.BlockReplaceBlock;
 
 /**
  * Copyright:
@@ -99,8 +102,8 @@ public class IChunkFacade {
 		return;
 	}
 
-	public static void replaceBlockID(final Chunk chunk, final Material toReplace, final Material newMaterial) {
-		IChunkAPI.chunkReplaceBlock(chunk, toReplace, newMaterial);
+	public static void replaceBlockID(Chunk chunk, final HashSet<BlockReplaceBlock> blockIDs) {
+		IChunkAPI.chunkReplaceBlock(chunk, blockIDs);
 		return;
 	}
 

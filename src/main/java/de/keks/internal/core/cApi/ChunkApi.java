@@ -1,5 +1,7 @@
 package de.keks.internal.core.cApi;
 
+import java.util.HashSet;
+
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -9,6 +11,7 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.keks.iChunk.object.BlockReplaceBlock;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.core.cApi.IChunk.IChunkFacade;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
@@ -129,9 +132,9 @@ public class ChunkApi {
 		}
 	}
 
-	public static void replaceBlockID(final Chunk chunk, final Material toReplace, final Material newMaterial) {
+	public static void replaceBlockID(Chunk chunk, final HashSet<BlockReplaceBlock> blockIDs) {
 		if (iChunk) {
-			IChunkFacade.replaceBlockID(chunk, toReplace, newMaterial);
+			IChunkFacade.replaceBlockID(chunk, blockIDs);
 			return;
 		} else {
 			return;
