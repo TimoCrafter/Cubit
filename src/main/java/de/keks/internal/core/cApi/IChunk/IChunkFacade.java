@@ -3,6 +3,7 @@ package de.keks.internal.core.cApi.IChunk;
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
@@ -95,6 +96,11 @@ public class IChunkFacade {
 
 	public static void chunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
 		IChunkAPI.chunkHighlight(p, l, c, effect);
+		return;
+	}
+
+	public static void replaceBlockID(final Chunk chunk, final Material toReplace, final Material newMaterial) {
+		IChunkAPI.chunkReplaceBlock(chunk, toReplace, newMaterial);
 		return;
 	}
 

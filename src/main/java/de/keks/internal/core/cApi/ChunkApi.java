@@ -3,6 +3,7 @@ package de.keks.internal.core.cApi;
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
@@ -124,6 +125,15 @@ public class ChunkApi {
 			return;
 		} else {
 			KChunkFacade.chunkHighlight(p, l, c, effect);
+			return;
+		}
+	}
+
+	public static void replaceBlockID(final Chunk chunk, final Material toReplace, final Material newMaterial) {
+		if (iChunk) {
+			IChunkFacade.replaceBlockID(chunk, toReplace, newMaterial);
+			return;
+		} else {
 			return;
 		}
 	}

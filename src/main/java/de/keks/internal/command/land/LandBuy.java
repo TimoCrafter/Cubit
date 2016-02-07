@@ -6,6 +6,7 @@ import java.util.HashSet;
 
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
@@ -93,6 +94,8 @@ public class LandBuy extends MainCore {
 								playerLocation.getChunk(), ConfigValues.landBuyChunkBorders));
 					}
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
+					// Test
+					ChunkApi.replaceBlockID(player.getLocation().getChunk(), Material.SIGN, Material.AIR);
 
 				}
 			});
