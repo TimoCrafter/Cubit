@@ -3,7 +3,6 @@ package de.keks.internal.command.land;
 import static de.keks.internal.I18n.translate;
 
 import org.bukkit.Effect;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -16,7 +15,6 @@ import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
-import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -42,7 +40,6 @@ public class LandSell extends MainCore {
 		if (sender.hasPermission("iLand.land.sell")) {
 
 			final Player player = (Player) sender;
-			final Location playerLocation = player.getLocation();
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
@@ -85,11 +82,9 @@ public class LandSell extends MainCore {
 							LandSell.this.calculateCosts(player, world, false)));
 
 					if (args.length < 2) {
-						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getILandInstance(),
-								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
+						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landSellChunkBorders);
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
-						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getILandInstance(),
-								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
+						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landSellChunkBorders);
 					}
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}

@@ -92,6 +92,7 @@ public class IChunkFacade {
 	 * </ul>
 	 * 
 	 */
+
 	/*
 	 * public static void teleportSave(Chunk chunk) {
 	 * KChunkTeleport.saveTeleport(chunk); return; }
@@ -99,6 +100,11 @@ public class IChunkFacade {
 
 	public static void chunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
 		IChunkAPI.chunkHighlight(p, l, c, effect);
+		return;
+	}
+
+	public static void chunkBlockHighlight(final Chunk c, final Material material) {
+		IChunkAPI.chunkBlockHighlight(c, material);
 		return;
 	}
 

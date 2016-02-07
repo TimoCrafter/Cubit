@@ -132,6 +132,16 @@ public class ChunkApi {
 		}
 	}
 
+	public static void chunkBlockHighligh(final Chunk c, final Material material) {
+		if (iChunk) {
+			IChunkFacade.chunkBlockHighlight(c, material);
+			return;
+		} else {
+			KChunkFacade.chunkBlockHighlight(c, material);
+			return;
+		}
+	}
+
 	public static void replaceBlockID(Chunk chunk, final HashSet<BlockReplaceBlock> blockIDs) {
 		if (iChunk) {
 			IChunkFacade.replaceBlockID(chunk, blockIDs);

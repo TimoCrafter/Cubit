@@ -5,7 +5,6 @@ import static de.keks.internal.I18n.translate;
 import java.util.HashSet;
 
 import org.bukkit.Effect;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.EntityType;
@@ -27,7 +26,6 @@ import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
-import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 import de.keks.internal.register.CommandSetupLand;
@@ -54,7 +52,6 @@ public class LandBuy extends MainCore {
 		if (sender.hasPermission("iLand.land.buy")) {
 
 			final Player player = (Player) sender;
-			final Location playerLocation = player.getLocation();
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
@@ -86,11 +83,9 @@ public class LandBuy extends MainCore {
 								Effect.HAPPY_VILLAGER);
 					}
 					if (args.length < 2) {
-						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getILandInstance(),
-								playerLocation.getChunk(), ConfigValues.landBuyChunkBorders));
+						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landBuyChunkBorders);
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
-						scheduleSyncTask(setupLand, new KChunkBlockHighlight(setupLand.getILandInstance(),
-								playerLocation.getChunk(), ConfigValues.landBuyChunkBorders));
+						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landBuyChunkBorders);
 					}
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));
 

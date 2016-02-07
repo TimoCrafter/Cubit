@@ -3,10 +3,13 @@ package de.keks.internal.core.cApi.KChunk;
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Biome;
 import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
+
+import de.keks.iLand.ILandPlugin;
 
 /**
  * Copyright:
@@ -89,6 +92,12 @@ public class KChunkFacade {
 
 	public static void chunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
 		KChunkHighlight.startChunkEffect(p, l, c, effect);
+		return;
+	}
+
+	public static void chunkBlockHighlight(final Chunk c, final Material material) {
+		ILandPlugin.inst().getServer().getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(),
+				new KChunkBlockHighlight(ILandPlugin.inst(), c, material));
 		return;
 	}
 

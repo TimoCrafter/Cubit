@@ -3,7 +3,6 @@ package de.keks.internal.command.admin;
 import static de.keks.internal.I18n.translate;
 
 import org.bukkit.Effect;
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -14,7 +13,6 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
-import de.keks.internal.core.cApi.KChunk.KChunkBlockHighlight;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.MainCore;
@@ -40,7 +38,6 @@ public class LandAdminDelete extends MainCore {
 		if (sender.hasPermission("iLand.admin.delete")) {
 
 			final Player player = (Player) sender;
-			final Location playerLocation = player.getLocation();
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
@@ -72,11 +69,9 @@ public class LandAdminDelete extends MainCore {
 					}
 					player.sendMessage(translate("messages.adminDeleteLand", regionName, owner));
 					if (args.length < 2) {
-						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getILandInstance(),
-								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
+						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landSellChunkBorders);
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
-						scheduleSyncTaskAdmin(setupAdmin, new KChunkBlockHighlight(setupAdmin.getILandInstance(),
-								playerLocation.getChunk(), ConfigValues.landSellChunkBorders));
+						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landSellChunkBorders);
 					}
 					setupAdmin.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}

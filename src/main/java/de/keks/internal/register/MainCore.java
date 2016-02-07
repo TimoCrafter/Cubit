@@ -3,7 +3,6 @@ package de.keks.internal.register;
 import java.util.UUID;
 
 import org.bukkit.Bukkit;
-import org.bukkit.Effect;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
