@@ -185,7 +185,7 @@ landInfo:
   split: '&6, '
   locked: '&aLocked'
   unlocked: '&cUnlocked'
-  pvpoff: '&aPVP  disabled'
+  pvpoff: '&aPVP disabled'
   pvpon: '&cPVP enabled'
   tntoff: '&aExplosions disabled'
   tnton: '&cExplosions enable'
