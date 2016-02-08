@@ -18,8 +18,9 @@ import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.command.config.SetupConfig;
 import de.keks.internal.core.entitylimit.MobGroupCompare;
+import de.keks.internal.register.MainCore;
 
-public class WorldListener implements Listener {
+public class ChunkEventListener implements Listener {
 	HashMap<Chunk, Integer> chunkTasks = new HashMap<Chunk, Integer>();
 
 	class inspectTask extends BukkitRunnable {
@@ -32,7 +33,7 @@ public class WorldListener implements Listener {
 		@Override
 		public void run() {
 			if (!c.isLoaded()) {
-				ILandPlugin.inst().cancelTask(taskID);
+				MainCore.cancelTask(taskID);
 				return;
 			}
 
@@ -52,7 +53,7 @@ public class WorldListener implements Listener {
 	public void onChunkLoadEvent(final ChunkLoadEvent e) {
 		if (ConfigValues.limitPropertiesActiveInspection) {
 			inspectTask task = new inspectTask(e.getChunk());
-			int taskID = ILandPlugin.inst().scheduleSyncRepeatingTask(task,
+			int taskID = MainCore.runSyncRepeatingTask(task,
 					ConfigValues.limitPropertiesInspectionFrequency * 20L);
 			task.setId(taskID);
 

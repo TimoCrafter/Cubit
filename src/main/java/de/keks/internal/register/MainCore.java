@@ -14,7 +14,6 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.command.config.ConfigValues;
-import de.keks.internal.core.cApi.KChunk.KChunkHighlight;
 import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
 
@@ -32,7 +31,6 @@ public abstract class MainCore {
 
 	protected CommandSetupLand setupLand;
 	protected CommandSetupAdmin setupAdmin;
-	public KChunkHighlight effects;
 
 	public MainCore(boolean isOnlyPlayerCommand) {
 
@@ -171,7 +169,7 @@ public abstract class MainCore {
 		return time;
 	}
 
-	public static boolean isSpigot1() {
+	public static boolean isSpigot() {
 		try {
 			Class.forName("org.spigotmc.SpigotConfig");
 			return true;
@@ -188,5 +186,18 @@ public abstract class MainCore {
 			}
 		}
 		return false;
+	}
+
+	public static int runSyncRepeatingTask(Runnable run, long delay) {
+		return runSyncRepeatingTask(run, delay, delay);
+	}
+
+	public static int runSyncRepeatingTask(Runnable run, long start, long delay) {
+		return ILandPlugin.inst().getServer().getScheduler().scheduleSyncRepeatingTask(ILandPlugin.inst(), run, start,
+				delay);
+	}
+
+	public static void cancelTask(int taskID) {
+		ILandPlugin.inst().getServer().getScheduler().cancelTask(taskID);
 	}
 }

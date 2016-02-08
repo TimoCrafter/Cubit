@@ -1,5 +1,6 @@
 package de.keks.internal.register;
 
+import java.util.HashMap;
 import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -37,6 +38,7 @@ public class CommandSetupAdmin implements CommandExecutor {
 		return initialized;
 	}
 
+	private HashMap<String, Long> commandTaskSpam = new HashMap<String, Long>();
 	private ILandPlugin iLand;
 	private OfferManager offerManager;
 
@@ -65,17 +67,17 @@ public class CommandSetupAdmin implements CommandExecutor {
 			sender.sendMessage(I18n.translate("messages.pluginDisabled"));
 			return true;
 		}
-		if (ILandPlugin.inst().iLandAdminTask.containsKey(sender.getName())) {
-			long secondsLeft = ((ILandPlugin.inst().iLandAdminTask.get(sender.getName()) / 1000)
-					+ ILandPlugin.inst().iLandTaskTime) - (System.currentTimeMillis() / 1000);
+		if (commandTaskSpam.containsKey(sender.getName())) {
+			long secondsLeft = ((commandTaskSpam.get(sender.getName()) / 1000) + ILandPlugin.inst().iLandTaskTime)
+					- (System.currentTimeMillis() / 1000);
 
 			if (secondsLeft > 0) {
 				sender.sendMessage(I18n.translate("messages.noSpam"));
-				ILandPlugin.inst().iLandAdminTask.put(sender.getName(), System.currentTimeMillis());
+				commandTaskSpam.put(sender.getName(), System.currentTimeMillis());
 				return true;
 			}
 		}
-		ILandPlugin.inst().iLandAdminTask.put(sender.getName(), System.currentTimeMillis());
+		commandTaskSpam.put(sender.getName(), System.currentTimeMillis());
 		if (args.length == 0) {
 
 			if (sender.hasPermission("iLand.admin.help")) {

@@ -9,7 +9,7 @@ import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.command.config.SetupConfig;
 
-public class EntityListener implements Listener {
+public class EntitySpawnEventListener implements Listener {
 
 	@EventHandler
 	public void onCreatureSpawnEvent(CreatureSpawnEvent e) {
@@ -27,7 +27,7 @@ public class EntityListener implements Listener {
 
 		Chunk c = e.getLocation().getChunk();
 
-		if (WorldListener.CheckChunk(c)) {
+		if (ChunkEventListener.CheckChunk(c)) {
 			e.setCancelled(true);
 			return;
 		}

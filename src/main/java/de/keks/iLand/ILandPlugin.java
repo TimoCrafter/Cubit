@@ -1,7 +1,5 @@
 package de.keks.iLand;
 
-import java.util.HashMap;
-
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -10,14 +8,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.DatabaseManager;
-import de.keks.internal.core.entitylimit.ILandLimitModule;
-import de.keks.internal.core.listeners.ILandListener;
+import de.keks.internal.core.entitylimit.EntityLimitClass;
+import de.keks.internal.core.listeners.PlayerLoginEventListener;
 import de.keks.internal.core.tasks.SetupAdminCommandsTask;
 import de.keks.internal.core.tasks.SetupLandCommandsTask;
 import de.keks.internal.core.tasks.SetupLanguageTask;
 import de.keks.internal.plugin.hooks.HookManager;
 import de.keks.internal.register.CommandSetupAdmin;
 import de.keks.internal.register.CommandSetupLand;
+import de.keks.internal.register.MainCore;
 import net.milkbowl.vault.economy.Economy;
 
 /**
@@ -31,8 +30,6 @@ import net.milkbowl.vault.economy.Economy;
  */
 
 public class ILandPlugin extends JavaPlugin {
-	public HashMap<String, Long> iLandLandTask = new HashMap<String, Long>();
-	public HashMap<String, Long> iLandAdminTask = new HashMap<String, Long>();
 
 	public int iLandTaskTime = 1;
 	private static ILandPlugin inst;
@@ -78,7 +75,7 @@ public class ILandPlugin extends JavaPlugin {
 	}
 
 	private void registerListenerAndHandler() {
-		getServer().getPluginManager().registerEvents(new ILandListener(), this);
+		getServer().getPluginManager().registerEvents(new PlayerLoginEventListener(), this);
 		getServer().getScheduler().runTask(this, new SetupLanguageTask(this));
 		hookManager = new HookManager(this);
 	}
@@ -89,7 +86,7 @@ public class ILandPlugin extends JavaPlugin {
 		}
 
 		if (ConfigValues.limitEnabled) {
-			ILandLimitModule.start(this);
+			EntityLimitClass.register(this);
 		}
 
 		if (getServer().getPluginManager().getPlugin("Vault") != null) {
@@ -128,7 +125,7 @@ public class ILandPlugin extends JavaPlugin {
 			this.isIChunkLoadet = false;
 		}
 
-		if (!isSpigot()) {
+		if (!MainCore.isSpigot()) {
 			this.getLogger().info("Warning: You are using craftbukkit. Particle effects will not work!");
 			this.getLogger().info("Warning: For enable particle effects, use spigot instead of craftbukkit!");
 		}
@@ -140,29 +137,8 @@ public class ILandPlugin extends JavaPlugin {
 		return hookManager;
 	}
 
-	public boolean isIChunkInstance() {
+	public boolean isIChunkEnabled() {
 		return this.isIChunkLoadet;
-	}
-
-	public int scheduleSyncRepeatingTask(Runnable run, long delay) {
-		return scheduleSyncRepeatingTask(run, delay, delay);
-	}
-
-	public int scheduleSyncRepeatingTask(Runnable run, long start, long delay) {
-		return inst.getServer().getScheduler().scheduleSyncRepeatingTask(inst, run, start, delay);
-	}
-
-	public void cancelTask(int taskID) {
-		inst.getServer().getScheduler().cancelTask(taskID);
-	}
-
-	public static boolean isSpigot() {
-		try {
-			Class.forName("org.spigotmc.SpigotConfig");
-			return true;
-		} catch (final ClassNotFoundException e) {
-			return false;
-		}
 	}
 
 	public static ConfigFile getSkyConfig() {

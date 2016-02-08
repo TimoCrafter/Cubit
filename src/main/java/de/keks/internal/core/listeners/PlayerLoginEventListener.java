@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerLoginEvent;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.core.database.mysql.SQLConnectionTask;
 
-public class ILandListener implements Listener {
+public class PlayerLoginEventListener implements Listener {
 
 	@EventHandler
 	public void onPlayerJoin(PlayerLoginEvent event) {

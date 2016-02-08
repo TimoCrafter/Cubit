@@ -29,7 +29,7 @@ import de.keks.internal.register.MainCore;
 
 public class ChunkApi {
 
-	private static boolean iChunk = ILandPlugin.inst().isIChunkInstance();
+	private static boolean iChunk = ILandPlugin.inst().isIChunkEnabled();
 
 	/**
 	 * <ul>
@@ -124,7 +124,7 @@ public class ChunkApi {
 	}
 
 	public static void chunkHighligh(final Player p, final Location l, final Chunk c, final Effect effect) {
-		if (MainCore.isSpigot1()) {
+		if (MainCore.isSpigot()) {
 			if (iChunk) {
 				IChunkFacade.chunkHighlight(p, l, c, effect);
 				return;
