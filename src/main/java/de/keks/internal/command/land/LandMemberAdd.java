@@ -90,10 +90,9 @@ public class LandMemberAdd extends MainCore {
 						return;
 					}
 					region.getMembers().addPlayer(olocalplayer);
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.HEART);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(), Effect.HEART);
+
 					player.sendMessage(translate("messages.memberAdd", args[1], regionName));
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}

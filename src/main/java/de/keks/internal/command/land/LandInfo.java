@@ -45,35 +45,37 @@ public class LandInfo extends MainCore {
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
 		if (sender.hasPermission("iLand.land.info")) {
-			Player player = (Player) sender;
+			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
 
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
-					Player player = (Player) sender;
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(), null);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(), null);
+
 					if (isServerRegion(chunkX, chunkZ, world)) {
 						sender.sendMessage(I18n.translate("messages.isServerregion"));
+						sender.sendMessage(I18n.translate("landInfo.line1"));
+						sender.sendMessage(
+								I18n.translate("landInfo.line2", getServerRegionName(chunkX, chunkZ, world), "Server"));
 						return;
 					}
-					String regionName = LandInfo.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					Biome biome = player.getWorld().getBiome(player.getLocation().getBlockX(),
 							player.getLocation().getBlockZ());
 					if (!ProtectedRegion.isValidId(regionName)) {
-						sender.sendMessage(I18n.translate("messages.regionBuyInfo",
-								LandInfo.this.setupLand.getILandInstance().getHookManager().getEconomyManager()
-										.formatMoney(LandInfo.this.calculateCosts(player, world, true))));
+						sender.sendMessage(
+								I18n.translate("messages.regionBuyInfo", setupLand.getILandInstance().getHookManager()
+										.getEconomyManager().formatMoney(calculateCosts(player, world, true))));
 						return;
 					}
-					ProtectedRegion region = LandInfo.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
-						sender.sendMessage(I18n.translate("messages.regionBuyInfo",
-								LandInfo.this.setupLand.getILandInstance().getHookManager().getEconomyManager()
-										.formatMoney(LandInfo.this.calculateCosts(player, world, true))));
+						sender.sendMessage(
+								I18n.translate("messages.regionBuyInfo", setupLand.getILandInstance().getHookManager()
+										.getEconomyManager().formatMoney(calculateCosts(player, world, true))));
 						return;
 					}
 					for (UUID regionplayer : region.getOwners().getUniqueIds()) {
@@ -119,7 +121,7 @@ public class LandInfo extends MainCore {
 						}
 						sender.sendMessage(I18n.translate("landInfo.line4", min, max, biome.toString()));
 						sender.sendMessage(I18n.translate("landInfo.line5",
-								LandInfo.LAST_SEEN.format(new Date(LandInfo.this.lastSeen(lplayer.getUniqueId())))));
+								LAST_SEEN.format(new Date(lastSeen(lplayer.getUniqueId())))));
 						sender.sendMessage(I18n.translate("landInfo.line6",
 								(new StringBuilder()).append(locked).append(I18n.translate("landInfo.split"))
 										.append(tnt).append(I18n.translate("landInfo.split")).append(pvp)
@@ -133,19 +135,19 @@ public class LandInfo extends MainCore {
 								.formatMoney(setupLand.getOfferManager().getOffer(regionName));
 						sender.sendMessage(I18n.translate("messages.regionOffered", formattedMoney));
 					}
-					if (LandInfo.this.wasPlayerTooLongOff(LandInfo.this.getRegion(world, regionName), player)) {
+					if (wasPlayerTooLongOff(getRegion(world, regionName), player)) {
 						sender.sendMessage(I18n.translate("messages.regionBuyupInfo"));
 					} else {
-						if (LandInfo.this.timeForBuyupInfo(LandInfo.this.getRegion(world, regionName), player)) {
-							long buyDate = LandInfo.this.getBuyupInfoDate(region, player);
+						if (timeForBuyupInfo(getRegion(world, regionName), player)) {
+							long buyDate = getBuyupInfoDate(region, player);
 							sender.sendMessage(I18n.translate("messages.regionBuyupInfoDate",
-									LandInfo.LAST_SEEN.format(new Date(buyDate))));
+									LAST_SEEN.format(new Date(buyDate))));
 						}
 					}
 				}
 			});
 		} else {
-			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
+			sender.sendMessage(I18n.translate("messages.noPermission"));
 		}
 		return true;
 	}

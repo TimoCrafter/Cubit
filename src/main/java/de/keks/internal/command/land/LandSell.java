@@ -74,12 +74,12 @@ public class LandSell extends MainCore {
 					manager.removeRegion(regionName);
 					setupLand.getOfferManager().removeOffer(regionName);
 					moneyTransfer(null, player, calculateCosts(player, world, false));
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.INSTANT_SPELL);
-					}
-					player.sendMessage(translate("messages.sellRegion", regionName,
-							LandSell.this.calculateCosts(player, world, false)));
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.INSTANT_SPELL);
+
+					player.sendMessage(
+							translate("messages.sellRegion", regionName, calculateCosts(player, world, false)));
 
 					if (args.length < 2) {
 						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landSellChunkBorders);

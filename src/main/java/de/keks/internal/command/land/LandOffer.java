@@ -82,19 +82,18 @@ public class LandOffer extends MainCore {
 								if (wert2.equalsIgnoreCase(wert1)) {
 									player.sendMessage(translate("messages.offerCancel", regionName));
 
-									if (isSpigot()) {
-										ChunkApi.chunkHighligh(player, player.getLocation(),
-												player.getLocation().getChunk(), Effect.WATERDRIP);
-									}
+									ChunkApi.chunkHighligh(player, player.getLocation(),
+											player.getLocation().getChunk(), Effect.WATERDRIP);
+
 								} else {
-									if (isSpigot()) {
-										ChunkApi.chunkHighligh(player, player.getLocation(),
-												player.getLocation().getChunk(), Effect.LAVADRIP);
-									}
+
+									ChunkApi.chunkHighligh(player, player.getLocation(),
+											player.getLocation().getChunk(), Effect.LAVADRIP);
+
 									String formattedMoney = setupLand.getILandInstance().getHookManager()
 											.getEconomyManager().formatMoney(NumberUtils.toDouble(args[1]));
 									player.sendMessage(translate("messages.offerLand", regionName));
-									LandOffer.this.setupLand.getILandInstance().getServer().broadcastMessage(translate(
+									setupLand.getILandInstance().getServer().broadcastMessage(translate(
 											"messages.offerInfoGlobal", sender.getName(), regionName, formattedMoney));
 								}
 							}

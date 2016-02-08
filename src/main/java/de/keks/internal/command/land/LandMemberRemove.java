@@ -87,10 +87,10 @@ public class LandMemberRemove extends MainCore {
 
 					region.getMembers().removePlayer(olocalplayer);
 					player.sendMessage(translate("messages.memberRemove", args[1], regionName));
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.VILLAGER_THUNDERCLOUD);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.VILLAGER_THUNDERCLOUD);
+
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}
 			});

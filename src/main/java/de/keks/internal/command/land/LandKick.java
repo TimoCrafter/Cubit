@@ -70,10 +70,10 @@ public class LandKick extends MainCore {
 					player.sendMessage(translate("messages.noPermissionForRegion"));
 					return;
 				}
-				if (isSpigot()) {
-					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-							Effect.COLOURED_DUST);
-				}
+
+				ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+						Effect.COLOURED_DUST);
+
 				player.sendMessage(translate("messages.kickNoMembersInfo"));
 
 				final Chunk c = player.getLocation().getChunk();
@@ -91,7 +91,8 @@ public class LandKick extends MainCore {
 						}
 					}
 				}
-				scheduleSyncTask(setupLand, new Runnable() {
+				ILandPlugin.inst().getServer().getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(),
+						new Runnable() {
 
 					@Override
 					public void run() {

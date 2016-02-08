@@ -85,10 +85,9 @@ public class LandGive extends MainCore {
 					region.getOwners().removeAll();
 					region.getMembers().removeAll();
 					region.getOwners().addPlayer(argplayer);
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.HEART);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(), Effect.HEART);
+
 					player.sendMessage(translate("messages.giveLand", regionName, args[1]));
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}

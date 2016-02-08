@@ -59,24 +59,6 @@ public abstract class MainCore {
 		return getWorldGuard().getRegionManager(world).getRegion(regionName);
 	}
 
-	protected void scheduleSyncTask(CommandSetupLand handler, Runnable run) {
-		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run);
-	}
-
-	protected void scheduleSyncTask(CommandSetupLand handler, Runnable run, long delay) {
-		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
-				delay);
-	}
-
-	protected void scheduleSyncTaskAdmin(CommandSetupAdmin handler, Runnable run) {
-		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run);
-	}
-
-	protected void scheduleSyncTaskAdmin(CommandSetupAdmin handler, Runnable run, long delay) {
-		handler.getILandInstance().getServer().getScheduler().scheduleSyncDelayedTask(handler.getILandInstance(), run,
-				delay);
-	}
-
 	protected WorldGuardPlugin getWorldGuard() {
 		try {
 			return ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin();
@@ -189,7 +171,7 @@ public abstract class MainCore {
 		return time;
 	}
 
-	public static boolean isSpigot() {
+	public static boolean isSpigot1() {
 		try {
 			Class.forName("org.spigotmc.SpigotConfig");
 			return true;

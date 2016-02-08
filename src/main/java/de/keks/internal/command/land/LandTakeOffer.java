@@ -95,10 +95,10 @@ public class LandTakeOffer extends MainCore {
 					setupLand.getOfferManager().removeOffer(regionName);
 
 					sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.HAPPY_VILLAGER);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.HAPPY_VILLAGER);
+
 					setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 				}
 			});

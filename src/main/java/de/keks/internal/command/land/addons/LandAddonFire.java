@@ -50,12 +50,12 @@ public class LandAddonFire extends MainCore {
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = LandAddonFire.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = LandAddonFire.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -74,12 +74,11 @@ public class LandAddonFire extends MainCore {
 						region.setFlag(DefaultFlag.LAVA_FIRE, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.LIGHTER, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.LIGHTNING, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonFire.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonFire.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -92,12 +91,11 @@ public class LandAddonFire extends MainCore {
 						region.setFlag(DefaultFlag.LAVA_FIRE, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.LIGHTER, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.LIGHTNING, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonFire.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonFire.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
@@ -106,12 +104,11 @@ public class LandAddonFire extends MainCore {
 						region.setFlag(DefaultFlag.LAVA_FIRE, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.LIGHTER, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.LIGHTNING, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonFire.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonFire.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					} else {
@@ -119,12 +116,11 @@ public class LandAddonFire extends MainCore {
 						region.setFlag(DefaultFlag.LAVA_FIRE, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.LIGHTER, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.LIGHTNING, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonFire.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonFire.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					}

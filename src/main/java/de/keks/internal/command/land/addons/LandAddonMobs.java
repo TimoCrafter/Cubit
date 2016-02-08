@@ -54,12 +54,12 @@ public class LandAddonMobs extends MainCore {
 				@SuppressWarnings({ "serial" })
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = LandAddonMobs.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = LandAddonMobs.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -82,12 +82,11 @@ public class LandAddonMobs extends MainCore {
 
 							}
 						});
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonMobs.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -117,12 +116,11 @@ public class LandAddonMobs extends MainCore {
 
 							}
 						});
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonMobs.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
@@ -134,12 +132,11 @@ public class LandAddonMobs extends MainCore {
 
 							}
 						});
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonMobs.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					} else {
@@ -164,12 +161,11 @@ public class LandAddonMobs extends MainCore {
 
 							}
 						});
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonMobs.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonMobs.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}

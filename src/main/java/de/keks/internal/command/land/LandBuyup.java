@@ -95,10 +95,10 @@ public class LandBuyup extends MainCore {
 					region.getOwners().addPlayer(localplayer);
 
 					moneyTransfer(player, null, costs);
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.HAPPY_VILLAGER);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.HAPPY_VILLAGER);
+
 					sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
 				}
 			});

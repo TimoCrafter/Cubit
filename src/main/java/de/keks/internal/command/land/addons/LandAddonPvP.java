@@ -50,12 +50,12 @@ public class LandAddonPvP extends MainCore {
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = LandAddonPvP.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = LandAddonPvP.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -72,12 +72,11 @@ public class LandAddonPvP extends MainCore {
 							return;
 						}
 						region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonPvP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPvP.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -87,33 +86,30 @@ public class LandAddonPvP extends MainCore {
 							return;
 						}
 						region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonPvP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPvP.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
 					if (region.getFlag(DefaultFlag.PVP) == StateFlag.State.DENY) {
 						region.setFlag(DefaultFlag.PVP, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonPvP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPvP.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					} else {
 						region.setFlag(DefaultFlag.PVP, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonPvP.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPvP.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}

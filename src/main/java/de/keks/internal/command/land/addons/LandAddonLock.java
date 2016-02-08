@@ -51,12 +51,12 @@ public class LandAddonLock extends MainCore {
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = LandAddonLock.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = LandAddonLock.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -75,12 +75,11 @@ public class LandAddonLock extends MainCore {
 						RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 						region.setFlag(groupFlag, RegionGroup.NON_MEMBERS);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonLock.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -92,12 +91,11 @@ public class LandAddonLock extends MainCore {
 						RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 						region.setFlag(groupFlag, RegionGroup.ALL);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonLock.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
@@ -105,24 +103,22 @@ public class LandAddonLock extends MainCore {
 						RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 						region.setFlag(groupFlag, RegionGroup.ALL);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonLock.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					} else {
 						RegionGroupFlag groupFlag = DefaultFlag.USE.getRegionGroupFlag();
 						region.setFlag(groupFlag, RegionGroup.NON_MEMBERS);
 						region.setFlag(DefaultFlag.USE, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonLock.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonLock.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					}

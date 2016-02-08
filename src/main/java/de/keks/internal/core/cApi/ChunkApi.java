@@ -15,6 +15,7 @@ import de.keks.iChunk.object.BlockReplaceBlock;
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.core.cApi.IChunk.IChunkFacade;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
+import de.keks.internal.register.MainCore;
 
 /**
  * Copyright:
@@ -123,12 +124,14 @@ public class ChunkApi {
 	}
 
 	public static void chunkHighligh(final Player p, final Location l, final Chunk c, final Effect effect) {
-		if (iChunk) {
-			IChunkFacade.chunkHighlight(p, l, c, effect);
-			return;
-		} else {
-			KChunkFacade.chunkHighlight(p, l, c, effect);
-			return;
+		if (MainCore.isSpigot1()) {
+			if (iChunk) {
+				IChunkFacade.chunkHighlight(p, l, c, effect);
+				return;
+			} else {
+				KChunkFacade.chunkHighlight(p, l, c, effect);
+				return;
+			}
 		}
 	}
 

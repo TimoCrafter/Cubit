@@ -84,20 +84,20 @@ public class LandAdminTake extends MainCore {
 
 					if (!manager.hasRegion(regionName)) {
 						region = createRegion(chunkX, chunkZ, world, newOwner, regionName);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.LARGE_SMOKE);
-						}
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.LARGE_SMOKE);
+
 						sender.sendMessage(I18n.translate("messages.adminCreateLand", regionName));
 					} else {
 						region = getRegion(world, regionName);
 						region.getOwners().removeAll();
 						region.getMembers().removeAll();
 						region.getOwners().addPlayer(newOwner);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.LARGE_SMOKE);
-						}
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.LARGE_SMOKE);
+
 						sender.sendMessage(I18n.translate("messages.adminTakeLand", regionName));
 					}
 					setupAdmin.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), region, world));

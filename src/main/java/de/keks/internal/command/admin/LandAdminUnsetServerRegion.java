@@ -46,10 +46,10 @@ public class LandAdminUnsetServerRegion extends MainCore {
 
 					if (manager.hasRegion(serverRegionName)) {
 						manager.removeRegion(serverRegionName);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.LARGE_SMOKE);
-						}
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.LARGE_SMOKE);
+
 						sender.sendMessage(I18n.translate("messages.unsetServerregion", serverRegionName));
 
 					} else {

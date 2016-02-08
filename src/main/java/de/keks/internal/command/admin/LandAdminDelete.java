@@ -63,10 +63,9 @@ public class LandAdminDelete extends MainCore {
 
 					manager.removeRegion(regionName);
 					moneyTransfer(null, player, calculateCosts(player, world, false));
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.INSTANT_SPELL);
-					}
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.INSTANT_SPELL);
+
 					player.sendMessage(translate("messages.adminDeleteLand", regionName, owner));
 					if (args.length < 2) {
 						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landSellChunkBorders);

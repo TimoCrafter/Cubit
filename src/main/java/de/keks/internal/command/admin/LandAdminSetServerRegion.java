@@ -64,10 +64,10 @@ public class LandAdminSetServerRegion extends MainCore {
 					}
 					if (!manager.hasRegion(serverRegionName)) {
 						region = createRegion(chunkX, chunkZ, world, serverRegionName);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.LARGE_SMOKE);
-						}
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.LARGE_SMOKE);
+
 						sender.sendMessage(I18n.translate("messages.setServerregion", serverRegionName));
 					} else {
 						sender.sendMessage(I18n.translate("messages.isAlreadyServerregion"));

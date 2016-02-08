@@ -51,12 +51,12 @@ public class LandChunkSetbiome extends MainCore
 				this.setupLand.executorServiceCommands.submit(new Runnable() {
 					public void run() {
 						Player player = (Player) sender;
-						String regionName = LandChunkSetbiome.this.getRegionName(chunkX, chunkZ, world);
+						String regionName = getRegionName(chunkX, chunkZ, world);
 						if (!ProtectedRegion.isValidId(regionName)) {
 							player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 							return;
 						}
-						ProtectedRegion region = LandChunkSetbiome.this.getRegion(world, regionName);
+						ProtectedRegion region = getRegion(world, regionName);
 						if (region == null) {
 							player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 							return;
@@ -84,12 +84,11 @@ public class LandChunkSetbiome extends MainCore
 						if (ChunkApi.setBiome(player, regionName, Biome.valueOf(args[1].toUpperCase()))) {
 							moneyTransfer(player, null, costs);
 						}
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.COLOURED_DUST);
-						}
-						LandChunkSetbiome.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandChunkSetbiome.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.COLOURED_DUST);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 					}
 				});
 				return true;

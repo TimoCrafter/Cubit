@@ -50,12 +50,12 @@ public class LandAddonPotion extends MainCore {
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = LandAddonPotion.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = LandAddonPotion.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -72,12 +72,11 @@ public class LandAddonPotion extends MainCore {
 							return;
 						}
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonPotion.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -87,33 +86,30 @@ public class LandAddonPotion extends MainCore {
 							return;
 						}
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonPotion.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
 					if (region.getFlag(DefaultFlag.POTION_SPLASH) == StateFlag.State.ALLOW) {
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonPotion.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					} else {
 						region.setFlag(DefaultFlag.POTION_SPLASH, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonPotion.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonPotion.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					}

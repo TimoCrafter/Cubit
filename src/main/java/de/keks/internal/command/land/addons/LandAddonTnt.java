@@ -50,12 +50,12 @@ public class LandAddonTnt extends MainCore {
 			this.setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					Player player = (Player) sender;
-					String regionName = LandAddonTnt.this.getRegionName(chunkX, chunkZ, world);
+					String regionName = getRegionName(chunkX, chunkZ, world);
 					if (!ProtectedRegion.isValidId(regionName)) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
 					}
-					ProtectedRegion region = LandAddonTnt.this.getRegion(world, regionName);
+					ProtectedRegion region = getRegion(world, regionName);
 					if (region == null) {
 						player.sendMessage(I18n.translate("messages.noRegionHere", new Object[0]));
 						return;
@@ -73,12 +73,11 @@ public class LandAddonTnt extends MainCore {
 						region.setFlag(DefaultFlag.TNT, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonTnt.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 
@@ -90,12 +89,11 @@ public class LandAddonTnt extends MainCore {
 						region.setFlag(DefaultFlag.TNT, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonTnt.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					}
@@ -103,24 +101,22 @@ public class LandAddonTnt extends MainCore {
 						region.setFlag(DefaultFlag.TNT, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.DENY);
 						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.DENY);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.HAPPY_VILLAGER);
-						}
-						LandAddonTnt.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.HAPPY_VILLAGER);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statusoff));
 						return;
 					} else {
 						region.setFlag(DefaultFlag.TNT, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.OTHER_EXPLOSION, StateFlag.State.ALLOW);
 						region.setFlag(DefaultFlag.CREEPER_EXPLOSION, StateFlag.State.ALLOW);
-						if (isSpigot()) {
-							ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-									Effect.FLAME);
-						}
-						LandAddonTnt.this.setupLand.executorServiceRegions
-								.submit(new RegionSaveTask(LandAddonTnt.this.getWorldGuard(), null, world));
+
+						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+								Effect.FLAME);
+
+						setupLand.executorServiceRegions.submit(new RegionSaveTask(getWorldGuard(), null, world));
 						player.sendMessage(I18n.translate("messages.options", flag, statuson));
 						return;
 					}

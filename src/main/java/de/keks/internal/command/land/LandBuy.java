@@ -78,10 +78,10 @@ public class LandBuy extends MainCore {
 
 					moneyTransfer(player, null, costs);
 					sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
-					if (isSpigot()) {
-						ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
-								Effect.HAPPY_VILLAGER);
-					}
+
+					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(),
+							Effect.HAPPY_VILLAGER);
+
 					if (args.length < 2) {
 						ChunkApi.chunkBlockHighligh(player.getLocation().getChunk(), ConfigValues.landBuyChunkBorders);
 					} else if (args.length > 2 && !args[1].equalsIgnoreCase("empty")) {
