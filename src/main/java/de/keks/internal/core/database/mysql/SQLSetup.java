@@ -29,7 +29,7 @@ public class SQLSetup {
 			Connection connection = handler.getConnection();
 			String sql = "CREATE TABLE IF NOT EXISTS iLandDB (Id int NOT NULL AUTO_INCREMENT, UUID text, Lastlogin bigint, Lockedname text, Playername text, PRIMARY KEY (Id));";
 			String sql2 = "CREATE TABLE IF NOT EXISTS iLandRegions (Id int NOT NULL AUTO_INCREMENT, region_id text, data bigint, PRIMARY KEY (Id));";
-			String sql3 = "CREATE TABLE IF NOT EXISTS iLandFiles (Id int NOT NULL AUTO_INCREMENT, UUID text, region_id text, remote text, PRIMARY KEY (Id));";
+			String sql3 = "CREATE TABLE IF NOT EXISTS iLandFiles (Id int NOT NULL AUTO_INCREMENT, UUID text, region_id text, PRIMARY KEY (Id));";
 			Statement action = connection.createStatement();
 			action.executeUpdate(sql);
 			action.executeUpdate(sql2);
