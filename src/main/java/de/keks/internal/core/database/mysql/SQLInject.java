@@ -160,13 +160,13 @@ public class SQLInject {
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
 				PreparedStatement update = conn.prepareStatement("UPDATE iLandRegions SET data = " + data + ", uuid = "
-						+ uuid + " WHERE region_id = '" + regionid + "';");
+						+ uuid.toString() + " WHERE region_id = '" + regionid + "';");
 				update.executeUpdate();
 				update.close();
 			} else {
 				PreparedStatement insert = conn
 						.prepareStatement("INSERT INTO iLandRegions (region_id, data, uuid) VALUES ('" + regionid
-								+ "', '" + data + "', '" + uuid + "');");
+								+ "', '" + data + "', '" + uuid.toString() + "');");
 				insert.executeUpdate();
 				insert.close();
 			}

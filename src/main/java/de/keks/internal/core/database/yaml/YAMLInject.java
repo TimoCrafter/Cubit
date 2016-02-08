@@ -73,7 +73,7 @@ public class YAMLInject {
 		FileConfiguration config = provider.getOfferConfig();
 		config.set(offerPath + "." + regionid, data);
 		config.set(offerPath + "." + regionid + ".price", data);
-		config.set(offerPath + "." + regionid + ".owner", uuid);
+		config.set(offerPath + "." + regionid + ".owner", uuid.toString());
 		provider.saveOfferData();
 	}
 
@@ -89,7 +89,7 @@ public class YAMLInject {
 		double offerdata = 0;
 		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getOfferConfig();
-		offerdata = config.getDouble(offerPath + "." + regionid);
+		offerdata = config.getDouble(offerPath + "." + regionid + ".price");
 		return offerdata;
 	}
 
