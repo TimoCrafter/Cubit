@@ -66,14 +66,15 @@ public class LandOffer extends MainCore {
 					}
 
 					if (args.length < 2) {
-						if (!setupLand.getOfferManager().addOffer(regionName, 0)) {
+						if (!setupLand.getOfferManager().addOffer(regionName, 0, player.getUniqueId())) {
 							player.sendMessage(translate("messages.offerError"));
 						}
 					} else {
 						if (!NumberUtils.isNumber(args[1])) {
 							player.sendMessage(translate("messages.notANumber", args[1]));
 						} else {
-							if (!setupLand.getOfferManager().addOffer(regionName, NumberUtils.toDouble(args[1]))) {
+							if (!setupLand.getOfferManager().addOffer(regionName, NumberUtils.toDouble(args[1]),
+									player.getUniqueId())) {
 								player.sendMessage(translate("messages.offerError"));
 							} else {
 								String wert1 = "0";

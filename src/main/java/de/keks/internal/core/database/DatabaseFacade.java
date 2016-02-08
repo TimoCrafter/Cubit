@@ -51,12 +51,12 @@ public class DatabaseFacade {
 
 	}
 
-	public static void addOfferdata(String regionid, double data) {
+	public static void addOfferdata(String regionid, double data, UUID uuid) {
 		if (ConfigValues.isSQL) {
-			SQLInject.setOffer(regionid, data);
+			SQLInject.setOffer(regionid, data, uuid);
 			return;
 		}
-		YAMLInject.setOffer(regionid, data);
+		YAMLInject.setOffer(regionid, data, uuid);
 
 	}
 

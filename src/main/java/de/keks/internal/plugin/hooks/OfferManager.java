@@ -1,5 +1,7 @@
 package de.keks.internal.plugin.hooks;
 
+import java.util.UUID;
+
 import org.bukkit.plugin.Plugin;
 
 import de.keks.internal.core.database.DatabaseFacade;
@@ -23,14 +25,14 @@ public class OfferManager {
 		return DatabaseFacade.getOfferdata(regionName);
 	}
 
-	public boolean addOffer(String regionName, double value) {
+	public boolean addOffer(String regionName, double value, UUID uuid) {
 
 		if (isCorrectRegionName(regionName) && value >= 0) {
 			if (value <= 0) {
 				DatabaseFacade.removeOfferdata(regionName);
 
 			} else {
-				DatabaseFacade.addOfferdata(regionName, value);
+				DatabaseFacade.addOfferdata(regionName, value, uuid);
 
 			}
 		}

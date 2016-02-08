@@ -151,7 +151,7 @@ public class SQLInject {
 		}
 	}
 
-	public static void setOffer(String regionid, double data) {
+	public static void setOffer(String regionid, double data, UUID uuid) {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
 			Connection conn = manager.getConnection("iLanddb");
@@ -159,13 +159,14 @@ public class SQLInject {
 					.prepareStatement("SELECT data FROM iLandRegions WHERE region_id = '" + regionid + "';");
 			ResultSet result = sql.executeQuery();
 			if (result.next()) {
-				PreparedStatement update = conn.prepareStatement(
-						"UPDATE iLandRegions SET data = " + data + " WHERE region_id = '" + regionid + "';");
+				PreparedStatement update = conn.prepareStatement("UPDATE iLandRegions SET data = " + data + ", uuid = "
+						+ uuid + " WHERE region_id = '" + regionid + "';");
 				update.executeUpdate();
 				update.close();
 			} else {
-				PreparedStatement insert = conn.prepareStatement(
-						"INSERT INTO iLandRegions (region_id, data) VALUES ('" + regionid + "', '" + data + "');");
+				PreparedStatement insert = conn
+						.prepareStatement("INSERT INTO iLandRegions (region_id, data, uuid) VALUES ('" + regionid
+								+ "', '" + data + "', '" + uuid + "');");
 				insert.executeUpdate();
 				insert.close();
 			}

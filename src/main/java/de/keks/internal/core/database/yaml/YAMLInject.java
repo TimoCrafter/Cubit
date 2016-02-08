@@ -68,10 +68,12 @@ public class YAMLInject {
 		// No needed
 	}
 
-	public static void setOffer(String regionid, double data) {
+	public static void setOffer(String regionid, double data, UUID uuid) {
 		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getOfferConfig();
 		config.set(offerPath + "." + regionid, data);
+		config.set(offerPath + "." + regionid + ".price", data);
+		config.set(offerPath + "." + regionid + ".owner", uuid);
 		provider.saveOfferData();
 	}
 
