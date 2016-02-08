@@ -76,7 +76,7 @@ public class LandChunkSave extends MainCore {
 					}
 
 					player.sendMessage(translate("messages.storeTask", regionName));
-					if (DatabaseFacade.saveRegionSQL(player, region.getId(), ConfigValues.ftpEnabled)) {
+					if (DatabaseFacade.saveRegionSQL(player, region.getId())) {
 						moneyTransfer(player, null, costs);
 						if (ChunkApi.saveRegion(player, region)) {
 							if (ChunkApi.regenerateRegion(player)) {

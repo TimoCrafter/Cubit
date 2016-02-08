@@ -6,7 +6,6 @@ import org.bukkit.entity.Player;
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -33,7 +32,6 @@ public class LandChunkDelete extends MainCore {
 					final Player player = (Player) sender;
 
 					String regionName = args[1];
-					ILandFTP.delete(regionName, player.getUniqueId().toString());
 					sender.sendMessage(I18n.translate("messages.storeDelete", regionName, player.getName()));
 
 				}

@@ -99,12 +99,11 @@ public class YAMLInject {
 		return isoffered;
 	}
 
-	public static boolean saveRegionfile(Player player, String regionid, Boolean remote) {
+	public static boolean saveRegionfile(Player player, String regionid) {
 		YAMLConnectionHandler provider = YAMLSetup.getYAMLConnection();
 		FileConfiguration config = provider.getCubliConfig();
 
 		config.set(cubliPath + "." + player.getUniqueId() + ".regionID", regionid);
-		config.set(cubliPath + "." + player.getUniqueId() + ".remote", remote);
 
 		config.set(cubliIDPath + "." + player.getUniqueId(), regionid);
 		provider.saveCubliData();

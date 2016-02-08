@@ -45,13 +45,6 @@ public class SetupConfig {
 	private static String sqlPassword = "MySQL.password";
 	private static String sqlDebugmode = "MySQL.debugmode";
 
-	// Ftp
-	private static String ftpEnabled = "Ftp.use";
-	private static String ftpHostname = "Ftp.hostname";
-	private static String ftpPort = "Ftp.port";
-	private static String ftpUsername = "Ftp.username";
-	private static String ftpPassword = "Ftp.password";
-
 	// RegionLimits
 	// Module
 
@@ -130,13 +123,6 @@ public class SetupConfig {
 		ConfigValues.sqlUsername = (String) setupPath(sqlUsername, "MySqlUsername");
 		ConfigValues.sqlPassword = (String) setupPath(sqlPassword, "MySqlPassword");
 		ConfigValues.sqlDebugmode = (boolean) setupPath(sqlDebugmode, false);
-
-		// Ftp
-		ConfigValues.ftpEnabled = (boolean) setupPath(ftpEnabled, false);
-		ConfigValues.ftpHostname = (String) setupPath(ftpHostname, "locahost");
-		ConfigValues.ftpPort = (int) setupPath(ftpPort, 21);
-		ConfigValues.ftpUsername = (String) setupPath(ftpUsername, "MyFtpUsername");
-		ConfigValues.ftpPassword = (String) setupPath(ftpPassword, "MyFtpPassword");
 
 		// RegionLimits
 		// Module

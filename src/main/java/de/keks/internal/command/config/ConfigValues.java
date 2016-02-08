@@ -43,13 +43,6 @@ public class ConfigValues {
 	public static String sqlPassword;
 	public static boolean sqlDebugmode;;
 
-	// Ftp
-	public static boolean ftpEnabled;
-	public static String ftpHostname;
-	public static int ftpPort;
-	public static String ftpUsername;
-	public static String ftpPassword;
-
 	// RegionLimits
 	// Module
 

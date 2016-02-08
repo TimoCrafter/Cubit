@@ -23,13 +23,11 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
 import de.keks.iLand.ILandPlugin;
 import de.keks.internal.I18n;
-import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
-import thirdparty.ftp.it.sauronsoftware.ftp4j.ILandFTP;
 
 /**
  * Copyright:
@@ -86,9 +84,6 @@ public class LandChunkPaste extends MainCore {
 					player.sendMessage(translate("messages.storeTask", regionid));
 					if (DatabaseFacade.pasteRegionSQL(player, regionid)) {
 						if (ChunkApi.pasteRegion(player, regionid)) {
-							if (ConfigValues.ftpEnabled) {
-								ILandFTP.delete(regionid, player.getUniqueId().toString());
-							}
 							sender.sendMessage(I18n.translate("messages.storePaste", regionName));
 						}
 					} else {

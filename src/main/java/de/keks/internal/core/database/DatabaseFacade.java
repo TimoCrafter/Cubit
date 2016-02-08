@@ -69,11 +69,11 @@ public class DatabaseFacade {
 
 	}
 
-	public static boolean saveRegionSQL(Player player, String regionid, Boolean remote) {
+	public static boolean saveRegionSQL(Player player, String regionid) {
 		if (ConfigValues.isSQL) {
-			return SQLInject.saveRegionfile(player, regionid, remote);
+			return SQLInject.saveRegionfile(player, regionid);
 		}
-		return YAMLInject.saveRegionfile(player, regionid, remote);
+		return YAMLInject.saveRegionfile(player, regionid);
 
 	}
 

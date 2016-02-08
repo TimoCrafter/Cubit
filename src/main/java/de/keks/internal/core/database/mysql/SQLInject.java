@@ -248,7 +248,7 @@ public class SQLInject {
 		return isoffered;
 	}
 
-	public static boolean saveRegionfile(Player player, String regionid, Boolean remote) {
+	public static boolean saveRegionfile(Player player, String regionid) {
 		SQLConnectionManager manager = SQLConnectionManager.DEFAULT;
 		try {
 			String uuid = player.getUniqueId().toString();
@@ -257,9 +257,8 @@ public class SQLInject {
 					"SELECT region_id FROM iLandFiles WHERE UUID = '" + uuid + "' AND region_id = '" + regionid + "';");
 			ResultSet result = sel.executeQuery();
 			if (!result.next()) {
-				PreparedStatement sql = conn
-						.prepareStatement("INSERT INTO iLandFiles (UUID, region_id, remote) VALUES ('" + uuid + "', '"
-								+ regionid + "', '" + remote + "');");
+				PreparedStatement sql = conn.prepareStatement(
+						"INSERT INTO iLandFiles (UUID, region_id) VALUES ('" + uuid + "', '" + regionid + "');");
 				sql.executeUpdate();
 				sql.close();
 				result.close();
