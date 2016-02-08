@@ -56,10 +56,18 @@ public class LandInfo extends MainCore {
 					ChunkApi.chunkHighligh(player, player.getLocation(), player.getLocation().getChunk(), null);
 
 					if (isServerRegion(chunkX, chunkZ, world)) {
+						String regionName = getServerRegionName(chunkX, chunkZ, world);
+						Biome biome = player.getWorld().getBiome(player.getLocation().getBlockX(),
+								player.getLocation().getBlockZ());
+						ProtectedRegion region = getRegion(world, regionName);
+						String min = "(" + region.getMinimumPoint().getBlockX() + ", "
+								+ region.getMinimumPoint().getBlockZ() + ")";
+						String max = "(" + region.getMaximumPoint().getBlockX() + ", "
+								+ region.getMaximumPoint().getBlockZ() + ")";
 						sender.sendMessage(I18n.translate("messages.isServerregion"));
 						sender.sendMessage(I18n.translate("landInfo.line1"));
-						sender.sendMessage(
-								I18n.translate("landInfo.line2", getServerRegionName(chunkX, chunkZ, world), "Server"));
+						sender.sendMessage(I18n.translate("landInfo.line4", min, max, biome.toString()));
+						sender.sendMessage(I18n.translate("landInfo.line2", regionName, "Server"));
 						return;
 					}
 					String regionName = getRegionName(chunkX, chunkZ, world);
