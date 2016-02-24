@@ -10,7 +10,7 @@ import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 
 /**
  * Copyright:
@@ -48,7 +48,7 @@ public class KChunkHighlight {
 
 	public static void startChunkEffect(final Player p, final Location l, final Chunk c, final Effect effect) {
 		stopChunkEffect(p);
-		final int tid = ILandPlugin.inst().getServer().getScheduler().scheduleSyncRepeatingTask(ILandPlugin.inst(),
+		final int tid = CubitPlugin.inst().getServer().getScheduler().scheduleSyncRepeatingTask(CubitPlugin.inst(),
 				new Runnable() {
 					public void run() {
 						int value = taskvalue.get(p.getUniqueId());
@@ -71,7 +71,7 @@ public class KChunkHighlight {
 	public static void stopChunkEffect(Player p) {
 		if (taskID.containsKey(p.getUniqueId())) {
 			int tid = taskID.get(p.getUniqueId());
-			ILandPlugin.inst().getServer().getScheduler().cancelTask(tid);
+			CubitPlugin.inst().getServer().getScheduler().cancelTask(tid);
 			taskID.remove(p.getUniqueId());
 		}
 

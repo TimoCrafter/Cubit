@@ -22,7 +22,7 @@ import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedCuboidRegion;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
@@ -49,7 +49,7 @@ public class LandBuy extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.buy")) {
+		if (sender.hasPermission("cubit.land.buy")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -102,7 +102,7 @@ public class LandBuy extends MainCore {
 		final Vector min;
 		final Vector max;
 		final Vector2D min2D;
-		final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapPlayer(player);
 
 		min2D = new Vector2D(chunkX * 16, chunkZ * 16);
@@ -151,7 +151,7 @@ public class LandBuy extends MainCore {
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupLand.getILandInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupLand.getCubitInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 }

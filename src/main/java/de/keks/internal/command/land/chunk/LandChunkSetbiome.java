@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.cApi.ChunkApi;
@@ -39,13 +39,13 @@ public class LandChunkSetbiome extends MainCore
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.landEdit.setbiome")) {
+		if (sender.hasPermission("cubit.landEdit.setbiome")) {
 
 			Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 			if (args.length == 2) {
 				this.setupLand.executorServiceCommands.submit(new Runnable() {
@@ -104,7 +104,7 @@ public class LandChunkSetbiome extends MainCore
 	}
 
 	private boolean hasEnoughToBuy(Player player, double costs) {
-		EconomyHook economyManager = setupLand.getILandInstance().getHookManager().getEconomyManager();
+		EconomyHook economyManager = setupLand.getCubitInstance().getHookManager().getEconomyManager();
 		return economyManager.getMoney(player) >= costs;
 	}
 

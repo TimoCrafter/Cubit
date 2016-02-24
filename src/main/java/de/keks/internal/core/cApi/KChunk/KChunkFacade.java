@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 
 /**
  * Copyright:
@@ -25,9 +25,9 @@ public class KChunkFacade {
 
 	/**
 	 * <ul>
-	 * <li>Load and paste a .iLand schematic file from local iLand folder or a
+	 * <li>Load and paste a .cubit schematic file from local Cubit folder or a
 	 * remote ftp server</li>
-	 * <li>Example: world_4_-16.iLand</li>
+	 * <li>Example: world_4_-16.cubit</li>
 	 * </ul>
 	 * 
 	 */
@@ -37,9 +37,9 @@ public class KChunkFacade {
 
 	/**
 	 * <ul>
-	 * <li>Save a selected ProtectedRegion in a .iLand schematic file to the
-	 * local iLand folder or a remote ftp server</li>
-	 * <li>Example: world_4_-16.iLand</li>
+	 * <li>Save a selected ProtectedRegion in a .cubit schematic file to the
+	 * local Cubit folder or a remote ftp server</li>
+	 * <li>Example: world_4_-16.cubit</li>
 	 * </ul>
 	 * 
 	 */
@@ -76,7 +76,7 @@ public class KChunkFacade {
 	 * 
 	 */
 	public static boolean setBiome(Player player, String regionid, Biome biome) {
-		return KChunkBiomeChange.createILandBiome(player, regionid, biome);
+		return KChunkBiomeChange.createCubitBiome(player, regionid, biome);
 	}
 
 	/**
@@ -96,8 +96,8 @@ public class KChunkFacade {
 	}
 
 	public static void chunkBlockHighlight(final Chunk c, final Material material) {
-		ILandPlugin.inst().getServer().getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(),
-				new KChunkBlockHighlight(ILandPlugin.inst(), c, material));
+		CubitPlugin.inst().getServer().getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(),
+				new KChunkBlockHighlight(CubitPlugin.inst(), c, material));
 		return;
 	}
 

@@ -14,7 +14,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupLand;
@@ -39,7 +39,7 @@ public class LandKick extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (!sender.hasPermission("iLand.land.kick")) {
+		if (!sender.hasPermission("cubit.land.kick")) {
 			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
 			return false;
 		}
@@ -48,7 +48,7 @@ public class LandKick extends MainCore {
 		final int chunkX = player.getLocation().getChunk().getX();
 		final int chunkZ = player.getLocation().getChunk().getZ();
 		final World world = player.getWorld();
-		final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapPlayer(player);
 
 		setupLand.executorServiceCommands.submit(new Runnable() {
@@ -85,13 +85,13 @@ public class LandKick extends MainCore {
 						if (!region.getOwners().getUniqueIds().contains(p.getUniqueId())
 								&& !region.getMembers().getUniqueIds().contains(p.getUniqueId())) {
 							// p.sendMessage(translate("messages.kickInfo"));
-							if (!p.hasPermission("iLand.land.kickbypass")) {
+							if (!p.hasPermission("cubit.land.kickbypass")) {
 								playersToKick.add(p);
 							}
 						}
 					}
 				}
-				ILandPlugin.inst().getServer().getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(),
+				CubitPlugin.inst().getServer().getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(),
 						new Runnable() {
 
 					@Override

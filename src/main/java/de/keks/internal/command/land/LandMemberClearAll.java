@@ -39,14 +39,14 @@ public class LandMemberClearAll extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.cleanmember")) {
+		if (sender.hasPermission("cubit.land.cleanmember")) {
 
 			final Player player = (Player) sender;
 			final World world = player.getWorld();
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
-					WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+					WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
 							.getWorldGuardPlugin();
 					RegionManager rm = wg.getRegionManager(player.getWorld());
 
@@ -91,7 +91,7 @@ public class LandMemberClearAll extends MainCore {
 	}
 
 	public List<String> getLandsOfPlayer(Player p) {
-		WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+		WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
 		RegionManager rm = wg.getRegionManager(p.getWorld());
 		List<String> toReturn = new ArrayList<String>();

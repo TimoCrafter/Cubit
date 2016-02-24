@@ -27,7 +27,7 @@ public class LandChunkBiomes extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("iLand.landEdit.biomes")) {
+		if (sender.hasPermission("cubit.landEdit.biomes")) {
 
 			String biomes = null;
 			for (Biome biome : Biome.values()) {

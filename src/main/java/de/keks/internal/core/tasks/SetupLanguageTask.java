@@ -1,6 +1,6 @@
 package de.keks.internal.core.tasks;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.config.ConfigValues;
 
@@ -16,18 +16,18 @@ import de.keks.internal.command.config.ConfigValues;
 
 public class SetupLanguageTask implements Runnable {
 
-	private ILandPlugin iLand;
+	private CubitPlugin cubit;
 
-	public SetupLanguageTask(ILandPlugin iLand) {
-		this.iLand = iLand;
+	public SetupLanguageTask(CubitPlugin cubit) {
+		this.cubit = cubit;
 	}
 
 	@Override
 	public void run() {
-		iLand.getServer().getScheduler().runTaskAsynchronously(iLand, new Runnable() {
+		cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
 			@Override
 			public void run() {
-				new I18n(iLand, ConfigValues.pluginLocale);
+				new I18n(cubit, ConfigValues.pluginLocale);
 
 			}
 		});

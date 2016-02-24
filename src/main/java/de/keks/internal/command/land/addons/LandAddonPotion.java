@@ -10,7 +10,7 @@ import com.sk89q.worldguard.protection.flags.DefaultFlag;
 import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
@@ -35,7 +35,7 @@ public class LandAddonPotion extends MainCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.flag.pvp")) {
+		if (sender.hasPermission("cubit.flag.pvp")) {
 
 			Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
@@ -44,7 +44,7 @@ public class LandAddonPotion extends MainCore {
 			final String statuson = I18n.translate("messages.optionson");
 			final String statusoff = I18n.translate("messages.optionsoff");
 			final String flag = I18n.translate("optionName.potion");
-			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			this.setupLand.executorServiceCommands.submit(new Runnable() {

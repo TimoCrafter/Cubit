@@ -36,13 +36,13 @@ public class LandList extends MainCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.list")) {
+		if (sender.hasPermission("cubit.land.list")) {
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 2) {
 						int pageNumb = 0;
 						Player p = (Player) sender;
-						WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+						WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin();
 						RegionManager rm = wg.getRegionManager(p.getWorld());
 						try {
@@ -92,7 +92,7 @@ public class LandList extends MainCore {
 	}
 
 	public List<String> getLandsOfPlayer(Player p) {
-		WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+		WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
 		RegionManager rm = wg.getRegionManager(p.getWorld());
 		List<String> toReturn = new ArrayList<String>();

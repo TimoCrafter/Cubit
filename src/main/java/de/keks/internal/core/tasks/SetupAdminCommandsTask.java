@@ -1,6 +1,6 @@
 package de.keks.internal.core.tasks;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.register.CommandSetupAdmin;
 
 /**
@@ -15,19 +15,19 @@ import de.keks.internal.register.CommandSetupAdmin;
 
 public class SetupAdminCommandsTask implements Runnable {
 
-	private ILandPlugin iLand;
+	private CubitPlugin cubit;
 
 	private CommandSetupAdmin handler;
 
-	public SetupAdminCommandsTask(ILandPlugin iLand, CommandSetupAdmin handler) {
-		this.iLand = iLand;
+	public SetupAdminCommandsTask(CubitPlugin cubit, CommandSetupAdmin handler) {
+		this.cubit = cubit;
 
 		this.handler = handler;
 	}
 
 	@Override
 	public void run() {
-		iLand.getServer().getScheduler().runTaskAsynchronously(iLand, new Runnable() {
+		cubit.getServer().getScheduler().runTaskAsynchronously(cubit, new Runnable() {
 			@Override
 			public void run() {
 				if (!handler.isInitialized()) {

@@ -13,7 +13,7 @@ import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.command.config.SetupConfig;
@@ -68,7 +68,7 @@ public class ChunkEventListener implements Listener {
 	public void onChunkUnloadEvent(final ChunkUnloadEvent e) {
 
 		if (chunkTasks.containsKey(e.getChunk())) {
-			ILandPlugin.inst().getServer().getScheduler().cancelTask(chunkTasks.get(e.getChunk()));
+			CubitPlugin.inst().getServer().getScheduler().cancelTask(chunkTasks.get(e.getChunk()));
 			chunkTasks.remove(e.getChunk());
 		}
 

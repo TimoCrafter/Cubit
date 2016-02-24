@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 
 import com.google.common.collect.Maps;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.admin.LandAdminDelete;
 import de.keks.internal.command.admin.LandAdminHelp;
@@ -39,23 +39,23 @@ public class CommandSetupAdmin implements CommandExecutor {
 	}
 
 	private HashMap<String, Long> commandTaskSpam = new HashMap<String, Long>();
-	private ILandPlugin iLand;
+	private CubitPlugin cubit;
 	private OfferManager offerManager;
 
 	public ThreadPoolExecutor executorServiceCommands;
 	public ThreadPoolExecutor executorServiceRegions;
 
-	public CommandSetupAdmin(final ILandPlugin iLand) {
-		this.iLand = iLand;
-		offerManager = new OfferManager(iLand);
+	public CommandSetupAdmin(final CubitPlugin cubit) {
+		this.cubit = cubit;
+		offerManager = new OfferManager(cubit);
 		executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>());
 		executorServiceRegions = new ThreadPoolExecutor(1, 1, 120L, TimeUnit.SECONDS,
 				new LinkedBlockingQueue<Runnable>());
 	}
 
-	public ILandPlugin getILandInstance() {
-		return this.iLand;
+	public CubitPlugin getCubitInstance() {
+		return this.cubit;
 	}
 
 	public OfferManager getOfferManager() {
@@ -68,7 +68,7 @@ public class CommandSetupAdmin implements CommandExecutor {
 			return true;
 		}
 		if (commandTaskSpam.containsKey(sender.getName())) {
-			long secondsLeft = ((commandTaskSpam.get(sender.getName()) / 1000) + ILandPlugin.inst().iLandTaskTime)
+			long secondsLeft = ((commandTaskSpam.get(sender.getName()) / 1000) + CubitPlugin.inst().cubitTaskTime)
 					- (System.currentTimeMillis() / 1000);
 
 			if (secondsLeft > 0) {
@@ -80,7 +80,7 @@ public class CommandSetupAdmin implements CommandExecutor {
 		commandTaskSpam.put(sender.getName(), System.currentTimeMillis());
 		if (args.length == 0) {
 
-			if (sender.hasPermission("iLand.admin.help")) {
+			if (sender.hasPermission("cubit.admin.help")) {
 
 				sender.sendMessage(I18n.translate("ladminHelpPage1.help1"));
 				sender.sendMessage(I18n.translate("ladminHelpPage1.help2"));

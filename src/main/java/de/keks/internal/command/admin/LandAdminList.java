@@ -39,13 +39,13 @@ public class LandAdminList extends MainCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.admin.list")) {
+		if (sender.hasPermission("cubit.admin.list")) {
 			setupAdmin.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 3) {
 						int pageNumb = 0;
 						Player p = (Player) sender;
-						WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
+						WorldGuardPlugin wg = setupAdmin.getCubitInstance().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin();
 						RegionManager rm = wg.getRegionManager(p.getWorld());
 						try {
@@ -104,7 +104,7 @@ public class LandAdminList extends MainCore {
 	}
 
 	public List<String> getLandsOfPlayer(OfflinePlayer p, World world) {
-		WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
+		WorldGuardPlugin wg = setupAdmin.getCubitInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
 		RegionManager rm = wg.getRegionManager(world);
 		List<String> toReturn = new ArrayList<String>();

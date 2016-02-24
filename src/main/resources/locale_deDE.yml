@@ -1,4 +1,4 @@
-# iLand Language file german # 
+# Cubit Language file german # 
 
 # All interact messages
 messages:
@@ -65,7 +65,7 @@ messages:
   storePasteNoFile: '&cDu hast kein Land unter diesem Namen abgespeichert!'
   storePage: '&2Deine Saves: Anzahl: &6%s &2, Liste von &6%s &2bis &6%s'
   storeTask: '&aTask mit LandID &d%s&a zur Queue added!'
-  pluginDisabled: '&ciLand ist in dieser Welt deaktiviert!'
+  pluginDisabled: '&cCubit ist in dieser Welt deaktiviert!'
   isServerregion: '&cDu stehst auf einer Serverregion!'
   isPlayerregion: '&cDu stehst bereits auf einer Spielerregion!'
   isNotServerregion: '&cDu stehst auf keiner Serverregion!'
@@ -87,7 +87,7 @@ optionName:
 
   # /land or /land help 1
 landHelpPage1:
-  help1: '&e&n&6&l-=================-[&2&liLand&r&6&l]-=================-'
+  help1: '&e&n&6&l-=================-[&2&lCubit&r&6&l]-=================-'
   help2: '&2 Infos zum Land: &e/land info'
   help3: '&2 Deine Länder auflisten: &e/land list [SEITE]'
   help4: '&6&lMehr Befehle auf den folgenden Seiten:'
@@ -140,8 +140,8 @@ landHelpPage5:
 
   # /ladmin or /ladmin help 1
 ladminHelpPage1:
-  help1: '&e&n&6-==================[&2&liLand Admin&r&6]=================-'
-  help2: '&a iLand Admin Hilfeseite: &e/ladmin help'
+  help1: '&e&n&6-==================[&2&lCubit Admin&r&6]=================-'
+  help2: '&a Cubit Admin Hilfeseite: &e/ladmin help'
   help3: '&a Länder eines Spielers auflisten: &e/ladmin list <Spieler> [SEITE]'
   help4: '&6&lMehr Befehle auf den folgenden Seiten:'
   help5: '&2 Seite 2: Spielerland verwalten &a/ladmin help 2'
@@ -160,7 +160,7 @@ ladminHelpPage2:
   # /iChunk or /iChunk help 1
 iChunkHelpPage1:
   help1: '&e&n&6-==================[&2&liChunk&r&6]=================-'
-  help2: '&a iLand iChunk Hilfeseite: &e/iChunk help'
+  help2: '&a Cubit iChunk Hilfeseite: &e/iChunk help'
   help3: '&a Deine gespeicherten Länder auflisten: &e/iChunk list [SEITE]'
   help4: '&6&lMehr Befehle auf den folgenden Seiten:'
   help5: '&2 Seite 2: Speicherungen verwalten &a/iChunk help 2'
@@ -175,7 +175,7 @@ iChunkHelpPage2:
   
   # /land info
 landInfo:
-  line1: '&e&n&6-==================[&2&liLand Info&r&6]=================-'
+  line1: '&e&n&6-==================[&2&lCubit Info&r&6]=================-'
   line2: '&2Grundstück: &d%s&2 gehört &6%s'
   line3: '&2Freunde: &e%s'
   line4: '&2Grenzen: &r%s &2bis &r%s &2Biome: &e%s'

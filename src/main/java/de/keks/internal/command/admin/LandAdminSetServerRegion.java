@@ -43,7 +43,7 @@ public class LandAdminSetServerRegion extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.admin.setserverregion")) {
+		if (sender.hasPermission("cubit.admin.setserverregion")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();

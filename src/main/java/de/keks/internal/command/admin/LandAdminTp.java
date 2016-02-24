@@ -33,7 +33,7 @@ public class LandAdminTp extends MainCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.admin.tp")) {
+		if (sender.hasPermission("cubit.admin.tp")) {
 
 			setupAdmin.executorServiceCommands.submit(new Runnable() {
 				public void run() {
@@ -41,7 +41,7 @@ public class LandAdminTp extends MainCore {
 						Player pc = null;
 						ProtectedRegion region = null;
 						Player p = (Player) sender;
-						WorldGuardPlugin wg = setupAdmin.getILandInstance().getHookManager().getWorldGuardManager()
+						WorldGuardPlugin wg = setupAdmin.getCubitInstance().getHookManager().getWorldGuardManager()
 								.getWorldGuardPlugin();
 						RegionManager rm = wg.getRegionManager(p.getWorld());
 						if (args.length == 3) {

@@ -11,7 +11,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigFile;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.command.config.SetupConfig;
@@ -19,9 +19,9 @@ import de.keks.internal.core.entitylimit.MobGroupCompare;
 
 public class EntityGarbageCollectionTask implements Runnable {
 
-	private ILandPlugin plugin;
+	private CubitPlugin plugin;
 
-	public EntityGarbageCollectionTask(ILandPlugin plugin) {
+	public EntityGarbageCollectionTask(CubitPlugin plugin) {
 		this.plugin = plugin;
 	}
 

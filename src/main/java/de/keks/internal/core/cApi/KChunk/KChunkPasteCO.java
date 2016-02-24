@@ -16,7 +16,7 @@ import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 import com.sk89q.worldedit.data.DataException;
 import com.sk89q.worldedit.schematic.SchematicFormat;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 
 /**
  * Copyright:
@@ -32,15 +32,15 @@ import de.keks.iLand.ILandPlugin;
 public class KChunkPasteCO {
 	public static boolean loadRegion(final Player player, final String region) {
 
-		Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
+		Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
 			public void run() {
-				WorldEditPlugin we = ILandPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
+				WorldEditPlugin we = CubitPlugin.inst().getHookManager().getWorldEditManager().getWorldEditPlugin();
 				final Vector min;
 				final Vector2D min2D;
 				CuboidClipboard cc;
 				try {
 					cc = SchematicFormat.MCEDIT.load(
-							new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region + ".iLand"));
+							new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit"));
 					LocalPlayer wePly = we.wrapPlayer(player);
 					EditSession es = we.getSession(player).createEditSession(wePly);
 					min2D = new Vector2D(player.getLocation().getChunk().getX() * 16,
@@ -61,7 +61,7 @@ public class KChunkPasteCO {
 					e.printStackTrace();
 
 				}
-				File remove = new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region + ".iLand");
+				File remove = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit");
 				if (remove.exists()) {
 					remove.delete();
 				}

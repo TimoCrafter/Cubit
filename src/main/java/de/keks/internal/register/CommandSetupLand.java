@@ -12,7 +12,7 @@ import org.bukkit.command.CommandSender;
 
 import com.google.common.collect.Maps;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.command.land.LandMemberAddAll;
 import de.keks.internal.command.land.LandMemberClearAll;
@@ -63,21 +63,21 @@ public class CommandSetupLand implements CommandExecutor {
 	private HashMap<String, Long> commandTaskSpam = new HashMap<String, Long>();
 
 	private OfferManager offerManager;
-	private ILandPlugin iLand;
+	private CubitPlugin cubit;
 	public ThreadPoolExecutor executorServiceCommands;
 	public ThreadPoolExecutor executorServiceRegions;
 
-	public CommandSetupLand(final ILandPlugin iLand) {
-		this.iLand = iLand;
-		offerManager = new OfferManager(iLand);
+	public CommandSetupLand(final CubitPlugin cubit) {
+		this.cubit = cubit;
+		offerManager = new OfferManager(cubit);
 		executorServiceCommands = new ThreadPoolExecutor(1, 1, 250L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>());
 		executorServiceRegions = new ThreadPoolExecutor(1, 1, 120L, TimeUnit.SECONDS,
 				new LinkedBlockingQueue<Runnable>());
 	}
 
-	public ILandPlugin getILandInstance() {
-		return this.iLand;
+	public CubitPlugin getCubitInstance() {
+		return this.cubit;
 	}
 
 	public OfferManager getOfferManager() {
@@ -90,7 +90,7 @@ public class CommandSetupLand implements CommandExecutor {
 			return true;
 		}
 		if (commandTaskSpam.containsKey(sender.getName())) {
-			long secondsLeft = ((commandTaskSpam.get(sender.getName()) / 1000) + ILandPlugin.inst().iLandTaskTime)
+			long secondsLeft = ((commandTaskSpam.get(sender.getName()) / 1000) + CubitPlugin.inst().cubitTaskTime)
 					- (System.currentTimeMillis() / 1000);
 
 			if (secondsLeft > 0) {
@@ -102,7 +102,7 @@ public class CommandSetupLand implements CommandExecutor {
 		commandTaskSpam.put(sender.getName(), System.currentTimeMillis());
 		if (args.length == 0) {
 
-			if (sender.hasPermission("iLand.land.help")) {
+			if (sender.hasPermission("cubit.land.help")) {
 
 				sender.sendMessage(I18n.translate("landHelpPage1.help1"));
 				sender.sendMessage(I18n.translate("landHelpPage1.help2"));

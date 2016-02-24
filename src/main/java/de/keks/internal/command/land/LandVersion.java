@@ -3,7 +3,7 @@ package de.keks.internal.command.land;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.register.CommandSetupLand;
 import de.keks.internal.register.MainCore;
@@ -27,10 +27,10 @@ public class LandVersion extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
-		if (sender.hasPermission("iLand.land.version")) {
-			sender.sendMessage(ChatColor.YELLOW + "§n§6-==================[§2§liLand§r§6]=================-");
-			sender.sendMessage(ChatColor.DARK_GREEN + "iLand Version: " + ChatColor.LIGHT_PURPLE
-					+ ILandPlugin.inst().pdf.getVersion().toString());
+		if (sender.hasPermission("cubit.land.version")) {
+			sender.sendMessage(ChatColor.YELLOW + "§n§6-==================[§2§lCubit§r§6]=================-");
+			sender.sendMessage(ChatColor.DARK_GREEN + "Cubit Version: " + ChatColor.LIGHT_PURPLE
+					+ CubitPlugin.inst().pdf.getVersion().toString());
 			sender.sendMessage(ChatColor.DARK_GREEN + "By Kekshaus");
 			sender.sendMessage(ChatColor.DARK_GREEN + "https://forum.hyve-software.com");
 

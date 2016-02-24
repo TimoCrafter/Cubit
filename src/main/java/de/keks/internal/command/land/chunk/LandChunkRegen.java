@@ -4,7 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupLand;
@@ -28,13 +28,13 @@ public class LandChunkRegen extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.landEdit.regen")) {
+		if (sender.hasPermission("cubit.landEdit.regen")) {
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					final Player player = (Player) sender;
 
-					Bukkit.getScheduler().scheduleSyncDelayedTask(ILandPlugin.inst(), new Runnable() {
+					Bukkit.getScheduler().scheduleSyncDelayedTask(CubitPlugin.inst(), new Runnable() {
 						public void run() {
 							if (ChunkApi.regenerateRegion(player)) {
 								sender.sendMessage(I18n.translate("messages.storeRegen"));

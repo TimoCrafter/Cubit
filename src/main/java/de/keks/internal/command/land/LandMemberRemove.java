@@ -12,7 +12,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.core.tasks.RegionSaveTask;
@@ -38,13 +38,13 @@ public class LandMemberRemove extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.removemember")) {
+		if (sender.hasPermission("cubit.land.removemember")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
@@ -77,7 +77,7 @@ public class LandMemberRemove extends MainCore {
 						sender.sendMessage("gibts nit");
 						return;
 					}
-					LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+					LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 							.getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
 
 					if (!region.isMember(olocalplayer)) {

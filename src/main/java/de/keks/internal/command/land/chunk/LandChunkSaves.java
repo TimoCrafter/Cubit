@@ -31,7 +31,7 @@ public class LandChunkSaves extends MainCore {
 	}
 
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.landEdit.list")) {
+		if (sender.hasPermission("cubit.landEdit.list")) {
 			setupLand.executorServiceCommands.submit(new Runnable() {
 				public void run() {
 					if (args.length <= 2) {

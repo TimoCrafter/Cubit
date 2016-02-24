@@ -32,17 +32,17 @@ public class KChunkSaveCO {
 			CuboidClipboard c1 = new CuboidClipboard(max.subtract(min).add(new Vector(1, 1, 1)), min);
 			c1.copy(es);
 
-			File saves = new File("plugins/iLand/" + File.separator + "saves");
+			File saves = new File("plugins/Cubit/" + File.separator + "saves");
 			if (!saves.exists()) {
 				saves.mkdirs();
 			}
 
-			File uuid = new File("plugins/iLand/saves" + File.separator + player.getUniqueId().toString());
+			File uuid = new File("plugins/Cubit/saves" + File.separator + player.getUniqueId().toString());
 			if (!uuid.exists()) {
 				uuid.mkdirs();
 			}
 
-			File file = new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region.getId() + ".iLand");
+			File file = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region.getId() + ".cubit");
 			if (file.exists()) {
 				file.delete();
 			}

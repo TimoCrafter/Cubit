@@ -26,7 +26,7 @@ public class LandHelp extends MainCore {
 
 	@Override
 	public boolean execute(CommandSender sender, String[] args) {
-		if (sender.hasPermission("iLand.land.help")) {
+		if (sender.hasPermission("cubit.land.help")) {
 
 			if (args.length < 2) {
 			} else if (args[1].toString().equalsIgnoreCase("2")) {

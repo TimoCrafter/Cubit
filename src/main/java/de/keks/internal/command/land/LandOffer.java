@@ -11,7 +11,7 @@ import org.bukkit.entity.Player;
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.cApi.ChunkApi;
 import de.keks.internal.register.CommandSetupLand;
@@ -35,13 +35,13 @@ public class LandOffer extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.offer")) {
+		if (sender.hasPermission("cubit.land.offer")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();
 			final int chunkZ = player.getLocation().getChunk().getZ();
 			final World world = player.getWorld();
-			final LocalPlayer localplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+			final LocalPlayer localplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 					.getWorldGuardPlugin().wrapPlayer(player);
 
 			setupLand.executorServiceCommands.submit(new Runnable() {
@@ -90,10 +90,10 @@ public class LandOffer extends MainCore {
 									ChunkApi.chunkHighligh(player, player.getLocation(),
 											player.getLocation().getChunk(), Effect.LAVADRIP);
 
-									String formattedMoney = setupLand.getILandInstance().getHookManager()
+									String formattedMoney = setupLand.getCubitInstance().getHookManager()
 											.getEconomyManager().formatMoney(NumberUtils.toDouble(args[1]));
 									player.sendMessage(translate("messages.offerLand", regionName));
-									setupLand.getILandInstance().getServer().broadcastMessage(translate(
+									setupLand.getCubitInstance().getServer().broadcastMessage(translate(
 											"messages.offerInfoGlobal", sender.getName(), regionName, formattedMoney));
 								}
 							}

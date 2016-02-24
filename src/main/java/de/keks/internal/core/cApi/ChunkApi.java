@@ -11,8 +11,8 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
+import de.keks.cubit.CubitPlugin;
 import de.keks.iChunk.object.BlockReplaceBlock;
-import de.keks.iLand.ILandPlugin;
 import de.keks.internal.core.cApi.IChunk.IChunkFacade;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 import de.keks.internal.register.MainCore;
@@ -29,13 +29,13 @@ import de.keks.internal.register.MainCore;
 
 public class ChunkApi {
 
-	private static boolean iChunk = ILandPlugin.inst().isIChunkEnabled();
+	private static boolean iChunk = CubitPlugin.inst().isIChunkEnabled();
 
 	/**
 	 * <ul>
-	 * <li>Load and paste a .iLand schematic file from local iLand folder or a
+	 * <li>Load and paste a .cubit schematic file from local Cubit folder or a
 	 * remote ftp server</li>
-	 * <li>Example: world_4_-16.iLand</li>
+	 * <li>Example: world_4_-16.cubit</li>
 	 * </ul>
 	 * 
 	 */
@@ -50,9 +50,9 @@ public class ChunkApi {
 
 	/**
 	 * <ul>
-	 * <li>Save a selected ProtectedRegion in a .iLand schematic file to the
-	 * local iLand folder or a remote ftp server</li>
-	 * <li>Example: world_4_-16.iLand</li>
+	 * <li>Save a selected ProtectedRegion in a .cubit schematic file to the
+	 * local Cubit folder or a remote ftp server</li>
+	 * <li>Example: world_4_-16.cubit</li>
 	 * </ul>
 	 * 
 	 */

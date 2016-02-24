@@ -1,4 +1,4 @@
-package de.keks.iLand;
+package de.keks.cubit;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -29,10 +29,10 @@ import net.milkbowl.vault.economy.Economy;
  * 
  */
 
-public class ILandPlugin extends JavaPlugin {
+public class CubitPlugin extends JavaPlugin {
 
-	public int iLandTaskTime = 1;
-	private static ILandPlugin inst;
+	public int cubitTaskTime = 1;
+	private static CubitPlugin inst;
 	public PluginDescriptionFile pdf;
 	private HookManager hookManager;
 	private CommandSetupLand landCommandHandler;
@@ -40,7 +40,7 @@ public class ILandPlugin extends JavaPlugin {
 	private static ConfigFile skyconfig;
 	private boolean isIChunkLoadet = false;
 
-	public static ILandPlugin inst() {
+	public static CubitPlugin inst() {
 		return inst;
 	}
 
@@ -142,7 +142,7 @@ public class ILandPlugin extends JavaPlugin {
 	}
 
 	public static ConfigFile getSkyConfig() {
-		return ILandPlugin.skyconfig;
+		return CubitPlugin.skyconfig;
 	}
 
 }

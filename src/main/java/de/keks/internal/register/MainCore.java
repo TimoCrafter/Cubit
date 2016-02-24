@@ -12,7 +12,7 @@ import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.command.config.ConfigValues;
 import de.keks.internal.core.database.DatabaseFacade;
 import de.keks.internal.plugin.hooks.classes.EconomyHook;
@@ -59,7 +59,7 @@ public abstract class MainCore {
 
 	protected WorldGuardPlugin getWorldGuard() {
 		try {
-			return ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin();
+			return CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -90,7 +90,7 @@ public abstract class MainCore {
 			return;
 		}
 
-		EconomyHook economyManager = ILandPlugin.inst().getHookManager().getEconomyManager();
+		EconomyHook economyManager = CubitPlugin.inst().getHookManager().getEconomyManager();
 		if (from == null) {
 			economyManager.giveMoney(to, amount);
 		} else if (to == null) {
@@ -106,13 +106,13 @@ public abstract class MainCore {
 	}
 
 	protected boolean wasPlayerTooLongOff(ProtectedRegion region, Player questionerName) {
-		LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapOfflinePlayer(questionerName);
 
 		long timeNow = System.currentTimeMillis();
 		for (UUID splayer : region.getOwners().getUniqueIds()) {
 			OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
-			LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+			LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 					.wrapOfflinePlayer(oplayer);
 			if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
 				if (timeNow - lastSeen(lplayer.getUniqueId()) < ConfigValues.buyupMembers) {
@@ -128,13 +128,13 @@ public abstract class MainCore {
 	}
 
 	protected boolean timeForBuyupInfo(ProtectedRegion region, Player questionerName) {
-		LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapOfflinePlayer(questionerName);
 
 		long timeNow = System.currentTimeMillis();
 		for (UUID splayer : region.getOwners().getUniqueIds()) {
 			OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
-			LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+			LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 					.wrapOfflinePlayer(oplayer);
 			if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
 				if (timeNow - lastSeen(lplayer.getUniqueId()) < ConfigValues.buyupMembers
@@ -152,13 +152,13 @@ public abstract class MainCore {
 	}
 
 	protected long getBuyupInfoDate(ProtectedRegion region, Player questionerName) {
-		LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+		LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 				.wrapOfflinePlayer(questionerName);
 
 		long time = 0;
 		for (UUID splayer : region.getOwners().getUniqueIds()) {
 			OfflinePlayer oplayer = Bukkit.getOfflinePlayer(splayer);
-			LocalPlayer lplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
+			LocalPlayer lplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager().getWorldGuardPlugin()
 					.wrapOfflinePlayer(oplayer);
 			if (region.isMember(olocalplayer) || region.isMember(olocalplayer)) {
 				time = lastSeen(lplayer.getUniqueId()) + (long) ConfigValues.buyupMembers;
@@ -193,11 +193,11 @@ public abstract class MainCore {
 	}
 
 	public static int runSyncRepeatingTask(Runnable run, long start, long delay) {
-		return ILandPlugin.inst().getServer().getScheduler().scheduleSyncRepeatingTask(ILandPlugin.inst(), run, start,
+		return CubitPlugin.inst().getServer().getScheduler().scheduleSyncRepeatingTask(CubitPlugin.inst(), run, start,
 				delay);
 	}
 
 	public static void cancelTask(int taskID) {
-		ILandPlugin.inst().getServer().getScheduler().cancelTask(taskID);
+		CubitPlugin.inst().getServer().getScheduler().cancelTask(taskID);
 	}
 }

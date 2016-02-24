@@ -35,7 +35,7 @@ public class LandAdminDelete extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.admin.delete")) {
+		if (sender.hasPermission("cubit.admin.delete")) {
 
 			final Player player = (Player) sender;
 			final int chunkX = player.getLocation().getChunk().getX();

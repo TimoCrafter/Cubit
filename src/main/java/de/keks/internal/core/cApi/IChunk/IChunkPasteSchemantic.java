@@ -23,7 +23,7 @@ public class IChunkPasteSchemantic {
 
 	public IChunkPasteSchemantic(Player player, String region) {
 
-		File schematicFile = new File("plugins/iLand/saves/" + player.getUniqueId().toString(), region + ".iLand");
+		File schematicFile = new File("plugins/Cubit/saves/" + player.getUniqueId().toString(), region + ".cubit");
 		Location loc = new Location(player.getWorld(), player.getLocation().getChunk().getX() * 16, 0,
 				player.getLocation().getChunk().getZ() * 16);
 		IChunkAPI.streamSchematicAsync(schematicFile, loc);

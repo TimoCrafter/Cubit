@@ -18,7 +18,7 @@ import com.sk89q.worldguard.domains.DefaultDomain;
 import com.sk89q.worldguard.protection.managers.RegionManager;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.iLand.ILandPlugin;
+import de.keks.cubit.CubitPlugin;
 import de.keks.internal.I18n;
 import de.keks.internal.core.tasks.RegionSaveTask;
 import de.keks.internal.register.CommandSetupLand;
@@ -43,7 +43,7 @@ public class LandMemberRemoveAll extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, final String[] args) {
-		if (sender.hasPermission("iLand.land.addallmember")) {
+		if (sender.hasPermission("cubit.land.addallmember")) {
 
 			final Player player = (Player) sender;
 			final World world = player.getWorld();
@@ -60,10 +60,10 @@ public class LandMemberRemoveAll extends MainCore {
 						sender.sendMessage("gibts nit");
 						return;
 					}
-					LocalPlayer olocalplayer = ILandPlugin.inst().getHookManager().getWorldGuardManager()
+					LocalPlayer olocalplayer = CubitPlugin.inst().getHookManager().getWorldGuardManager()
 							.getWorldGuardPlugin().wrapOfflinePlayer(oplayer);
 
-					WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+					WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
 							.getWorldGuardPlugin();
 					RegionManager rm = wg.getRegionManager(player.getWorld());
 
@@ -109,7 +109,7 @@ public class LandMemberRemoveAll extends MainCore {
 	}
 
 	public List<String> getLandsOfPlayer(Player p) {
-		WorldGuardPlugin wg = setupLand.getILandInstance().getHookManager().getWorldGuardManager()
+		WorldGuardPlugin wg = setupLand.getCubitInstance().getHookManager().getWorldGuardManager()
 				.getWorldGuardPlugin();
 		RegionManager rm = wg.getRegionManager(p.getWorld());
 		List<String> toReturn = new ArrayList<String>();

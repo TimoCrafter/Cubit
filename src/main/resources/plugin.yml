@@ -1,8 +1,8 @@
-name: iLand
+name: Cubit
 version: ${project.version}
-description: iLand Regionmanager
+description: Cubit Regionmanager
 author: Kekshaus
-main: de.keks.iLand.ILandPlugin
+main: de.keks.cubit.CubitPlugin
 depend: [WorldEdit, WorldGuard, Vault]
 commands:
    land:
@@ -12,176 +12,176 @@ commands:
       description: Alle Land-Admin-Befehle
       usage: /<command>
 permissions:
-    iLand.admin:
+    cubit.admin:
         description: Alle Permissions
         children:
-            iLand.land: true
-            iLand.flags: true
-            iLand.landEdit: true
-            iLand.land.kickbypass: true
-            iLand.admin.take: true
-            iLand.admin.delete: true
-            iLand.admin.help: true
-            iLand.admin.reload: true
-            iLand.admin.list: true
-            iLand.admin.tp: true
-            iLand.admin.unsetserverregion: true
-            iLand.admin.setserverregion: true
-            iLand.landEdit: true
-            iLand.landEdit.regen: true
-            iLand.landEdit.delete: true
-    iLand.land:
+            cubit.land: true
+            cubit.flags: true
+            cubit.landEdit: true
+            cubit.land.kickbypass: true
+            cubit.admin.take: true
+            cubit.admin.delete: true
+            cubit.admin.help: true
+            cubit.admin.reload: true
+            cubit.admin.list: true
+            cubit.admin.tp: true
+            cubit.admin.unsetserverregion: true
+            cubit.admin.setserverregion: true
+            cubit.landEdit: true
+            cubit.landEdit.regen: true
+            cubit.landEdit.delete: true
+    cubit.land:
         description: Alle Land Befehle
         children:
-            iLand.land.help: true
-            iLand.land.addmember: true
-            iLand.land.removemember: true
-            iLand.land.buy: true
-            iLand.land.sell: true
-            iLand.land.buyup: true
-            iLand.land.info: true
-            iLand.land.list: true
-            iLand.land.offer: true
-            iLand.land.give: true
-            iLand.land.takeoffer: true
-            iLand.land.kick: true
-            iLand.land.version: true
-            iLand.land.addallmember: true
-            iLand.land.cleanmember: true
-            iLand.land.removeallmember: true
-    iLand.landEdit:
+            cubit.land.help: true
+            cubit.land.addmember: true
+            cubit.land.removemember: true
+            cubit.land.buy: true
+            cubit.land.sell: true
+            cubit.land.buyup: true
+            cubit.land.info: true
+            cubit.land.list: true
+            cubit.land.offer: true
+            cubit.land.give: true
+            cubit.land.takeoffer: true
+            cubit.land.kick: true
+            cubit.land.version: true
+            cubit.land.addallmember: true
+            cubit.land.cleanmember: true
+            cubit.land.removeallmember: true
+    cubit.landEdit:
         description: Alle iChunk Commands
         children:
-            iLand.landEdit.list: true
-            iLand.landEdit.paste: true
-            iLand.landEdit.save: true
-            iLand.landEdit.help: true
-            iLand.landEdit.biomes: true
-            iLand.landEdit.setbiome: true
-    iLand.flags:
+            cubit.landEdit.list: true
+            cubit.landEdit.paste: true
+            cubit.landEdit.save: true
+            cubit.landEdit.help: true
+            cubit.landEdit.biomes: true
+            cubit.landEdit.setbiome: true
+    cubit.flags:
         description: Gibt alle Flags frei
         children:
-            iLand.flag.help: true
-            iLand.flag.lock: true
-            iLand.flag.mobs: true
-            iLand.flag.potion: true
-            iLand.flag.pvp: true
-            iLand.flag.tnt: true
-            iLand.flag.fire: true
-    iLand.land.help:
+            cubit.flag.help: true
+            cubit.flag.lock: true
+            cubit.flag.mobs: true
+            cubit.flag.potion: true
+            cubit.flag.pvp: true
+            cubit.flag.tnt: true
+            cubit.flag.fire: true
+    cubit.land.help:
         description: Haupt-Hilfeseite
         default: op
-    iLand.land.addmember:
+    cubit.land.addmember:
         description: Spieler hinzufügen
         default: op
-    iLand.land.kick:
+    cubit.land.kick:
         description: Spieler verweisen
         default: op
-    iLand.land.kickbypass:
+    cubit.land.kickbypass:
         description: Landkick bypass
         default: op   
-    iLand.land.removemember:
+    cubit.land.removemember:
         description: Spieler entfernen
         default: op
-    iLand.land.buy:
+    cubit.land.buy:
         description: Land kaufen
         default: op
-    iLand.land.sell:
+    cubit.land.sell:
         description: Land verkaufen
         default: op
-    iLand.land.buyup:
+    cubit.land.buyup:
         description: Land aufkaufen
         default: op
-    iLand.land.info:
+    cubit.land.info:
         description: Land Informationen anzeigen
         default: op
-    iLand.land.list:
+    cubit.land.list:
         description: Laender auflisten
         default: op
-    iLand.land.give:
+    cubit.land.give:
         description: Land verschenken
         default: op
-    iLand.land.offer:
+    cubit.land.offer:
         description: Land anbieten
         default: op
-    iLand.land.takeoffer:
+    cubit.land.takeoffer:
         description: Land abkaufen
         default: op
-    iLand.land.version:
-        description: iLand Version
+    cubit.land.version:
+        description: cubit Version
         default: op
-    iLand.land.addallmember:
+    cubit.land.addallmember:
         description: Land-Einstellungen zurücksetzen
         default: op
-    iLand.land.cleanmember:
+    cubit.land.cleanmember:
         description: Land-Einstellungen zurücksetzen
         default: op
-    iLand.land.removeallmember:
+    cubit.land.removeallmember:
         description: Land-Einstellungen zurücksetzen
         default: op     
-    iLand.flag.help:
+    cubit.flag.help:
         description: Flags-Hilfeseite
         default: op
-    iLand.flag.lock:
+    cubit.flag.lock:
         description: Flag abschliesen
         default: op
-    iLand.flag.mobs:
+    cubit.flag.mobs:
         description: Flag Monster
         default: op
-    iLand.flag.potion:
+    cubit.flag.potion:
         description: Flag Wurftraenke
         default: op
-    iLand.flag.pvp:
+    cubit.flag.pvp:
         description: Flag PvP
         default: op
-    iLand.flag.tnt:
+    cubit.flag.tnt:
         description: Flag Explosionen
         default: op
-    iLand.flag.fire:
+    cubit.flag.fire:
         description: Flag Fire
         default: op
-    iLand.admin.take:
+    cubit.admin.take:
         description: Admin Land uebername
         default: op
-    iLand.admin.delete:
+    cubit.admin.delete:
         description: Admin Land loeschen
         default: op
-    iLand.admin.help:
+    cubit.admin.help:
         description: Ladmin Seite
         default: op
-    iLand.admin.reload:
-        description: Neuladen der iLand-Config
+    cubit.admin.reload:
+        description: Neuladen der cubit-Config
         default: op
-    iLand.admin.setserverregion:
+    cubit.admin.setserverregion:
         description: Set a serverregion
         default: op
-    iLand.admin.unsetserverregion:
+    cubit.admin.unsetserverregion:
         description: Unset a serverregion
         default: op
-    iLand.admin.list:
+    cubit.admin.list:
         description: Auflisten von Regionen eines Spielers
         default: op
-    iLand.admin.tp:
+    cubit.admin.tp:
         description: Teleportierten zu einer Region
         default: op
-    iLand.landEdit.delete:
+    cubit.landEdit.delete:
         description: Delete a file
         default: op
-    iLand.landEdit.list:
+    cubit.landEdit.list:
         description: List all your files
         default: op
-    iLand.landEdit.paste:
+    cubit.landEdit.paste:
         description: Paste a file
         default: op
-    iLand.landEdit.save:
+    cubit.landEdit.save:
         description: Save a file
         default: op
-    iLand.landEdit.regen:
+    cubit.landEdit.regen:
         description: Regenerate a chunk
         default: op
-    iLand.landEdit.biomes:
+    cubit.landEdit.biomes:
         description: Biome-Hilfeseite
         default: op
-    iLand.landEdit.setbiome:
+    cubit.landEdit.setbiome:
         description: Biome veraendern
         default: op
