@@ -14,17 +14,17 @@
     <dependency>
       <groupId>com.sk89q</groupId>
       <artifactId>worldedit</artifactId>
-      <version>6.0</version>
+      <version>6.1.1</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/libs/WorldEdit-1.8.jar</systemPath>
+      <systemPath>${project.basedir}/libs/worldedit.jar</systemPath>
       <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>com.sk89q</groupId>
       <artifactId>worldguard</artifactId>
-      <version>6.1.x</version>
+      <version>6.1.2</version>
       <scope>system</scope>
-      <systemPath>${project.basedir}/libs/worldguard-6.1.1-SNAPSHOT.jar</systemPath>
+      <systemPath>${project.basedir}/libs/worldguard.jar</systemPath>
       <optional>true</optional>
     </dependency>
     <dependency>
@@ -37,27 +37,11 @@
     </dependency>
     <dependency>
       <groupId>org.spigotmc</groupId>
-      <artifactId>spigot_3</artifactId>
-      <version>1_8_R3</version>
+      <artifactId>spigot</artifactId>
+      <version>1_9</version>
       <scope>system</scope>
       <optional>true</optional>
-      <systemPath>${project.basedir}/libs/spigot-1_8_R3.jar</systemPath>
-    </dependency>
-    <dependency>
-    	<groupId>org.spigotmc</groupId>
-    	<artifactId>spigot_2</artifactId>
-    	<version>1_8_R2</version>
-    	<scope>system</scope>
-    	<optional>true</optional>
-    	<systemPath>${project.basedir}/libs/spigot-1_8_R2.jar</systemPath>
-    </dependency>
-    <dependency>
-    	<groupId>org.spigotmc</groupId>
-    	<artifactId>spigot_1</artifactId>
-    	<version>1_8_R1</version>
-    	<scope>system</scope>
-    	<optional>true</optional>
-    	<systemPath>${project.basedir}/libs/spigot-1_8_R1.jar</systemPath>
+      <systemPath>${project.basedir}/libs/spigot-1.9.jar</systemPath>
     </dependency>
     <dependency>
     	<groupId>de.keks</groupId>

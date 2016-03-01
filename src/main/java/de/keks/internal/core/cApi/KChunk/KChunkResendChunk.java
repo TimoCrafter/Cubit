@@ -27,7 +27,7 @@ public class KChunkResendChunk {
 	public static void refreshChunk(final Chunk chunk) {
 
 		if (getVersion().contains("1_8_R3")) {
-			NMSVersion1_8_R3.refreshChunk(chunk);
+			NMSVersion1_9_R1.refreshChunk(chunk);
 
 		} else {
 			for (Player player : Bukkit.getOnlinePlayers()) {
