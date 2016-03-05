@@ -12,7 +12,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.sk89q</groupId>
+      <groupId>we</groupId>
       <artifactId>worldedit</artifactId>
       <version>6.1.1</version>
       <scope>system</scope>
@@ -20,7 +20,7 @@
       <optional>true</optional>
     </dependency>
     <dependency>
-      <groupId>com.sk89q</groupId>
+      <groupId>wg</groupId>
       <artifactId>worldguard</artifactId>
       <version>6.1.2</version>
       <scope>system</scope>
@@ -36,7 +36,7 @@
     	<version>1.5</version>
     </dependency>
     <dependency>
-      <groupId>org.spigotmc</groupId>
+      <groupId>spigot</groupId>
       <artifactId>spigot</artifactId>
       <version>1_9</version>
       <scope>system</scope>
