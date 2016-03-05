@@ -1,9 +1,6 @@
 package de.keks.internal.core.cApi.KChunk;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
 
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
@@ -24,10 +21,7 @@ import de.keks.cubit.CubitPlugin;
 
 public class KChunkHighlight {
 
-	public static Map<UUID, Integer> taskID = new HashMap<UUID, Integer>();
-	public static Map<UUID, Integer> taskvalue = new HashMap<UUID, Integer>();
-
-	public static void chunkBorder(Player p, Location l, Chunk c, Effect e, int amt) {
+	public static void buildPaticleSpigot(Player p, Location l, Chunk c, Effect e, int amt) {
 		ArrayList<Location> edgeBlocks = new ArrayList<Location>();
 		for (int i = 0; i < 16; i++) {
 			for (int ii = -1; ii <= 10; ii++) {
@@ -46,33 +40,31 @@ public class KChunkHighlight {
 
 	}
 
-	public static void startChunkEffect(final Player p, final Location l, final Chunk c, final Effect effect) {
-		stopChunkEffect(p);
-		final int tid = CubitPlugin.inst().getServer().getScheduler().scheduleSyncRepeatingTask(CubitPlugin.inst(),
-				new Runnable() {
-					public void run() {
-						int value = taskvalue.get(p.getUniqueId());
-						taskvalue.remove(p.getUniqueId());
-						taskvalue.put(p.getUniqueId(), value + 1);
-						chunkBorder(p, l, c, Effect.FIREWORKS_SPARK, 1);
-						if (effect != null) {
-							chunkBorder(p, l, c, effect, 1);
-						}
-						if (value >= 5) {
-							stopChunkEffect(p);
-							taskvalue.remove(p.getUniqueId());
-						}
-					}
-				}, 0L, 30L);
-		taskvalue.put(p.getUniqueId(), 1);
-		taskID.put(p.getUniqueId(), tid);
+	public KChunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
+
+		CubitPlugin.inst().getServer().getScheduler().runTaskAsynchronously(CubitPlugin.inst(), new Runnable() {
+			@Override
+			public void run() {
+				sendPaticleSpigot(p, l, c, effect);
+			}
+		});
+
 	}
 
-	public static void stopChunkEffect(Player p) {
-		if (taskID.containsKey(p.getUniqueId())) {
-			int tid = taskID.get(p.getUniqueId());
-			CubitPlugin.inst().getServer().getScheduler().cancelTask(tid);
-			taskID.remove(p.getUniqueId());
+	public void sendPaticleSpigot(final Player p, final Location l, final Chunk c, final Effect effect) {
+		int loopValue = 0;
+		while (loopValue <= 3) {
+			buildPaticleSpigot(p, l, c, Effect.FIREWORKS_SPARK, 1);
+			if (effect != null) {
+				buildPaticleSpigot(p, l, c, effect, 1);
+			}
+			loopValue++;
+			try {
+				Thread.sleep(1500);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+
 		}
 
 	}

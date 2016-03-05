@@ -91,7 +91,7 @@ public class KChunkFacade {
 	}
 
 	public static void chunkHighlight(final Player p, final Location l, final Chunk c, final Effect effect) {
-		KChunkHighlight.startChunkEffect(p, l, c, effect);
+		new KChunkHighlight(p, l, c, effect);
 		return;
 	}
 

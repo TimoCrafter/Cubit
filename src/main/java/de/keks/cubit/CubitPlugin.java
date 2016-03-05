@@ -38,7 +38,6 @@ public class CubitPlugin extends JavaPlugin {
 	private CommandSetupLand landCommandHandler;
 	private CommandSetupAdmin adminCommandHandler;
 	private static ConfigFile skyconfig;
-	private boolean isIChunkLoadet = false;
 
 	public static CubitPlugin inst() {
 		return inst;
@@ -116,15 +115,6 @@ public class CubitPlugin extends JavaPlugin {
 			return false;
 		}
 
-		if (getServer().getPluginManager().getPlugin("iChunk") != null) {
-			this.isIChunkLoadet = true;
-			// Not yet activate
-			this.getLogger().info("iChunk found! Hooked");
-		} else {
-			this.getLogger().info("iChunk NOT found!");
-			this.isIChunkLoadet = false;
-		}
-
 		if (!MainCore.isSpigot()) {
 			this.getLogger().info("Warning: You are using craftbukkit. Particle effects will not work!");
 			this.getLogger().info("Warning: For enable particle effects, use spigot instead of craftbukkit!");
@@ -135,10 +125,6 @@ public class CubitPlugin extends JavaPlugin {
 
 	public HookManager getHookManager() {
 		return hookManager;
-	}
-
-	public boolean isIChunkEnabled() {
-		return this.isIChunkLoadet;
 	}
 
 	public static ConfigFile getSkyConfig() {

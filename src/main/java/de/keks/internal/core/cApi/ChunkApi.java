@@ -1,7 +1,5 @@
 package de.keks.internal.core.cApi;
 
-import java.util.HashSet;
-
 import org.bukkit.Chunk;
 import org.bukkit.Effect;
 import org.bukkit.Location;
@@ -11,9 +9,6 @@ import org.bukkit.entity.Player;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import de.keks.cubit.CubitPlugin;
-import de.keks.iChunk.object.BlockReplaceBlock;
-import de.keks.internal.core.cApi.IChunk.IChunkFacade;
 import de.keks.internal.core.cApi.KChunk.KChunkFacade;
 import de.keks.internal.register.MainCore;
 
@@ -29,8 +24,6 @@ import de.keks.internal.register.MainCore;
 
 public class ChunkApi {
 
-	private static boolean iChunk = CubitPlugin.inst().isIChunkEnabled();
-
 	/**
 	 * <ul>
 	 * <li>Load and paste a .cubit schematic file from local Cubit folder or a
@@ -40,11 +33,8 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean pasteRegion(Player player, String region) {
-		if (iChunk) {
-			return IChunkFacade.pasteSchematic(player, region);
-		} else {
-			return KChunkFacade.pasteRegion(player, region);
-		}
+
+		return KChunkFacade.pasteRegion(player, region);
 
 	}
 
@@ -57,11 +47,9 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean saveRegion(Player player, ProtectedRegion region) {
-		if (iChunk) {
-			return IChunkFacade.createSchematic(player, region);
-		} else {
-			return KChunkFacade.saveRegion(player, region);
-		}
+
+		return KChunkFacade.saveRegion(player, region);
+
 	}
 
 	/**
@@ -71,11 +59,9 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean regenerateRegion(Player player) {
-		if (iChunk) {
-			return false;
-		} else {
-			return KChunkFacade.regenerateRegion(player);
-		}
+
+		return KChunkFacade.regenerateRegion(player);
+
 	}
 
 	/**
@@ -86,12 +72,10 @@ public class ChunkApi {
 	 * 
 	 */
 	public static void refreshChunk(Chunk chunk) {
-		if (iChunk) {
-			return;
-		} else {
-			KChunkFacade.refreshChunk(chunk);
-			return;
-		}
+
+		KChunkFacade.refreshChunk(chunk);
+		return;
+
 	}
 
 	/**
@@ -101,11 +85,9 @@ public class ChunkApi {
 	 * 
 	 */
 	public static boolean setBiome(Player player, String regionid, Biome biome) {
-		if (iChunk) {
-			return false;
-		} else {
-			return KChunkFacade.setBiome(player, regionid, biome);
-		}
+
+		return KChunkFacade.setBiome(player, regionid, biome);
+
 	}
 
 	/**
@@ -115,43 +97,25 @@ public class ChunkApi {
 	 * 
 	 */
 	public static void teleportSave(Chunk chunk) {
-		if (iChunk) {
-			return;
-		} else {
-			KChunkFacade.teleportSave(chunk);
-			return;
-		}
+
+		KChunkFacade.teleportSave(chunk);
+
 	}
 
 	public static void chunkHighligh(final Player p, final Location l, final Chunk c, final Effect effect) {
 		if (MainCore.isSpigot()) {
-			if (iChunk) {
-				IChunkFacade.chunkHighlight(p, l, c, effect);
-				return;
-			} else {
-				KChunkFacade.chunkHighlight(p, l, c, effect);
-				return;
-			}
+
+			KChunkFacade.chunkHighlight(p, l, c, effect);
+			return;
+
 		}
 	}
 
 	public static void chunkBlockHighligh(final Chunk c, final Material material) {
-		if (iChunk) {
-			IChunkFacade.chunkBlockHighlight(c, material);
-			return;
-		} else {
-			KChunkFacade.chunkBlockHighlight(c, material);
-			return;
-		}
-	}
 
-	public static void replaceBlockID(Chunk chunk, final HashSet<BlockReplaceBlock> blockIDs) {
-		if (iChunk) {
-			IChunkFacade.replaceBlockID(chunk, blockIDs);
-			return;
-		} else {
-			return;
-		}
+		KChunkFacade.chunkBlockHighlight(c, material);
+		return;
+
 	}
 
 }
