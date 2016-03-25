@@ -3,6 +3,7 @@ package de.keks.internal.core.entitylimit;
 import org.bukkit.entity.Ambient;
 import org.bukkit.entity.Animals;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.Horse;
 import org.bukkit.entity.Monster;
 import org.bukkit.entity.NPC;
 import org.bukkit.entity.WaterMob;
@@ -21,6 +22,10 @@ public class MobGroupCompare implements EntityCompare {
 	}
 
 	public static String getMobGroup(Entity entity) {
+		if (entity instanceof Horse) {
+			// Chicken, Cow, MushroomCow, Ocelot, Pig, Sheep, Wolf
+			return "Other";
+		}
 		// Determine the general group this mob belongs to.
 		if (entity instanceof Animals) {
 			// Chicken, Cow, MushroomCow, Ocelot, Pig, Sheep, Wolf
