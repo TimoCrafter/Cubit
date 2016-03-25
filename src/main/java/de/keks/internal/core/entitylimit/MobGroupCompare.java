@@ -24,31 +24,31 @@ public class MobGroupCompare implements EntityCompare {
 		// Determine the general group this mob belongs to.
 		if (entity instanceof Animals) {
 			// Chicken, Cow, MushroomCow, Ocelot, Pig, Sheep, Wolf
-			return "ANIMAL";
+			return "Animal";
 		}
 
 		if (entity instanceof Monster) {
 			// Blaze, CaveSpider, Creeper, Enderman, Giant, PigZombie,
 			// Silverfish, Skeleton, Spider, Witch, Wither, Zombie
-			return "MONSTER";
+			return "Monster";
 		}
 
 		if (entity instanceof Ambient) {
 			// Bat
-			return "AMBIENT";
+			return "Ambient";
 		}
 
 		if (entity instanceof WaterMob) {
 			// Squid
-			return "WATER_MOB";
+			return "Water_Mob";
 		}
 
 		if (entity instanceof NPC) {
 			// Villager
-			return "NPC";
+			return "Npc";
 		}
 
 		// Anything else.
-		return "OTHER";
+		return "Other";
 	}
 }
