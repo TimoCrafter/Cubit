@@ -75,7 +75,6 @@ public class LandBuy extends MainCore {
 						return;
 					}
 					ProtectedRegion region = createRegion(chunkX, chunkZ, world, player, regionName);
-
 					moneyTransfer(player, null, costs);
 					sender.sendMessage(I18n.translate("messages.buyRegion", regionName, costs));
 
