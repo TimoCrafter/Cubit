@@ -32,7 +32,7 @@ public class LandVersion extends MainCore {
 			sender.sendMessage(ChatColor.DARK_GREEN + "Cubit Version: " + ChatColor.LIGHT_PURPLE
 					+ CubitPlugin.inst().pdf.getVersion().toString());
 			sender.sendMessage(ChatColor.DARK_GREEN + "By Kekshaus");
-			sender.sendMessage(ChatColor.DARK_GREEN + "https://forum.hyve-software.com");
+			sender.sendMessage(ChatColor.DARK_GREEN + "https://www..Minegaming.de");
 
 		} else {
 			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));
