@@ -79,7 +79,7 @@ public class LandList extends MainCore {
 							final int posX = region.getMinimumPoint().getBlockX() + 8;
 							final int posZ = region.getMinimumPoint().getBlockZ() + 8;
 							sender.sendMessage(
-									"ยงa" + counter + ". ยง6" + name + " ยงa(X,Z)   [" + posX + ", " + posZ + "]");
+									"งa" + counter + ". ง6" + name + " งa(X,Z)   [" + posX + ", " + posZ + "]");
 							counter++;
 						}
 					}

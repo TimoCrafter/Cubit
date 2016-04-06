@@ -28,7 +28,7 @@ public class LandVersion extends MainCore {
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
 		if (sender.hasPermission("cubit.land.version")) {
-			sender.sendMessage(ChatColor.YELLOW + "Â§nÂ§6-==================[Â§2Â§lCubitÂ§rÂ§6]=================-");
+			sender.sendMessage(ChatColor.YELLOW + "§n§6-==================[§2§lCubit§r§6]=================-");
 			sender.sendMessage(ChatColor.DARK_GREEN + "Cubit Version: " + ChatColor.LIGHT_PURPLE
 					+ CubitPlugin.inst().pdf.getVersion().toString());
 			sender.sendMessage(ChatColor.DARK_GREEN + "By Kekshaus");

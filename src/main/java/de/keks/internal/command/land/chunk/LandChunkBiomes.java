@@ -34,7 +34,7 @@ public class LandChunkBiomes extends MainCore {
 				if (biomes == null)
 					biomes = biome.toString();
 				else
-					biomes += "ยง6, " + ChatColor.LIGHT_PURPLE + biome.toString();
+					biomes += "ง6, " + ChatColor.LIGHT_PURPLE + biome.toString();
 			}
 			sender.sendMessage(ChatColor.GREEN + "Available biomes: ");
 			sender.sendMessage(ChatColor.LIGHT_PURPLE + biomes);

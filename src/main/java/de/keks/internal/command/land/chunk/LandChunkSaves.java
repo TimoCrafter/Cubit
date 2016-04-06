@@ -63,7 +63,7 @@ public class LandChunkSaves extends MainCore {
 
 						for (String name : toplist) {
 
-							sender.sendMessage("ยงa" + counter + ". ยง6" + name);
+							sender.sendMessage("งa" + counter + ". ง6" + name);
 							counter++;
 						}
 					}
