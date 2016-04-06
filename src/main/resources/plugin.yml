@@ -1,5 +1,5 @@
 name: Cubit
-version: ${project.version}
+version: ${project.version}.${build.number}
 description: Cubit Regionmanager
 author: Kekshaus
 main: de.keks.cubit.CubitPlugin
