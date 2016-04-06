@@ -2,6 +2,7 @@ name: Cubit
 version: ${project.version}.b${build.number}
 description: Cubit Regionmanager
 author: Kekshaus
+authors: [Kekshaus, TimoCrafter]
 main: de.keks.cubit.CubitPlugin
 depend: [WorldEdit, WorldGuard, Vault]
 commands:
