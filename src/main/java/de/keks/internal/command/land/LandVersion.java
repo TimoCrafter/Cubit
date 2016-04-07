@@ -27,12 +27,16 @@ public class LandVersion extends MainCore {
 
 	@Override
 	public boolean execute(final CommandSender sender, String[] args) {
+		String autors = "";
+		for (String name : CubitPlugin.inst().getDescription().getAuthors()) {
+			autors = autors + ", " + name;
+		}
+
 		if (sender.hasPermission("cubit.land.version")) {
 			sender.sendMessage(ChatColor.YELLOW + "§n§6-==================[§2§lCubit§r§6]=================-");
 			sender.sendMessage(ChatColor.DARK_GREEN + "Cubit Version: " + ChatColor.LIGHT_PURPLE
 					+ CubitPlugin.inst().pdf.getVersion().toString());
-			sender.sendMessage(ChatColor.DARK_GREEN + "By Kekshaus");
-			sender.sendMessage(ChatColor.DARK_GREEN + "https://www.Minegaming.de");
+			sender.sendMessage(ChatColor.DARK_GREEN + autors);
 
 		} else {
 			sender.sendMessage(I18n.translate("messages.noPermission", new Object[0]));

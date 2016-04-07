@@ -33,26 +33,38 @@ public class PlayerLoginEventListener implements Listener {
 		final World fromWorld = from.getWorld();
 		final int fromChunkX = from.getChunk().getX();
 		final int fromChunkZ = from.getChunk().getZ();
-		String fromRegionName = getRegionName(fromChunkX, fromChunkZ, fromWorld);	
+		String fromRegionName;
+		if (isServerRegion(fromChunkX, fromChunkZ, fromWorld)) {
+			fromRegionName = getServerRegionName(fromChunkX, fromChunkZ, fromWorld);
+		} else {
+			fromRegionName = getRegionName(fromChunkX, fromChunkZ, fromWorld);
+		}	
 		ProtectedRegion fromRegion = getRegion(fromWorld, fromRegionName);
 		
 		Location to = event.getToBlock().getLocation();
 		final World toWorld = to.getWorld();
 		final int toChunkX = to.getChunk().getX();
 		final int toChunkZ = to.getChunk().getZ();
-		String toRegionName = getRegionName(toChunkX, toChunkZ, toWorld);
+		String toRegionName;
+		if (isServerRegion(toChunkX, toChunkZ, toWorld)) {
+			toRegionName = getServerRegionName(toChunkX, toChunkZ, toWorld);
+		} else {
+			toRegionName = getRegionName(toChunkX, toChunkZ, toWorld);
+		}
 		ProtectedRegion toRegion = getRegion(toWorld, toRegionName);
 		
-		if (! sameOwner(fromRegion, toRegion)) {
+		if (toRegionName.startsWith("server") && fromRegionName.startsWith("server")) {
+			
+		} else if (toRegionName.startsWith("server") || fromRegionName.startsWith("server")) {
+			event.setCancelled(true);
+		}
+		else if (! sameOwner(fromRegion, toRegion)) {
 			event.setCancelled(true);
 		}
 		
 	}
 	
 	private boolean sameOwner(ProtectedRegion a, ProtectedRegion b) {
-		if (a == null || b == null) {
-			Bukkit.broadcastMessage("null");
-		}
 		for (UUID pa : a.getOwners().getUniqueIds()) {
 			for (UUID pb : b.getOwners().getUniqueIds()) {
 				if (pa.equals(pb)) {
@@ -65,6 +77,17 @@ public class PlayerLoginEventListener implements Listener {
 	
 	protected String getRegionName(int x, int z, World world) {
 		return world.getName().toLowerCase() + "_" + x + "_" + z;
+	}
+	
+	protected String getServerRegionName(int x, int z, World world) {
+		return "server_" + x + "_" + z;
+	}
+	
+	protected boolean isServerRegion(int x, int z, World world) {
+		if (getRegion(world, "server_" + x + "_" + z) != null) {
+			return true;
+		}
+		return false;
 	}
 	
 	protected WorldGuardPlugin getWorldGuard() {
